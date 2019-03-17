@@ -1,0 +1,15 @@
+ext {
+    isApplication = true
+    android = [
+            applicationId    : "com.example.lemonbily",
+            compileSdkVersion: 28,
+            minSdkVersion    : 21,
+            targetSdkVersion : 28,
+            versionCode      : 1,
+            versionName      : "1.0"
+    ]
+    dependencies = [
+            supportV7       : 'com.android.support:appcompat-v7:28.0.0',
+            constraintLayout: 'com.android.support.constraint:constraint-layout:1.1.3'
+    ]
+}

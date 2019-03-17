@@ -1,0 +1,1 @@
+include ':app', ':loginmodule', ':publishmodule', ':commentmodule', ':basemodule', ':videoplaymodule', ':danmakuflamemastermodule', ':immodule'
