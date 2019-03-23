@@ -1,9 +1,12 @@
-package com.example.lemonbily;
+package com.example.lemonbily.view;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class MainActivity extends AppCompatActivity {
+import com.example.lemonbily.R;
+import com.example.lemonbily.view.ui.IMainView;
+
+public class MainActivity extends AppCompatActivity implements IMainView {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

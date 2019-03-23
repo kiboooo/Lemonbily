@@ -25,4 +25,9 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    //当所有module作为组件依赖的时候，需要在宿主中导入依赖
+    if (!rootProject.ext.isApplication) {
+        implementation project(":loginmodule") //  导入Login Module
+    }
+
 }
