@@ -13,6 +13,6 @@ public class VideoPlayActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_video_play);
+        setContentView(R.layout.videoplay_activity_video_play);
     }
 }
