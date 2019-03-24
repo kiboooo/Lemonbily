@@ -1,6 +1,6 @@
 //用于管理所有module 共有的属性和依赖，保证代码的可维护性。
 ext {
-    isApplication = true
+    isApplication = false
     android = [
             applicationId    : "com.example.lemonbily",
             compileSdkVersion: 28,

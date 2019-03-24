@@ -1,2 +1,22 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.loginmodule" />
+
+    package="com.example.loginmodule" >
+
+    <application
+        android:allowBackup="false"
+        android:label="@string/login_app_name"
+        android:supportsRtl="true"
+        >
+
+        <activity
+            android:name=".view.ui.LoginActivity"
+            android:screenOrientation="portrait"
+            android:exported="true"
+            >
+
+        </activity>
+
+    </application>
+
+
+</manifest>

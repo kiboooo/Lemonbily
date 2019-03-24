@@ -28,6 +28,7 @@ dependencies {
     //当所有module作为组件依赖的时候，需要在宿主中导入依赖
     if (!rootProject.ext.isApplication) {
         implementation project(":loginmodule") //  导入Login Module
+        implementation project(":videoplaymodule") //  video Module
     }
 
 }
