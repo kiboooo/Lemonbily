@@ -1,4 +1,4 @@
-package application;
+package com.example.basemodule.application;
 
 import android.app.Application;
 import android.util.Log;

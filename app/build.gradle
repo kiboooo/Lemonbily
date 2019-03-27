@@ -29,6 +29,7 @@ dependencies {
     if (!rootProject.ext.isApplication) {
         implementation project(":loginmodule") //  导入Login Module
         implementation project(":videoplaymodule") //  video Module
+        implementation project(":basemodule") // 导入 baseModule
     }
 
 }
