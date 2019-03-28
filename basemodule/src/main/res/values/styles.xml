@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="base_NoActionBarSyncTitle" parent="Theme.AppCompat.DayNight.NoActionBar" >
+        <item name="colorPrimary">@color/base_colorPrimary</item>
+        <item name="colorPrimaryDark">@color/base_colorBackground</item>
+        <item name="colorAccent">@color/base_colorAccent</item>
+    </style>
+
+</resources>

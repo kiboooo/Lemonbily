@@ -8,10 +8,5 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <style name="NoActionBarSyncTitle" parent="Theme.AppCompat.DayNight.NoActionBar" >
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorStatus</item>
-        <item name="colorAccent">@color/colorAccent</item>
-    </style>
 
 </resources>
