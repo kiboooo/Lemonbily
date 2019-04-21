@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
+
 public abstract class baseActivity extends AppCompatActivity {
 
     @Override
@@ -23,6 +24,10 @@ public abstract class baseActivity extends AppCompatActivity {
 
     public abstract void initListener();
 
+    /**
+     * 实现状态栏上字体颜色
+     * 验证：MIUI
+     */
     private void setColorForStatus(){
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);

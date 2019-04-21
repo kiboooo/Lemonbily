@@ -1,5 +1,4 @@
 apply plugin: 'com.android.application'
-
 android {
     compileSdkVersion rootProject.ext.android.compileSdkVersion
     defaultConfig {
@@ -9,6 +8,11 @@ android {
         versionCode rootProject.ext.android.versionCode
         versionName rootProject.ext.android.versionName
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [ AROUTER_MODULE_NAME : project.getName()]
+            }
+        }
     }
     buildTypes {
         release {
@@ -22,6 +26,10 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation rootProject.ext.dependencies.supportV7
     implementation rootProject.ext.dependencies.constraintLayout
+    implementation "android.arch.lifecycle:extensions:1.1.1"
+    implementation project(":basemodule") // 导入 baseModule
+    // arouter-compiler 的注解依赖需要所有使用 ARouter 的 module 都添加依赖
+    annotationProcessor rootProject.ext.dependencies.arouterCompiler
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
@@ -29,7 +37,6 @@ dependencies {
     if (!rootProject.ext.isApplication) {
         implementation project(":loginmodule") //  导入Login Module
         implementation project(":videoplaymodule") //  video Module
-        implementation project(":basemodule") // 导入 baseModule
     }
 
 }

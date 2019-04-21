@@ -6,11 +6,13 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.widget.Button;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
 import com.example.basemodule.baseActivity;
 import com.example.lemonbily.R;
 import com.example.lemonbily.presenter.MainPresenter;
 import com.example.lemonbily.view.ui.IMainView;
 
+@Route(path = "/Lemonbily/MainActivity")
 public class MainActivity extends baseActivity implements IMainView,View.OnClickListener {
 
     private MainPresenter presenter;

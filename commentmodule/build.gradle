@@ -18,6 +18,12 @@ android {
         versionName rootProject.ext.android.versionName
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         resourcePrefix "comment_"
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [AROUTER_MODULE_NAME: project.getName()]
+            }
+        }
     }
 
     buildTypes {
@@ -46,6 +52,7 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation  rootProject.ext.dependencies.supportV7
     implementation project(":basemodule") // 导入 baseModule
+    annotationProcessor rootProject.ext.dependencies.arouterCompiler
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
