@@ -4,11 +4,11 @@
     package="com.example.lemonbily">
 
     <application
-        android:name="com.example.basemodule.application.BaseApplication"
+        android:name=".application.MyApplication"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/logo_launcher"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/logo_launcher"
         android:supportsRtl="true"
         android:theme="@style/base_NoActionBarSyncTitle"
         tools:replace="android:allowBackup,android:label">

@@ -1,5 +1,6 @@
 package com.example.lemonbily.view;
 
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -7,15 +8,14 @@ import android.view.View;
 import android.widget.Button;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.example.basemodule.baseActivity;
+import com.example.basemodule.view.BaseActivity;
 import com.example.lemonbily.R;
 import com.example.lemonbily.presenter.MainPresenter;
 import com.example.lemonbily.view.ui.IMainView;
 
 @Route(path = "/Lemonbily/MainActivity")
-public class MainActivity extends baseActivity implements IMainView,View.OnClickListener {
+public class MainActivity extends BaseActivity<IMainView,MainPresenter> implements IMainView,View.OnClickListener {
 
-    private MainPresenter presenter;
     private Fragment[] fragments = new Fragment[3];
     private HomeFragment homeFragment;
     private MineFragment mineFragment;
@@ -30,7 +30,17 @@ public class MainActivity extends baseActivity implements IMainView,View.OnClick
 
 
     @Override
-    public void initView() {
+    protected void initBinding() {
+        palCircleFragment = new PalCircleFragment();
+        homeFragment = new HomeFragment();
+        mineFragment = new MineFragment();
+        fragmentManager = getSupportFragmentManager();
+        fragments = new Fragment[]{homeFragment, palCircleFragment, mineFragment};
+        selectTab(0);
+    }
+
+    @Override
+    public void initView(Bundle savedInstanceState) {
         setContentView(R.layout.activity_login_main);
         btnHome = findViewById(R.id.btn_home);
         btnMine = findViewById(R.id.btn_mine);
@@ -38,25 +48,16 @@ public class MainActivity extends baseActivity implements IMainView,View.OnClick
     }
 
     @Override
-    public void initPresenter() {
-        presenter = MainPresenter.getInstance().init(this);
-        initFragment();
+    public MainPresenter initPresenter() {
+        return MainPresenter.getInstance();
     }
+
 
     @Override
     public void initListener() {
         btnHome.setOnClickListener(this);
         btnMine.setOnClickListener(this);
         btnPalCircle.setOnClickListener(this);
-    }
-
-    private void initFragment(){
-        palCircleFragment = new PalCircleFragment();
-        homeFragment = new HomeFragment();
-        mineFragment = new MineFragment();
-        fragmentManager = getSupportFragmentManager();
-        fragments = new Fragment[]{homeFragment, mineFragment, palCircleFragment};
-        selectTab(0);
     }
 
 
@@ -78,14 +79,14 @@ public class MainActivity extends baseActivity implements IMainView,View.OnClick
 
     @Override
     public void goToLogin(View view) {
-        presenter.ToActivity(MainActivity.this,
+        mPresenter.ToActivity(MainActivity.this,
                 "com.example.loginmodule.view.ui.LoginActivity");
     }
 
     @Override
     public void goToVideo(View view) {
 
-        presenter.ToActivity(MainActivity.this,
+        mPresenter.ToActivity(MainActivity.this,
                 "com.example.videoplaymodule.VideoPlayActivity");
     }
 

@@ -1,16 +1,31 @@
 package com.example.loginmodule.view.ui;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 
+import com.example.basemodule.presenter.BasePresenter;
+import com.example.basemodule.view.BaseActivity;
 import com.example.loginmodule.R;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends BaseActivity {
+
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    protected void initBinding() {
+
+    }
+
+    @Override
+    public void initView(Bundle savedInstanceState) {
         setContentView(R.layout.login_activity_login);
+    }
+
+    @Override
+    public BasePresenter initPresenter() {
+        return null;
+    }
+
+    @Override
+    public void initListener() {
+
     }
 }

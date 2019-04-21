@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
 package="com.example.videoplaymodule">
     <application
-        android:name=".debug.VideoPlayApplication"
+        android:name=".com.example.loginmodule.debug.VideoPlayApplication"
         android:allowBackup="true"
         android:label="@string/videoplay_app_name"
         android:supportsRtl="true"

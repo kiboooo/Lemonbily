@@ -8,8 +8,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
 import com.example.lemonbily.R;
 
+@Route(path = "/Lemonbily/MineFragment")
 public class MineFragment extends Fragment {
 
     @Nullable

@@ -6,7 +6,11 @@ import android.util.Log;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 
-public class BaseApplication extends Application {
+public abstract class BaseApplication extends Application {
+
+    //由每个module中的独自的 Application 初始化的接口；
+    public abstract void initApplication(Application application);
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -33,7 +37,7 @@ public class BaseApplication extends Application {
      * 初始化其他功能
      */
     private void init() {
-
+        initApplication(this);
     }
 
     public Application getApplication(){

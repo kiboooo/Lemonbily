@@ -2,7 +2,7 @@
     package="com.example.loginmodule" >
 
     <application
-    android:name="debug.LoginApplication"
+    android:name="com.example.loginmodule.debug.LoginApplication"
     android:allowBackup="true"
     android:label="@string/login_app_name"
     android:supportsRtl="true"

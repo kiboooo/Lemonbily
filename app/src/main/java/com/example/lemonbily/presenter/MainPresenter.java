@@ -3,12 +3,13 @@ package com.example.lemonbily.presenter;
 import android.content.Context;
 import android.content.Intent;
 
+import com.example.basemodule.presenter.BasePresenter;
 import com.example.lemonbily.model.IMainModel;
 import com.example.lemonbily.model.impl.IMainModelImpl;
 import com.example.lemonbily.view.ui.IMainView;
 
-public class MainPresenter {
-    protected IMainView mainView;
+public class MainPresenter extends BasePresenter<IMainView> {
+
     private IMainModel mainModel;
 
     private  static class SingletonPresenter {
@@ -20,7 +21,7 @@ public class MainPresenter {
     }
 
     public MainPresenter init(IMainView iMainView) {
-        getInstance().mainView = iMainView;
+        attachView(iMainView);
         getInstance().mainModel = new IMainModelImpl();
         return getInstance();
     }
