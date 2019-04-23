@@ -1,25 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
-    >
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:id="@+id/login_text_btn"
+        android:layout_width="300dp"
+        android:layout_height="match_parent"
+        android:textSize="14sp"
         android:gravity="center"
-        android:text="登陆界面"
-        android:textSize="24sp"
+        android:text="sjdkflas"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
         />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/toVideo"
-        android:onClick="goToVideo"
-        android:text="去播放界面"
-        />
-
-</LinearLayout>
+</android.support.constraint.ConstraintLayout>

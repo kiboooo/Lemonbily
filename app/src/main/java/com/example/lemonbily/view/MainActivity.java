@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.example.basemodule.view.BaseActivity;
 import com.example.lemonbily.R;
 import com.example.lemonbily.presenter.MainPresenter;
@@ -22,7 +23,6 @@ public class MainActivity extends BaseActivity<IMainView,MainPresenter> implemen
     private PalCircleFragment palCircleFragment;
 
     private FragmentManager fragmentManager;
-    private FragmentTransaction transaction;
 
     private Button btnHome;
     private Button btnMine;
@@ -31,9 +31,15 @@ public class MainActivity extends BaseActivity<IMainView,MainPresenter> implemen
 
     @Override
     protected void initBinding() {
-        palCircleFragment = new PalCircleFragment();
-        homeFragment = new HomeFragment();
-        mineFragment = new MineFragment();
+        palCircleFragment =(PalCircleFragment) ARouter.getInstance()
+                .build("/Lemonbily/PalCircleFragment")
+                .navigation();
+        homeFragment = (HomeFragment) ARouter.getInstance()
+                .build("/Lemonbily/HomeFragment")
+                .navigation();
+        mineFragment = (MineFragment) ARouter.getInstance()
+                .build("/Lemonbily/MineFragment")
+                .navigation();
         fragmentManager = getSupportFragmentManager();
         fragments = new Fragment[]{homeFragment, palCircleFragment, mineFragment};
         selectTab(0);
@@ -62,7 +68,7 @@ public class MainActivity extends BaseActivity<IMainView,MainPresenter> implemen
 
 
     private void selectTab(int i) {
-        transaction = fragmentManager.beginTransaction();
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
         hideFragment(transaction);
         if (!fragments[i].isAdded()) {
             transaction.add(R.id.fragment, fragments[i]);

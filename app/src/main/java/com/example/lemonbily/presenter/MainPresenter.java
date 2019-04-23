@@ -12,6 +12,10 @@ public class MainPresenter extends BasePresenter<IMainView> {
 
     private IMainModel mainModel;
 
+    private MainPresenter() {
+        this.mainModel = new IMainModelImpl();
+    }
+
     private  static class SingletonPresenter {
         private static final MainPresenter presenter = new MainPresenter();
     }
@@ -22,8 +26,7 @@ public class MainPresenter extends BasePresenter<IMainView> {
 
     public MainPresenter init(IMainView iMainView) {
         attachView(iMainView);
-        getInstance().mainModel = new IMainModelImpl();
-        return getInstance();
+        return this;
     }
 
     //TODO : 把这个跳转逻辑放到liveDataBus中去。

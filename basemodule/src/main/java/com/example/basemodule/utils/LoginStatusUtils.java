@@ -1,6 +1,6 @@
 package com.example.basemodule.utils;
 
 public class LoginStatusUtils {
-    private boolean isLogin = false;
-
+    public static boolean isLogin = false;
+    public static String token = "";
 }
