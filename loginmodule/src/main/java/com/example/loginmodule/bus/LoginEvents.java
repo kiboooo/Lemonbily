@@ -22,4 +22,13 @@ public class LoginEvents {
     @EventType(JsonResponse.class)
     public static final String REGISTER_EVENT = "account_register_event";
 
+    //账号登出事件
+    @EventType(JsonResponse.class)
+    public static final String LOGOUT_EVENT = "account_logout_event";
+
+
+    //修改密码
+    @EventType(JsonResponse.class)
+    public static final String CHANGE_PASSWORD_EVENT = "account_change_password_event";
+
 }

@@ -4,8 +4,8 @@ import android.arch.lifecycle.LifecycleOwner;
 
 public interface ILoginModel {
 
-    public void AccountLogin(String phone, String passWord);
+    void AccountLogin(String phone, String passWord);
 
-    public void initLoginObservers(LifecycleOwner owner );
+    void initLoginObservers(LifecycleOwner owner );
 
 }

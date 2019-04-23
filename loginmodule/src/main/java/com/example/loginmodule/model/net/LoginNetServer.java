@@ -6,7 +6,7 @@ import com.example.basemodule.bean.JsonResponse;
 import com.example.basemodule.net.NetWorkServer;
 import com.example.loginmodule.bus.generated.im.EventsDefineAsLoginEvents;
 import com.example.loginmodule.model.LoginServer;
-import com.example.loginmodule.model.bean.Login;
+import com.example.basemodule.bean.Login;
 import com.jeremyliao.im.core.InvokingMessage;
 import com.jeremyliao.liveeventbus.LiveEventBus;
 
@@ -20,13 +20,28 @@ public class LoginNetServer {
     private LoginServer mLoginServer;
     private EventsDefineAsLoginEvents eventBus;
 
+    //注册
     public void registered(Login login) {
         callBack(mLoginServer.registered(login), eventBus.REGISTER_EVENT());
     }
 
+    //登录
     public void login(String phone, String passWord) {
         callBack(mLoginServer.login(phone, passWord), eventBus.LOGIN_EVENT());
     }
+
+    //登出
+    public void logout(String phone) {
+        callBack(mLoginServer.logout(phone), eventBus.LOGOUT_EVENT());
+    }
+
+    //更改密码
+    public void changePassWord(int id,String phone,String oldPassWord,String newPassWord) {
+        callBack(mLoginServer.changePassWord(id, phone, oldPassWord, newPassWord),
+                eventBus.CHANGE_PASSWORD_EVENT());
+    }
+
+
 
     private LoginNetServer() {
         mLoginServer = NetWorkServer.getInstance().getRetrofit().create(LoginServer.class);

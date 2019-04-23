@@ -1,4 +1,4 @@
-package com.example.loginmodule.model.bean;
+package com.example.basemodule.bean;
 
 import java.io.Serializable;
 import java.util.Date;

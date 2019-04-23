@@ -9,7 +9,7 @@ import com.example.basemodule.bean.JsonResponse;
 import com.example.basemodule.utils.LoginStatusUtils;
 import com.example.loginmodule.bus.generated.im.EventsDefineAsLoginEvents;
 import com.example.loginmodule.model.ILoginModel;
-import com.example.loginmodule.model.bean.Login;
+import com.example.basemodule.bean.Login;
 import com.example.loginmodule.model.net.LoginNetServer;
 import com.example.loginmodule.presenter.ILoginPresenter;
 import com.jeremyliao.im.core.InvokingMessage;
@@ -18,18 +18,18 @@ import java.lang.ref.SoftReference;
 
 public class ILoginModelimpl implements ILoginModel {
 
-    private Login mLoginSuccessful;
-    private SoftReference<ILoginPresenter> presenter;
+    private SoftReference<ILoginPresenter> loginPresenter;
 
     public ILoginModelimpl() {
     }
 
-    public ILoginModelimpl(ILoginPresenter presenter) {
-        this.presenter = new SoftReference<>(presenter);
+    public  ILoginModelimpl(ILoginPresenter presenter){
+        this.loginPresenter = new SoftReference<>(presenter);
     }
 
-    public ILoginPresenter getPresenter(){
-        return presenter.get();
+
+    public ILoginPresenter getLoginPresenter(){
+        return loginPresenter.get();
     }
 
     @Override
@@ -41,6 +41,7 @@ public class ILoginModelimpl implements ILoginModel {
     public void initLoginObservers(LifecycleOwner owner) {
         registerLoginErrorBusObserver(owner);
         registerLoginEvenObserver(owner);
+//        registerAccountRegisterObserver(owner);
     }
 
 
@@ -51,13 +52,14 @@ public class ILoginModelimpl implements ILoginModel {
                 .observeSticky(owner, new Observer<String>() {
                     @Override
                     public void onChanged(@Nullable String s) {
-                        if (getPresenter() != null) {
-                            getPresenter().sendErrorMsg(s, Toast.LENGTH_SHORT);
+                        if (getLoginPresenter() != null) {
+                            getLoginPresenter().sendErrorMsg(s, Toast.LENGTH_SHORT);
                         }
                     }
                 });
     }
 
+    //登录事件的观察者
     private void registerLoginEvenObserver(LifecycleOwner owner) {
         InvokingMessage.get().as(EventsDefineAsLoginEvents.class)
                 .LOGIN_EVENT()
@@ -65,25 +67,55 @@ public class ILoginModelimpl implements ILoginModel {
                     @Override
                     public void onChanged(@Nullable JsonResponse jsonResponse) {
                         if (null == jsonResponse) {
-                            getPresenter().sendErrorMsg("登陆出错，请稍后重试",
+                            getLoginPresenter().sendErrorMsg("登陆出错，请稍后重试",
                                     Toast.LENGTH_SHORT);
-                            getPresenter().loginFail();
+                            getLoginPresenter().loginFail();
                         }else {
                             if (jsonResponse.getCode() == 0) {
-                                mLoginSuccessful = (Login) jsonResponse.getData();
                                 LoginStatusUtils.isLogin = true;
                                 LoginStatusUtils.token = jsonResponse.getToken();
-                                getPresenter().loginSuccess();
+                                LoginStatusUtils.mLogin = (Login) jsonResponse.getData();
+                                getLoginPresenter().loginSuccess();
                             } else {
-                                getPresenter().sendErrorMsg(jsonResponse.getCode()+" : "
+                                getLoginPresenter().sendErrorMsg(jsonResponse.getCode()+" : "
                                         +jsonResponse.getMsg(),Toast.LENGTH_SHORT);
-                                getPresenter().loginFail();
+                                getLoginPresenter().loginFail();
                             }
                         }
 
                     }
                 });
     }
+
+    //登出事件的观察者
+    private void registerLogoutObserver(LifecycleOwner owner) {
+        InvokingMessage.get().as(EventsDefineAsLoginEvents.class)
+                .LOGOUT_EVENT()
+                .observeSticky(owner, new Observer<JsonResponse>() {
+                    @Override
+                    public void onChanged(@Nullable JsonResponse jsonResponse) {
+                        if (null == jsonResponse) {
+                            getLoginPresenter().sendErrorMsg("登出出错，请稍后重试",
+                                    Toast.LENGTH_SHORT);
+                        }else {
+                            if (jsonResponse.getCode() == 0) {
+                                LoginStatusUtils.isLogin = false;
+                                LoginStatusUtils.token = "";
+                                LoginStatusUtils.mLogin = null;
+                                getLoginPresenter().logoutSuccess();
+                            } else {
+                                getLoginPresenter().sendErrorMsg(jsonResponse.getCode()+" : "
+                                        +jsonResponse.getMsg(),Toast.LENGTH_SHORT);
+                                getLoginPresenter().logoutFail();
+                            }
+                        }
+
+                    }
+                });
+    }
+
+
+
 
 
 }

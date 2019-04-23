@@ -14,7 +14,8 @@ import com.example.loginmodule.presenter.LoginPresenter;
 import com.example.loginmodule.view.ILoginView;
 
 @Route(path = "/LoginModule/LoginActivity")
-public class LoginActivity extends BaseActivity<ILoginView, LoginPresenter> implements View.OnClickListener,ILoginView {
+public class LoginActivity extends BaseActivity<ILoginView, LoginPresenter>
+        implements View.OnClickListener,ILoginView {
 
     TextView textView ;
 
@@ -26,7 +27,7 @@ public class LoginActivity extends BaseActivity<ILoginView, LoginPresenter> impl
 
     @Override
     public LoginPresenter initPresenter() {
-        return LoginPresenter.getInstance().init(this,this);
+        return new LoginPresenter(this,this);
     }
 
     @Override
@@ -67,6 +68,46 @@ public class LoginActivity extends BaseActivity<ILoginView, LoginPresenter> impl
     public void loginFail() {
         hideLoding();
         showToast("登录失败", Toast.LENGTH_SHORT);
+    }
+
+    @Override
+    public void getLoginObjSuccess() {
+
+    }
+
+    @Override
+    public void getLoginObjFail() {
+
+    }
+
+    @Override
+    public void logoutSuccess() {
+
+    }
+
+    @Override
+    public void logoutFail() {
+
+    }
+
+    @Override
+    public void permanentLogoutSuccess() {
+
+    }
+
+    @Override
+    public void permanentLogoutFail() {
+
+    }
+
+    @Override
+    public void changePassWordSuccess() {
+
+    }
+
+    @Override
+    public void changePassWordFail() {
+
     }
 
     private void hideLoding(){

@@ -1,7 +1,7 @@
 package com.example.loginmodule.model;
 
 import com.example.basemodule.bean.JsonResponse;
-import com.example.loginmodule.model.bean.Login;
+import com.example.basemodule.bean.Login;
 
 import retrofit2.Call;
 import retrofit2.http.Body;

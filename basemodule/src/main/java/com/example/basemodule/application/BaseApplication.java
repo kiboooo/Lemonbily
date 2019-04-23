@@ -5,6 +5,7 @@ import android.content.pm.ApplicationInfo;
 import android.util.Log;
 
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.example.basemodule.net.NetWorkServer;
 
 public abstract class BaseApplication extends Application {
 
@@ -38,6 +39,9 @@ public abstract class BaseApplication extends Application {
      */
     private void init() {
         initApplication(this);
+
+        //初始化Retrofit
+        NetWorkServer.getInstance().initRetrofit();
     }
 
     public Application getApplication(){

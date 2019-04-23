@@ -11,8 +11,14 @@
         <activity
             android:name=".view.ui.LoginActivity"
             android:screenOrientation="portrait"
-            android:exported="true"
-            >
+            android:exported="true">
+
+        </activity>
+
+        <activity
+            android:name=".view.ui.RegisterActivity"
+            android:screenOrientation="portrait"
+            android:exported="true">
 
         </activity>
 
