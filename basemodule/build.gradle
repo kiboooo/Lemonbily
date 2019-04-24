@@ -26,18 +26,18 @@ android {
         }
     }
 
-    sourceSets{
-        main{
-            if(rootProject.ext.isApplication){
-                manifest.srcFile 'src/main/com.example.loginmodule.debug/AndroidManifest.xml'
-            }else{
-                manifest.srcFile 'src/main/release/AndroidManifest.xml'
-                java{
-                    exclude 'com.example.loginmodule.debug/**'
-                }
-            }
-        }
-    }
+//    sourceSets{
+//        main{
+//            if(rootProject.ext.isApplication){
+//                manifest.srcFile 'src/main/com.example.loginmodule.debug/AndroidManifest.xml'
+//            }else{
+//                manifest.srcFile 'src/main/release/AndroidManifest.xml'
+//                java{
+//                    exclude 'com.example.loginmodule.debug/**'
+//                }
+//            }
+//        }
+//    }
 
     //groovy脚本强制修改冲突的依赖库版本号
     configurations.all {
@@ -58,29 +58,26 @@ repositories {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation  rootProject.ext.dependencies.supportV7
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation rootProject.ext.dependencies.supportV7
+    implementation rootProject.ext.dependencies.constraintLayout
     //导入各个组件通用的第三方库
-
     //网络请求 retrofit2
     api 'com.squareup.retrofit2:retrofit:2.5.0'
     api 'com.squareup.retrofit2:converter-gson:2.5.0'
     api 'com.squareup.retrofit2:converter-scalars:2.5.0'
-
     //组件间通信
     api 'com.jeremyliao:invoking-message-core:1.1.0'
     annotationProcessor rootProject.ext.dependencies.evenMsgCompiler
-
     //路由
     api 'com.alibaba:arouter-api:1.4.1'
     // arouter-compiler 的注解依赖需要所有使用 ARouter 的 module 都添加依赖
     annotationProcessor rootProject.ext.dependencies.arouterCompiler
-
     //图片加载库
     api 'com.github.bumptech.glide:glide:4.8.0'
     annotationProcessor rootProject.ext.dependencies.glideCompiler
-
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    implementation files('libs/codec.jar')
 }

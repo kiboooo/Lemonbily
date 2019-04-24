@@ -1,3 +1,4 @@
 <resources>
     <string name="base_app_name">BaseModule</string>
+    <string name="base_back">back_button</string>
 </resources>

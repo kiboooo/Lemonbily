@@ -1,5 +1,7 @@
 package com.example.basemodule.utils;
 
+import org.apaches.commons.codec.digest.DigestUtils;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -34,5 +36,14 @@ public class CommonUtils {
         Pattern p = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
         Matcher m = p.matcher(mobile);
         return m.matches();
+    }
+
+
+    public static boolean isTextEmpty(String s) {
+        return s != null && !s.equals("");
+    }
+
+    public static String passwordEncode(String s) {
+        return DigestUtils.md5Hex(s);
     }
 }

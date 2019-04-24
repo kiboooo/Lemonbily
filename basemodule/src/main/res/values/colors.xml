@@ -5,4 +5,6 @@
     <color name="base_colorAccent">#ffff00</color>
     <color name="base_colorBackground">#FFFFFF</color>
     <color name="base_colorWeakAccent">#ffff2c</color>
+    <color name="base_colorWeakAccent2">#F7D94C</color>
+    <color name="base_loading_back">#595E5D5C</color>
 </resources>

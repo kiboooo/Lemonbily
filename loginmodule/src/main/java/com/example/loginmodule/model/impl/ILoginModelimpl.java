@@ -41,7 +41,6 @@ public class ILoginModelimpl implements ILoginModel {
     public void initLoginObservers(LifecycleOwner owner) {
         registerLoginErrorBusObserver(owner);
         registerLoginEvenObserver(owner);
-//        registerAccountRegisterObserver(owner);
     }
 
 
@@ -63,7 +62,7 @@ public class ILoginModelimpl implements ILoginModel {
     private void registerLoginEvenObserver(LifecycleOwner owner) {
         InvokingMessage.get().as(EventsDefineAsLoginEvents.class)
                 .LOGIN_EVENT()
-                .observeSticky(owner, new Observer<JsonResponse>() {
+                .observe(owner, new Observer<JsonResponse>() {
                     @Override
                     public void onChanged(@Nullable JsonResponse jsonResponse) {
                         if (null == jsonResponse) {

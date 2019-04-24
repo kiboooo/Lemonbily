@@ -2,11 +2,13 @@ package com.example.loginmodule.view.ui;
 
 import android.os.Bundle;
 import android.view.View;
-import android.widget.TextView;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.example.basemodule.utils.CommonUtils;
 import com.example.basemodule.utils.LoginStatusUtils;
 import com.example.basemodule.view.BaseActivity;
 import com.example.loginmodule.R;
@@ -17,12 +19,18 @@ import com.example.loginmodule.view.ILoginView;
 public class LoginActivity extends BaseActivity<ILoginView, LoginPresenter>
         implements View.OnClickListener,ILoginView {
 
-    TextView textView ;
+    EditText phone;
+    EditText password;
+    Button login;
+    Button register;
 
     @Override
     public void initView(Bundle savedInstanceState) {
         setContentView(R.layout.login_activity_login);
-        textView = findViewById(R.id.login_text_btn);
+        phone = findViewById(R.id.account_phone);
+        password = findViewById(R.id.account_password);
+        login = findViewById(R.id.login);
+        register = findViewById(R.id.register);
     }
 
     @Override
@@ -37,18 +45,34 @@ public class LoginActivity extends BaseActivity<ILoginView, LoginPresenter>
 
     @Override
     public void initListener() {
-        textView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mPresenter.login("12345678900",
-                        "21232f297a57a5a743894a0e4a801fc3");
-            }
-        });
+        login.setOnClickListener(this);
+        register.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View view) {
+        int i = view.getId();
+        if (i == R.id.login) {
+            String mPhone = phone.getText().toString();
+            String mPass = password.getText().toString();
+            if (mPhone.equals(getResources().getString(R.string.login_phone_hint))||
+                    !CommonUtils.isTextEmpty(mPhone) || !CommonUtils.isMobile(mPhone)) {
+                phone.setError(getResources().getString(R.string.login_phone_error));
+                return;
+            }
 
+            if (!CommonUtils.isTextEmpty(mPass)
+                    || mPass.equals(getResources().getString(R.string.login_password_hint))) {
+                password.setError(getResources().getString(R.string.login_password_error));
+                return;
+            }
+            mPass = CommonUtils.passwordEncode(mPass);
+            mPresenter.login(mPhone, mPass);
+
+        } else if (i == R.id.register) {
+            showToast("注册", Toast.LENGTH_LONG);
+
+        }
     }
 
     @Override
@@ -59,9 +83,8 @@ public class LoginActivity extends BaseActivity<ILoginView, LoginPresenter>
     @Override
     public void loginSuccess() {
         hideLoding();
-        textView.setText("token is : "+LoginStatusUtils.token);
-//        toHomeView();
-        showToast("登录成功", Toast.LENGTH_SHORT);
+        toHomeView();
+        showToast("登录成功 token :" + LoginStatusUtils.token, Toast.LENGTH_SHORT);
     }
 
     @Override

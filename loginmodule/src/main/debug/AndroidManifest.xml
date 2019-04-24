@@ -1,20 +1,23 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.loginmodule" >
+    package="com.example.loginmodule">
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-    android:name="com.example.loginmodule.debug.LoginApplication"
-    android:allowBackup="true"
-    android:label="@string/login_app_name"
-    android:supportsRtl="true"
-    android:theme="@style/login_AppTheme">
-    <activity android:name=".view.ui.LoginActivity">
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
+        android:name="com.example.loginmodule.debug.LoginApplication"
+        android:allowBackup="true"
+        android:label="@string/login_app_name"
+        android:supportsRtl="true"
+        android:usesCleartextTraffic="true"
+        android:theme="@style/base_NoActionBarSyncTitle">
+        <activity android:name=".view.ui.LoginActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
-    </activity>
-</application>
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
 
 
 </manifest>
