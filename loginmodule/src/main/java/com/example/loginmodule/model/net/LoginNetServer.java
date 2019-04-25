@@ -2,6 +2,7 @@ package com.example.loginmodule.model.net;
 
 import android.util.Log;
 
+import com.example.basemodule.bean.Account;
 import com.example.basemodule.bean.JsonResponse;
 import com.example.basemodule.net.NetWorkServer;
 import com.example.loginmodule.bus.generated.im.EventsDefineAsLoginEvents;
@@ -16,28 +17,33 @@ import retrofit2.Response;
 
 public class LoginNetServer {
 
-    public static final String TAG = "LoginNetServer";
+    private static final String TAG = "LoginNetServer";
     private LoginServer mLoginServer;
     private EventsDefineAsLoginEvents eventBus;
 
     //注册
     public void registered(Login login) {
-        callBack(mLoginServer.registered(login), eventBus.REGISTER_EVENT());
+        callLoginBack(mLoginServer.registered(login), eventBus.REGISTER_EVENT());
+    }
+
+    //注册个人信息
+    public void registeredAccount(Account account) {
+        callAccountBack(mLoginServer.registeredAccount(account), eventBus.REGISTER_ACCOUNT_EVENT());
     }
 
     //登录
     public void login(String phone, String passWord) {
-        callBack(mLoginServer.login(phone, passWord), eventBus.LOGIN_EVENT());
+        callLoginBack(mLoginServer.login(phone, passWord), eventBus.LOGIN_EVENT());
     }
 
     //登出
     public void logout(String phone) {
-        callBack(mLoginServer.logout(phone), eventBus.LOGOUT_EVENT());
+        callLoginBack(mLoginServer.logout(phone), eventBus.LOGOUT_EVENT());
     }
 
     //更改密码
     public void changePassWord(int id,String phone,String oldPassWord,String newPassWord) {
-        callBack(mLoginServer.changePassWord(id, phone, oldPassWord, newPassWord),
+        callLoginBack(mLoginServer.changePassWord(id, phone, oldPassWord, newPassWord),
                 eventBus.CHANGE_PASSWORD_EVENT());
     }
 
@@ -70,8 +76,8 @@ public class LoginNetServer {
         return result;
     }
 
-    private void callBack(Call<JsonResponse<Login>> mCall,
-                          final LiveEventBus.Observable<JsonResponse> observable) {
+    private void callLoginBack(Call<JsonResponse<Login>> mCall,
+                               final LiveEventBus.Observable<JsonResponse> observable) {
         mCall.enqueue(new Callback<JsonResponse<Login>>() {
             @Override
             public void onResponse(Call<JsonResponse<Login>> call,
@@ -83,6 +89,25 @@ public class LoginNetServer {
 
             @Override
             public void onFailure(Call<JsonResponse<Login>> call, Throwable t) {
+                eventBus.LOGIN_REQUEST_ERROR().post(t.getMessage());
+                Log.e(TAG, t.getMessage());
+            }
+        });
+    }
+
+    private void callAccountBack(Call<JsonResponse<Account>> mCall,
+                          final LiveEventBus.Observable<JsonResponse> observable) {
+        mCall.enqueue(new Callback<JsonResponse<Account>>() {
+            @Override
+            public void onResponse(Call<JsonResponse<Account>> call,
+                                   Response<JsonResponse<Account>> response) {
+                if(isFailOnResponse(response)){
+                    observable.post(response.body());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<JsonResponse<Account>> call, Throwable t) {
                 eventBus.LOGIN_REQUEST_ERROR().post(t.getMessage());
                 Log.e(TAG, t.getMessage());
             }

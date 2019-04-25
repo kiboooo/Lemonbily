@@ -8,5 +8,5 @@ public interface IRegisterModel  {
 
     void initRegisterObservers(LifecycleOwner owner );
 
-    void register(Login login);
+    void register(Login login,String name,String gender);
 }

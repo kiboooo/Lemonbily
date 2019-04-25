@@ -52,17 +52,17 @@ public class MineFragment extends BaseFragment<IMineView, MinePresenter> impleme
                         .navigation(getContext(), new NavigationCallback() {
                             @Override
                             public void onFound(Postcard postcard) {
-                                Log.e(TAG, "找到");
+                                Log.d(TAG, "找到");
                             }
 
                             @Override
                             public void onLost(Postcard postcard) {
-                                Log.e(TAG, "onLost");
+                                Log.d(TAG, "onLost");
                             }
 
                             @Override
                             public void onArrival(Postcard postcard) {
-                                Log.e(TAG, "onArrival");
+                                Log.d(TAG, "onArrival");
                             }
 
                             @Override
@@ -70,6 +70,7 @@ public class MineFragment extends BaseFragment<IMineView, MinePresenter> impleme
 
                             }
                         });
+
                 break;
             }
 

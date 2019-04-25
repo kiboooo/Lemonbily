@@ -14,6 +14,7 @@ public abstract class BaseActivity<V,T extends BasePresenter<V>> extends AppComp
 
     protected T mPresenter;
     public Context mContext;
+    private LoadingDialog mLoadingDialog;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -32,6 +33,7 @@ public abstract class BaseActivity<V,T extends BasePresenter<V>> extends AppComp
         if (null != mPresenter) {
             mPresenter.attachView((V) this);
         }
+        mLoadingDialog = new LoadingDialog();
     }
 
     /**
@@ -66,4 +68,18 @@ public abstract class BaseActivity<V,T extends BasePresenter<V>> extends AppComp
             mPresenter.detachView();
         }
     }
+
+    public LoadingDialog getmLoadingDialog() {
+        return mLoadingDialog;
+    }
+    public void showLoading() {
+        mLoadingDialog.showLoading(getSupportFragmentManager());
+    }
+
+    public void hideLoding(){
+        if (mLoadingDialog != null) {
+            mLoadingDialog.dismiss();
+        }
+    }
+
 }

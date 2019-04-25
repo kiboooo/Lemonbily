@@ -1,5 +1,6 @@
 package com.example.loginmodule.model;
 
+import com.example.basemodule.bean.Account;
 import com.example.basemodule.bean.JsonResponse;
 import com.example.basemodule.bean.Login;
 
@@ -14,6 +15,9 @@ public interface LoginServer {
 
     @POST("LoginController/registered")
     Call<JsonResponse<Login>> registered (@Body Login login);
+
+    @POST("AccountController/insert")
+    Call<JsonResponse<Account>> registeredAccount (@Body Account account);
 
     @POST("LoginController/login")
     @FormUrlEncoded

@@ -18,14 +18,15 @@ public class RegisterPresenter extends BasePresenter<IRegisterView> implements I
         registerModel.initRegisterObservers(owner);
     }
 
-    public void accountRegister(Login login) {
-
+    public void accountRegister(Login login ,String name,String gender) {
+        registerModel.register(login,name,gender);
     }
 
     @Override
     public void sendErrorMsg(String msg, int state) {
         getView().showToast(msg,state);
     }
+
 
     @Override
     public void registerSuccess() {
