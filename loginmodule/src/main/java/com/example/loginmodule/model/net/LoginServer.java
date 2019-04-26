@@ -1,4 +1,4 @@
-package com.example.loginmodule.model;
+package com.example.loginmodule.model.net;
 
 import com.example.basemodule.bean.Account;
 import com.example.basemodule.bean.JsonResponse;
@@ -29,19 +29,27 @@ public interface LoginServer {
 
     @POST("LoginController/logout")
     @FormUrlEncoded
-    Call<JsonResponse<Login>> logout (@Field("lphone") String phone);
+    Call<JsonResponse<Login>> logout (@Header("phone") String loginPhone,
+                                      @Header("token") String token,
+                                      @Field("lphone") String phone);
 
     @POST("LoginController/permanentLogout")
     @FormUrlEncoded
-    Call<JsonResponse<Login>> permanentLogout (@Field("id") int id);
+    Call<JsonResponse<Login>> permanentLogout (@Header("phone") String loginPhone,
+                                               @Header("token") String token,
+                                               @Field("id") int id);
 
     @POST("LoginController/changePassWord")
     @FormUrlEncoded
-    Call<JsonResponse<Login>> changePassWord (@Field("id") int id,@Field("lphone") String phone,
+    Call<JsonResponse<Login>> changePassWord (@Header("phone") String loginPhone,
+                                              @Header("token") String token,
+                                              @Field("id") int id,
+                                              @Field("lphone") String phone,
                                               @Field("oldPassWord") String oldPassWord,
                                               @Field("newPassWord") String newPassWord);
 
     @GET("LoginController/getLogin")
     @FormUrlEncoded
-    Call<JsonResponse<Login>> getLogin(@Field("id") int id);
+    Call<JsonResponse<Login>> getLogin(@Header("phone") String loginPhone,
+                                       @Header("token") String token, @Field("id") int id);
 }

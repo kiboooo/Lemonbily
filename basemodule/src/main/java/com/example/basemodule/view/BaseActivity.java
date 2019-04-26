@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.Toast;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.example.basemodule.presenter.BasePresenter;
@@ -79,6 +80,10 @@ public abstract class BaseActivity<V,T extends BasePresenter<V>> extends AppComp
         if (mLoadingDialog != null && mLoadingDialog.isVisible()) {
             mLoadingDialog.dismiss();
         }
+    }
+
+    protected void showToasts(String msg, int state) {
+        Toast.makeText(this, msg, state).show();
     }
 
 }

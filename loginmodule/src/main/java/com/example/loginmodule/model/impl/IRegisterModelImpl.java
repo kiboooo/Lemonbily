@@ -16,7 +16,8 @@ import com.example.loginmodule.model.net.LoginNetServer;
 import com.example.loginmodule.presenter.IRegisterPresenter;
 import com.jeremyliao.im.core.InvokingMessage;
 
-public class IRegisterModelImpl extends LoginBaseModel<IRegisterPresenter> implements IRegisterModel {
+public class IRegisterModelImpl extends LoginBaseModel<IRegisterPresenter>
+        implements IRegisterModel {
 
     private String registerName;
     private String registerGender;

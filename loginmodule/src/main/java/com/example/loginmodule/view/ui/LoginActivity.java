@@ -78,8 +78,12 @@ public class LoginActivity extends BaseActivity<ILoginView,LoginPresenter>
         register.setOnClickListener(new OnMutiClickListener() {
             @Override
             public void onMutiClick(View view) {
+//                ARouter.getInstance()
+//                        .build("/LoginModule/RegisterActivity")
+//                        .navigation();
+
                 ARouter.getInstance()
-                        .build("/LoginModule/RegisterActivity")
+                        .build("/LoginModule/ChangePasswordActivity")
                         .navigation();
             }
         });
@@ -96,7 +100,7 @@ public class LoginActivity extends BaseActivity<ILoginView,LoginPresenter>
 
     @Override
     public void showToast(String msg, int state) {
-        Toast.makeText(this, msg, state).show();
+        showToasts(msg, state);
     }
 
     @Override
@@ -110,12 +114,6 @@ public class LoginActivity extends BaseActivity<ILoginView,LoginPresenter>
     public void loginFail() {
         hideLoading();
     }
-
-    @Override
-    public void doHideLoading() {
-        hideLoading();
-    }
-
 
     private void toHomeView(boolean isExPull){
         if (isExPull) {

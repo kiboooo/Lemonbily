@@ -46,7 +46,6 @@ public class RegisterActivity extends BaseActivity<IRegisterView, RegisterPresen
         mContinue = findViewById(R.id.register_continue);
         radioGroup = findViewById(R.id.register_gender);
         titleDescription = findViewById(R.id.base_normal_back_title);
-        titleDescription.setText("注册");
     }
 
     @Override
@@ -56,7 +55,7 @@ public class RegisterActivity extends BaseActivity<IRegisterView, RegisterPresen
 
     @Override
     protected void initBinding() {
-
+        titleDescription.setText("注册");
     }
 
     @Override
@@ -133,7 +132,7 @@ public class RegisterActivity extends BaseActivity<IRegisterView, RegisterPresen
 
     @Override
     public void showToast(String msg, int state) {
-        Toast.makeText(this, msg, state).show();
+        showToasts(msg, state);
     }
 
     @Override

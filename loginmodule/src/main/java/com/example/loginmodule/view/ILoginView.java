@@ -8,6 +8,4 @@ public interface ILoginView {
 
     void loginFail();
 
-    void doHideLoading();
-
 }

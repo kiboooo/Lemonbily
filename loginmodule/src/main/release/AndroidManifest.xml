@@ -22,6 +22,13 @@
 
         </activity>
 
+        <activity
+            android:name=".view.ui.ChangePasswordActivity"
+            android:screenOrientation="portrait"
+            android:exported="true">
+
+        </activity>
+
     </application>
 
 

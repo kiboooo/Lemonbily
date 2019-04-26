@@ -8,7 +8,6 @@ import com.example.basemodule.bean.Login;
 import com.example.basemodule.net.NetWorkServer;
 import com.example.basemodule.utils.LoginStatusUtils;
 import com.example.loginmodule.bus.generated.im.EventsDefineAsLoginEvents;
-import com.example.loginmodule.model.LoginServer;
 import com.jeremyliao.im.core.InvokingMessage;
 import com.jeremyliao.liveeventbus.LiveEventBus;
 
@@ -40,12 +39,14 @@ public class LoginNetServer {
 
     //登出
     public void logout(String phone) {
-        callLoginBack(mLoginServer.logout(phone), eventBus.LOGOUT_EVENT());
+        callLoginBack(mLoginServer.logout(LoginStatusUtils.mLogin.getLphone(),
+                LoginStatusUtils.token,phone), eventBus.LOGOUT_EVENT());
     }
 
     //更改密码
     public void changePassWord(int id,String phone,String oldPassWord,String newPassWord) {
-        callLoginBack(mLoginServer.changePassWord(id, phone, oldPassWord, newPassWord),
+        callLoginBack(mLoginServer.changePassWord(LoginStatusUtils.mLogin.getLphone(),
+                LoginStatusUtils.token,id, phone, oldPassWord, newPassWord),
                 eventBus.CHANGE_PASSWORD_EVENT());
     }
 
