@@ -70,11 +70,13 @@ public abstract class BaseActivity<V,T extends BasePresenter<V>> extends AppComp
         return mLoadingDialog;
     }
     public void showLoading() {
-        mLoadingDialog.showLoading(getSupportFragmentManager());
+        if (mLoadingDialog != null && !mLoadingDialog.isVisible()){
+            mLoadingDialog.showLoading(getSupportFragmentManager());
+        }
     }
 
     public void hideLoading(){
-        if (mLoadingDialog != null) {
+        if (mLoadingDialog != null && mLoadingDialog.isVisible()) {
             mLoadingDialog.dismiss();
         }
     }

@@ -67,12 +67,14 @@ public class LoginNetServer {
     private boolean isFailOnResponse(Response response) {
         boolean result = true;
         if (!response.isSuccessful()) {
-            eventBus.LOGIN_REQUEST_ERROR().post(response.message());
+            eventBus.LOGIN_REQUEST_ERROR().post("code :" + response.code()
+                    + " msg: " + response.message());
             result = false;
         }
         Object jr = response.body();
         if (null == jr) {
-            eventBus.LOGIN_REQUEST_ERROR().post(response.message());
+            eventBus.LOGIN_REQUEST_ERROR().post("code :" + response.code()
+                    + " msg: " + response.message() + " body is null ;");
             result = false;
         }
         return result;

@@ -20,7 +20,6 @@ public class LoginPresenter extends BasePresenter<ILoginView> implements ILoginP
 
     @Override
     public void sendErrorMsg(String msg,int state) {
-        getView().doHideLoading();
         getView().showToast(msg, state);
     }
 
