@@ -62,8 +62,8 @@ public class IRegisterModelImpl extends LoginBaseModel<IRegisterPresenter> imple
                                 LoginStatusUtils.isLogin = true;
                                 LoginStatusUtils.token = jsonResponse.getToken();
                                 LoginStatusUtils.mLogin = (Login) jsonResponse.getData();
-                                registerAccount(new Account(null,registerName,
-                                        registerGender,null));
+                                registerAccount(new Account(((Login) jsonResponse.getData()).getId(),
+                                        registerName, registerGender,null));
                             } else {
                                 getPresenter().sendErrorMsg(jsonResponse.getCode()+" : "
                                         +jsonResponse.getMsg(),Toast.LENGTH_SHORT);

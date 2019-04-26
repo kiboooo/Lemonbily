@@ -139,6 +139,7 @@ public class RegisterActivity extends BaseActivity<IRegisterView, RegisterPresen
     @Override
     public void registerSuccess() {
         this.hideLoading();
+        showToast("登录成功", Toast.LENGTH_SHORT);
         ARouter.getInstance().build("/Lemonbily/MainActivity")
                 .withFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                 .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
