@@ -10,7 +10,7 @@ import com.example.lemonbily.presenter.HomePresenter;
 import com.example.lemonbily.view.ui.IHomeView;
 
 @Route(path = "/Lemonbily/HomeFragment")
-public class HomeFragment extends BaseFragment<IHomeView, HomePresenter> {
+public class HomeFragment extends BaseFragment<IHomeView, HomePresenter> implements IHomeView{
 
     @Override
     protected void initFragmentData(Bundle savedInstanceState) {
@@ -29,6 +29,6 @@ public class HomeFragment extends BaseFragment<IHomeView, HomePresenter> {
 
     @Override
     protected HomePresenter initPresenter() {
-        return new HomePresenter();
+        return new HomePresenter(this,this);
     }
 }

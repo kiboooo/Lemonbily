@@ -9,6 +9,7 @@ import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.Header;
 import retrofit2.http.POST;
 
 public interface LoginServer {
@@ -17,7 +18,9 @@ public interface LoginServer {
     Call<JsonResponse<Login>> registered (@Body Login login);
 
     @POST("AccountController/insert")
-    Call<JsonResponse<Account>> registeredAccount (@Body Account account);
+    Call<JsonResponse<Account>> registeredAccount (@Header("phone") String loginPhone,
+                                                   @Header("token") String token,
+                                                   @Body Account account);
 
     @POST("LoginController/login")
     @FormUrlEncoded

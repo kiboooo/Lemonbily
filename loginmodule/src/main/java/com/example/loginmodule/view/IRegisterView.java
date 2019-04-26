@@ -7,4 +7,6 @@ public interface IRegisterView {
     void registerSuccess();
 
     void registerFail();
+
+    void doHideLoading();
 }

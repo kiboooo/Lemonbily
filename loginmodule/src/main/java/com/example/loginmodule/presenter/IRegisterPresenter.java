@@ -1,6 +1,8 @@
 package com.example.loginmodule.presenter;
 
-public interface IRegisterPresenter {
+import com.example.basemodule.presenter.IBasePresenter;
+
+public interface IRegisterPresenter extends IBasePresenter {
 
     void sendErrorMsg(String msg,int state);
 

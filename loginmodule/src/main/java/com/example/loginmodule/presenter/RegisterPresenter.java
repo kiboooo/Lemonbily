@@ -3,6 +3,7 @@ package com.example.loginmodule.presenter;
 import android.arch.lifecycle.LifecycleOwner;
 
 import com.example.basemodule.bean.Login;
+import com.example.basemodule.model.IBaseModel;
 import com.example.basemodule.presenter.BasePresenter;
 import com.example.loginmodule.model.IRegisterModel;
 import com.example.loginmodule.model.impl.IRegisterModelImpl;
@@ -10,23 +11,24 @@ import com.example.loginmodule.view.IRegisterView;
 
 public class RegisterPresenter extends BasePresenter<IRegisterView> implements IRegisterPresenter {
 
-    private IRegisterModel registerModel;
-
     public RegisterPresenter(IRegisterView registerView, LifecycleOwner owner) {
-        this.registerModel = new IRegisterModelImpl(this);
-        attachView(registerView);
-        registerModel.initRegisterObservers(owner);
+        super(registerView,owner);
+    }
+
+    @Override
+    protected IBaseModel initModel() {
+        return new IRegisterModelImpl(this);
     }
 
     public void accountRegister(Login login ,String name,String gender) {
-        registerModel.register(login,name,gender);
+        ((IRegisterModel) getBaseModel()).register(login,name,gender);
     }
 
     @Override
     public void sendErrorMsg(String msg, int state) {
+        getView().doHideLoading();
         getView().showToast(msg,state);
     }
-
 
     @Override
     public void registerSuccess() {

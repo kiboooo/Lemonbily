@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
@@ -19,10 +20,11 @@ import com.example.loginmodule.presenter.LoginPresenter;
 import com.example.loginmodule.view.ILoginView;
 
 @Route(path = "/LoginModule/LoginActivity")
-public class LoginActivity extends BaseActivity<ILoginView, LoginPresenter>
+public class LoginActivity extends BaseActivity<ILoginView,LoginPresenter>
         implements View.OnClickListener,ILoginView {
 
     ImageView backBtn;
+    TextView titleDescription;
     EditText phone;
     EditText password;
     Button login;
@@ -32,6 +34,8 @@ public class LoginActivity extends BaseActivity<ILoginView, LoginPresenter>
     @Override
     public void initView(Bundle savedInstanceState) {
         setContentView(R.layout.login_activity_login);
+        titleDescription = findViewById(R.id.base_normal_back_title);
+        titleDescription.setText("注册与登录");
         backBtn = findViewById(R.id.base_normal_title_back_btn);
         phone = findViewById(R.id.account_phone);
         password = findViewById(R.id.account_password);
@@ -46,7 +50,6 @@ public class LoginActivity extends BaseActivity<ILoginView, LoginPresenter>
 
     @Override
     protected void initBinding() {
-
     }
 
     @Override
@@ -75,19 +78,9 @@ public class LoginActivity extends BaseActivity<ILoginView, LoginPresenter>
         register.setOnClickListener(new OnMutiClickListener() {
             @Override
             public void onMutiClick(View view) {
-                showLoading();
-                showToast("注册", Toast.LENGTH_LONG);
-                new Thread(new Runnable(){
-                    @Override
-                    public void run() {
-                        try {
-                            Thread.sleep(2000);
-                            hideLoding();
-                        }catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }).start();
+                ARouter.getInstance()
+                        .build("/LoginModule/RegisterActivity")
+                        .navigation();
             }
         });
         backBtn.setOnClickListener(this);
@@ -108,56 +101,21 @@ public class LoginActivity extends BaseActivity<ILoginView, LoginPresenter>
 
     @Override
     public void loginSuccess() {
-        hideLoding();
+        hideLoading();
         toHomeView(false);
         showToast("登录成功 token :" + LoginStatusUtils.token, Toast.LENGTH_SHORT);
     }
 
     @Override
     public void loginFail() {
-        hideLoding();
-//        showToast("登录失败", Toast.LENGTH_SHORT);
+        hideLoading();
     }
 
     @Override
-    public void getLoginObjSuccess() {
-
+    public void doHideLoading() {
+        hideLoading();
     }
 
-    @Override
-    public void getLoginObjFail() {
-
-    }
-
-    @Override
-    public void logoutSuccess() {
-
-    }
-
-    @Override
-    public void logoutFail() {
-
-    }
-
-    @Override
-    public void permanentLogoutSuccess() {
-
-    }
-
-    @Override
-    public void permanentLogoutFail() {
-
-    }
-
-    @Override
-    public void changePassWordSuccess() {
-
-    }
-
-    @Override
-    public void changePassWordFail() {
-
-    }
 
     private void toHomeView(boolean isExPull){
         if (isExPull) {

@@ -10,7 +10,7 @@ import com.example.lemonbily.presenter.PalCirclePresenter;
 import com.example.lemonbily.view.ui.IPalCircleView;
 
 @Route(path = "/Lemonbily/PalCircleFragment")
-public class PalCircleFragment extends BaseFragment<IPalCircleView, PalCirclePresenter> {
+public class PalCircleFragment extends BaseFragment<IPalCircleView, PalCirclePresenter> implements IPalCircleView {
 
     @Override
     protected void initFragmentData(Bundle savedInstanceState) {
@@ -29,6 +29,6 @@ public class PalCircleFragment extends BaseFragment<IPalCircleView, PalCirclePre
 
     @Override
     protected PalCirclePresenter initPresenter() {
-        return new PalCirclePresenter();
+        return new PalCirclePresenter(this,this);
     }
 }

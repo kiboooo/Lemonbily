@@ -1,6 +1,27 @@
 package com.example.lemonbily.model.impl;
 
-import com.example.lemonbily.model.IHomeModel;
+import android.arch.lifecycle.LifecycleOwner;
 
-public class IHomeModelImpl implements IHomeModel {
+import com.example.basemodule.model.BaseModel;
+import com.example.lemonbily.model.IHomeModel;
+import com.example.lemonbily.presenter.HomePresenter;
+
+public class IHomeModelImpl extends BaseModel<HomePresenter> implements IHomeModel {
+
+    public IHomeModelImpl() {
+    }
+
+    public IHomeModelImpl(HomePresenter presenter) {
+        super(presenter);
+    }
+
+    @Override
+    public void initObservers(LifecycleOwner owner) {
+
+    }
+
+    @Override
+    public void initErrorObservers(LifecycleOwner owner) {
+
+    }
 }

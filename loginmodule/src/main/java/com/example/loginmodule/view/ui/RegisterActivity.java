@@ -1,13 +1,17 @@
 package com.example.loginmodule.view.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.example.basemodule.bean.Login;
 import com.example.basemodule.utils.CommonUtils;
 import com.example.basemodule.utils.OnMutiClickListener;
@@ -16,6 +20,8 @@ import com.example.loginmodule.R;
 import com.example.loginmodule.presenter.RegisterPresenter;
 import com.example.loginmodule.view.IRegisterView;
 
+
+@Route(path = "/LoginModule/RegisterActivity")
 public class RegisterActivity extends BaseActivity<IRegisterView, RegisterPresenter>
         implements View.OnClickListener, IRegisterView {
 
@@ -25,6 +31,7 @@ public class RegisterActivity extends BaseActivity<IRegisterView, RegisterPresen
     RadioGroup radioGroup;
     Button mContinue;
     ImageView backBtn;
+    TextView titleDescription;
 
     String inAccountName;
     String accountGender = "m"; //默认为男性: m ;而女性为: w
@@ -38,6 +45,8 @@ public class RegisterActivity extends BaseActivity<IRegisterView, RegisterPresen
         mPassword = findViewById(R.id.register_password);
         mContinue = findViewById(R.id.register_continue);
         radioGroup = findViewById(R.id.register_gender);
+        titleDescription = findViewById(R.id.base_normal_back_title);
+        titleDescription.setText("注册");
     }
 
     @Override
@@ -129,12 +138,22 @@ public class RegisterActivity extends BaseActivity<IRegisterView, RegisterPresen
 
     @Override
     public void registerSuccess() {
-        hideLoding();
+        this.hideLoading();
+        ARouter.getInstance().build("/Lemonbily/MainActivity")
+                .withFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                .navigation();
+        finish();
     }
 
     @Override
     public void registerFail() {
-        hideLoding();
+        this.hideLoading();
+    }
+
+    @Override
+    public void doHideLoading() {
+        this.hideLoading();
     }
 
 }

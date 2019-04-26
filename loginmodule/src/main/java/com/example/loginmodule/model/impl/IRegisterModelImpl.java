@@ -8,6 +8,7 @@ import android.widget.Toast;
 import com.example.basemodule.bean.Account;
 import com.example.basemodule.bean.JsonResponse;
 import com.example.basemodule.bean.Login;
+import com.example.basemodule.utils.CommonUtils;
 import com.example.basemodule.utils.LoginStatusUtils;
 import com.example.loginmodule.bus.generated.im.EventsDefineAsLoginEvents;
 import com.example.loginmodule.model.IRegisterModel;
@@ -15,34 +16,27 @@ import com.example.loginmodule.model.net.LoginNetServer;
 import com.example.loginmodule.presenter.IRegisterPresenter;
 import com.jeremyliao.im.core.InvokingMessage;
 
-import java.lang.ref.SoftReference;
-
-public class IRegisterModelImpl implements IRegisterModel {
+public class IRegisterModelImpl extends LoginBaseModel<IRegisterPresenter> implements IRegisterModel {
 
     private String registerName;
     private String registerGender;
 
-    private SoftReference<IRegisterPresenter> registerPresenter;
-
     public IRegisterModelImpl() {
     }
 
-    public  IRegisterModelImpl(IRegisterPresenter presenter){
-        this.registerPresenter = new SoftReference<>(presenter);
-    }
-
-    public IRegisterPresenter getRegisterPresenter() {
-        return registerPresenter.get();
+    public IRegisterModelImpl(IRegisterPresenter presenter) {
+        super(presenter);
     }
 
     @Override
-    public void initRegisterObservers(LifecycleOwner owner) {
+    public void initObservers(LifecycleOwner owner) {
         registerRegisterObserver(owner);
         registerRegisterAccountObserver(owner);
     }
 
     @Override
     public void register(Login login, String name,String gender) {
+        login.setLpassword(CommonUtils.passwordEncode(login.getLpassword()));
         LoginNetServer.getInstance().registered(login);
         registerName = name;
         registerGender = gender;
@@ -61,7 +55,7 @@ public class IRegisterModelImpl implements IRegisterModel {
                     @Override
                     public void onChanged(@Nullable JsonResponse jsonResponse) {
                         if (null == jsonResponse) {
-                            getRegisterPresenter().sendErrorMsg("注册出错，请稍后重试",
+                            getPresenter().sendErrorMsg("注册出错，请稍后重试",
                                     Toast.LENGTH_SHORT);
                         }else {
                             if (jsonResponse.getCode() == 0) {
@@ -71,9 +65,9 @@ public class IRegisterModelImpl implements IRegisterModel {
                                 registerAccount(new Account(null,registerName,
                                         registerGender,null));
                             } else {
-                                getRegisterPresenter().sendErrorMsg(jsonResponse.getCode()+" : "
+                                getPresenter().sendErrorMsg(jsonResponse.getCode()+" : "
                                         +jsonResponse.getMsg(),Toast.LENGTH_SHORT);
-                                getRegisterPresenter().registerFail();
+                                getPresenter().registerFail();
                             }
                         }
 
@@ -89,16 +83,16 @@ public class IRegisterModelImpl implements IRegisterModel {
                     @Override
                     public void onChanged(@Nullable JsonResponse jsonResponse) {
                         if (null == jsonResponse) {
-                            getRegisterPresenter().sendErrorMsg("注册个人信息出错，请稍后重试",
+                            getPresenter().sendErrorMsg("注册个人信息出错，请稍后重试",
                                     Toast.LENGTH_SHORT);
                         }else {
                             if (jsonResponse.getCode() == 0) {
                                 LoginStatusUtils.mAccount = (Account) jsonResponse.getData();
-                                getRegisterPresenter().registerSuccess();
+                                getPresenter().registerSuccess();
                             } else {
-                                getRegisterPresenter().sendErrorMsg(jsonResponse.getCode()+" : "
+                                getPresenter().sendErrorMsg(jsonResponse.getCode()+" : "
                                         +jsonResponse.getMsg(),Toast.LENGTH_SHORT);
-                                getRegisterPresenter().registerFail();
+                                getPresenter().registerFail();
                             }
                         }
 

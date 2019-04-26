@@ -9,16 +9,18 @@ import com.example.loginmodule.view.ILoginView;
 
 public class LoginPresenter extends BasePresenter<ILoginView> implements ILoginPresenter{
 
-    private ILoginModel loginModel;
-
     public LoginPresenter(ILoginView loginView, LifecycleOwner owner) {
-        this.loginModel = new ILoginModelimpl(this);
-        attachView(loginView);
-        loginModel.initLoginObservers(owner);
+        super(loginView,owner);
+    }
+
+    @Override
+    protected ILoginModel initModel() {
+        return new ILoginModelimpl(this);
     }
 
     @Override
     public void sendErrorMsg(String msg,int state) {
+        getView().doHideLoading();
         getView().showToast(msg, state);
     }
 
@@ -73,20 +75,7 @@ public class LoginPresenter extends BasePresenter<ILoginView> implements ILoginP
     }
 
     public void login(String phone, String passWord) {
-        loginModel.AccountLogin(phone, passWord);
+        ((ILoginModelimpl)getBaseModel()).AccountLogin(phone, passWord);
     }
-
-//    private  static class SingletonPresenter {
-//        private static final LoginPresenter presenter = new LoginPresenter();
-//    }
-
-//    public static LoginPresenter getInstance(){
-//        return SingletonPresenter.presenter;
-//    }
-
-//    public LoginPresenter init() {
-//
-//        return this;
-//    }
 
 }

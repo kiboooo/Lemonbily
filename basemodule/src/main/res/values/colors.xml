@@ -2,10 +2,10 @@
 <resources>
     <color name="base_colorPrimary">#000000</color>
     <color name="base_colorWeakPoint">#bfbfa6</color>
-    <color name="base_colorAccent">#ffff00</color>
+    <color name="base_colorAccent">#F7D94C</color>
     <color name="base_colorBackground">#FFFFFF</color>
+    <color name="base_statusBarColor">#FFFFFF</color>
     <color name="base_colorWeakAccent">#ffff2c</color>
-    <color name="base_colorWeakAccent2">#F7D94C</color>
     <color name="base_loading_back">#D7202020</color>
     <color name="base_transparent">#00000000</color>
 </resources>

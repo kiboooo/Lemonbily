@@ -4,10 +4,11 @@ import android.util.Log;
 
 import com.example.basemodule.bean.Account;
 import com.example.basemodule.bean.JsonResponse;
+import com.example.basemodule.bean.Login;
 import com.example.basemodule.net.NetWorkServer;
+import com.example.basemodule.utils.LoginStatusUtils;
 import com.example.loginmodule.bus.generated.im.EventsDefineAsLoginEvents;
 import com.example.loginmodule.model.LoginServer;
-import com.example.basemodule.bean.Login;
 import com.jeremyliao.im.core.InvokingMessage;
 import com.jeremyliao.liveeventbus.LiveEventBus;
 
@@ -28,7 +29,8 @@ public class LoginNetServer {
 
     //注册个人信息
     public void registeredAccount(Account account) {
-        callAccountBack(mLoginServer.registeredAccount(account), eventBus.REGISTER_ACCOUNT_EVENT());
+        callAccountBack(mLoginServer.registeredAccount(LoginStatusUtils.mLogin.getLphone(),
+                LoginStatusUtils.token, account), eventBus.REGISTER_ACCOUNT_EVENT());
     }
 
     //登录

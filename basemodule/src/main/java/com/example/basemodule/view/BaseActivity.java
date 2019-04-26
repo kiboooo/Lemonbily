@@ -30,9 +30,6 @@ public abstract class BaseActivity<V,T extends BasePresenter<V>> extends AppComp
         ARouter.getInstance().inject(this);
         mContext = BaseActivity.this;
         mPresenter = initPresenter();
-        if (null != mPresenter) {
-            mPresenter.attachView((V) this);
-        }
         mLoadingDialog = new LoadingDialog();
     }
 
@@ -76,7 +73,7 @@ public abstract class BaseActivity<V,T extends BasePresenter<V>> extends AppComp
         mLoadingDialog.showLoading(getSupportFragmentManager());
     }
 
-    public void hideLoding(){
+    public void hideLoading(){
         if (mLoadingDialog != null) {
             mLoadingDialog.dismiss();
         }

@@ -1,11 +1,7 @@
 package com.example.loginmodule.model;
 
-import android.arch.lifecycle.LifecycleOwner;
+import com.example.basemodule.model.IBaseModel;
 
-public interface ILoginModel {
-
+public interface ILoginModel extends IBaseModel {
     void AccountLogin(String phone, String passWord);
-
-    void initLoginObservers(LifecycleOwner owner );
-
 }

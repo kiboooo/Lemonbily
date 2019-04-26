@@ -15,7 +15,7 @@ import com.example.lemonbily.presenter.MinePresenter;
 import com.example.lemonbily.view.ui.IMineView;
 
 @Route(path = "/Lemonbily/MineFragment")
-public class MineFragment extends BaseFragment<IMineView, MinePresenter> implements View. OnClickListener {
+public class MineFragment extends BaseFragment<IMineView, MinePresenter> implements IMineView,View. OnClickListener {
 
 
     private TextView loginButton;
@@ -38,7 +38,7 @@ public class MineFragment extends BaseFragment<IMineView, MinePresenter> impleme
 
     @Override
     protected MinePresenter initPresenter() {
-        return new MinePresenter();
+        return new MinePresenter(this,this);
     }
 
 

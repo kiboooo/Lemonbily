@@ -1,4 +1,6 @@
 package com.example.lemonbily.model;
 
-public interface IMineModel {
+import com.example.basemodule.model.IBaseModel;
+
+public interface IMineModel extends IBaseModel {
 }

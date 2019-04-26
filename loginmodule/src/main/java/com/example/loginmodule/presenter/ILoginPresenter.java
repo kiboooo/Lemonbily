@@ -1,9 +1,8 @@
 package com.example.loginmodule.presenter;
 
-public interface ILoginPresenter {
+import com.example.basemodule.presenter.IBasePresenter;
 
-     void sendErrorMsg(String msg,int state);
-
+public interface ILoginPresenter extends IBasePresenter {
      void loginSuccess();
 
      void loginFail();

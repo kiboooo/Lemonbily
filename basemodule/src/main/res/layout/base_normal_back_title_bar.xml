@@ -10,7 +10,6 @@
         android:layout_height="match_parent"
         android:gravity="center"
         android:textSize="18sp"
-        android:text="注册与登录"
         android:textStyle="bold"
         android:textColor="@color/base_colorPrimary"
         />

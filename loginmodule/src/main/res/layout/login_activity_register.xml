@@ -80,6 +80,7 @@
         android:id="@+id/register_gender"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:checkedButton="@id/gender_man"
         android:orientation="horizontal"
         android:layout_marginTop="50dp"
         android:layout_marginStart="50dp"

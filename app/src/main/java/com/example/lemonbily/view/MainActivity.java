@@ -55,9 +55,8 @@ public class MainActivity extends BaseActivity<IMainView,MainPresenter> implemen
 
     @Override
     public MainPresenter initPresenter() {
-        return MainPresenter.getInstance();
+        return new MainPresenter(this,this);
     }
-
 
     @Override
     public void initListener() {
@@ -65,7 +64,6 @@ public class MainActivity extends BaseActivity<IMainView,MainPresenter> implemen
         btnMine.setOnClickListener(this);
         btnPalCircle.setOnClickListener(this);
     }
-
 
     private void selectTab(int i) {
         FragmentTransaction transaction = fragmentManager.beginTransaction();
@@ -81,19 +79,6 @@ public class MainActivity extends BaseActivity<IMainView,MainPresenter> implemen
         for (int i = 0; i < fragments.length; i++) {
             transaction.hide(fragments[i]);
         }
-    }
-
-    @Override
-    public void goToLogin(View view) {
-        mPresenter.ToActivity(MainActivity.this,
-                "com.example.loginmodule.view.ui.LoginActivity");
-    }
-
-    @Override
-    public void goToVideo(View view) {
-
-        mPresenter.ToActivity(MainActivity.this,
-                "com.example.videoplaymodule.VideoPlayActivity");
     }
 
 
