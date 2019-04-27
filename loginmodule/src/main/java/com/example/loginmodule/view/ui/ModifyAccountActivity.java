@@ -33,6 +33,7 @@ public class ModifyAccountActivity extends BaseActivity<IModifyAccountView, Modi
     RadioGroup genderRG;
     Button finishBtn;
     ImageView avatar;
+
     File avatarFile = null;
     String accountGender = "m";
 
