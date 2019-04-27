@@ -1,4 +1,4 @@
-package com.example.loginmodule.presenter;
+package com.example.loginmodule.presenter.impl;
 
 import android.arch.lifecycle.LifecycleOwner;
 
@@ -7,6 +7,7 @@ import com.example.basemodule.model.IBaseModel;
 import com.example.basemodule.presenter.BasePresenter;
 import com.example.loginmodule.model.IRegisterModel;
 import com.example.loginmodule.model.impl.IRegisterModelImpl;
+import com.example.loginmodule.presenter.IRegisterPresenter;
 import com.example.loginmodule.view.IRegisterView;
 
 public class RegisterPresenter extends BasePresenter<IRegisterView> implements IRegisterPresenter {

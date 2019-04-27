@@ -3,10 +3,9 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    >
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <include layout="@layout/base_normal_back_title_bar"/>
+    <include layout="@layout/base_normal_back_title_bar" />
 
     <android.support.constraint.Guideline
         android:id="@+id/title_guide_line"
@@ -19,24 +18,19 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="手机号："
+        android:text="头像："
         android:textColor="@color/base_colorPrimary"
         android:layout_marginBottom="10dp"
-        app:layout_constraintLeft_toLeftOf="@id/register_phone"
-        app:layout_constraintBottom_toTopOf="@id/register_phone"
+        app:layout_constraintLeft_toLeftOf="@id/modify_account_name"
+        app:layout_constraintBottom_toTopOf="@id/modify_avatar"
         />
-
-    <EditText
-        android:id="@+id/register_phone"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/login_phone_hint"
-        android:inputType="phone"
-        android:maxLength="11"
-        android:digits="1234567890"
-        android:layout_marginStart="50dp"
-        android:layout_marginEnd="50dp"
-        android:layout_marginTop="100dp"
+    
+    <ImageView
+        android:id="@+id/modify_avatar"
+        android:layout_width="96dp"
+        android:layout_height="96dp"
+        android:src="@drawable/base_avatar_default"
+        android:layout_marginTop="60dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="@id/title_guide_line"
@@ -48,22 +42,22 @@
         android:text="用户名："
         android:textColor="@color/base_colorPrimary"
         android:layout_marginBottom="10dp"
-        app:layout_constraintLeft_toLeftOf="@id/register_account_name"
-        app:layout_constraintBottom_toTopOf="@id/register_account_name"
+        app:layout_constraintLeft_toLeftOf="@id/modify_account_name"
+        app:layout_constraintBottom_toTopOf="@id/modify_account_name"
         />
 
     <EditText
-        android:id="@+id/register_account_name"
+        android:id="@+id/modify_account_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/login_phone_hint"
         android:inputType="text"
         android:layout_marginStart="50dp"
         android:layout_marginEnd="50dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="80dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/register_phone"
+        app:layout_constraintTop_toBottomOf="@id/modify_avatar"
         />
 
     <TextView
@@ -72,22 +66,21 @@
         android:text="性别："
         android:textColor="@color/base_colorPrimary"
         android:layout_marginBottom="10dp"
-        app:layout_constraintLeft_toLeftOf="@id/register_gender"
-        app:layout_constraintBottom_toTopOf="@id/register_gender"
+        app:layout_constraintLeft_toLeftOf="@id/modify_gender"
+        app:layout_constraintBottom_toTopOf="@id/modify_gender"
         />
 
     <RadioGroup
-        android:id="@+id/register_gender"
+        android:id="@+id/modify_gender"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:checkedButton="@id/gender_man"
         android:orientation="horizontal"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="60dp"
         android:layout_marginStart="50dp"
         android:layout_marginEnd="50dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/register_account_name"
+        app:layout_constraintTop_toBottomOf="@id/modify_account_name"
         >
 
         <RadioButton
@@ -110,41 +103,16 @@
 
     </RadioGroup>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="密码："
-        android:textColor="@color/base_colorPrimary"
-        android:layout_marginBottom="10dp"
-        app:layout_constraintLeft_toLeftOf="@id/register_password"
-        app:layout_constraintBottom_toTopOf="@id/register_password"
-        />
-
-    <EditText
-        android:id="@+id/register_password"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/login_register_password_content"
-        android:inputType="textPassword"
-        android:layout_marginStart="50dp"
-        android:layout_marginEnd="50dp"
-        android:layout_marginTop="50dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/register_gender"
-        />
-
     <Button
-        android:id="@+id/register_continue"
+        android:id="@+id/modify_finish"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/login_continue_content"
+        android:text="@string/login_finish_content"
         android:background="@drawable/base_radius2_button"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="50dp"
         android:layout_marginStart="50dp"
         android:layout_marginEnd="50dp"
-        app:layout_constraintTop_toBottomOf="@id/register_password"
+        app:layout_constraintTop_toBottomOf="@id/modify_gender"
         />
-
 
 </android.support.constraint.ConstraintLayout>

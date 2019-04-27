@@ -14,7 +14,7 @@ import com.example.basemodule.utils.LoginStatusUtils;
 import com.example.basemodule.utils.OnMutiClickListener;
 import com.example.basemodule.view.BaseActivity;
 import com.example.loginmodule.R;
-import com.example.loginmodule.presenter.ChangePasswordPresenter;
+import com.example.loginmodule.presenter.impl.ChangePasswordPresenter;
 import com.example.loginmodule.view.IChangePasswordView;
 
 @Route(path = "/LoginModule/ChangePasswordActivity")

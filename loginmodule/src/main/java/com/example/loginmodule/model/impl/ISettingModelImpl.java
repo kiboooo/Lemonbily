@@ -6,65 +6,56 @@ import android.support.annotation.Nullable;
 import android.widget.Toast;
 
 import com.example.basemodule.bean.JsonResponse;
-import com.example.basemodule.bean.Login;
 import com.example.basemodule.utils.LoginStatusUtils;
 import com.example.loginmodule.bus.generated.im.EventsDefineAsLoginEvents;
-import com.example.loginmodule.model.ILoginModel;
+import com.example.loginmodule.model.ISettingModel;
 import com.example.loginmodule.model.net.LoginNetServer;
-import com.example.loginmodule.presenter.ILoginPresenter;
+import com.example.loginmodule.presenter.ISettingPresenter;
 import com.jeremyliao.im.core.InvokingMessage;
 
-public class ILoginModelimpl extends LoginBaseModel<ILoginPresenter> implements ILoginModel {
-
-    public ILoginModelimpl() {
+public class ISettingModelImpl  extends LoginBaseModel<ISettingPresenter> implements ISettingModel {
+    public ISettingModelImpl() {
     }
 
-    public ILoginModelimpl(ILoginPresenter presenter) {
+    public ISettingModelImpl(ISettingPresenter presenter) {
         super(presenter);
     }
 
     @Override
     public void initObservers(LifecycleOwner owner) {
-        registerLoginEvenObserver(owner);
+        registerLogoutObserver(owner);
     }
 
     @Override
-    public void AccountLogin(String phone, String passWord) {
-        LoginNetServer.getInstance().login(phone, passWord);
+    public void logout(String phone) {
+        LoginNetServer.getInstance().logout(phone);
     }
 
-    //登录事件的观察者
-    private void registerLoginEvenObserver(LifecycleOwner owner) {
+
+    //登出事件的观察者
+    private void registerLogoutObserver(LifecycleOwner owner) {
         InvokingMessage.get().as(EventsDefineAsLoginEvents.class)
-                .LOGIN_EVENT()
+                .LOGOUT_EVENT()
                 .observe(owner, new Observer<JsonResponse>() {
                     @Override
                     public void onChanged(@Nullable JsonResponse jsonResponse) {
                         if (null == jsonResponse) {
-                            getPresenter().sendErrorMsg("登陆出错，请稍后重试",
+                            getPresenter().sendErrorMsg("登出出错，请稍后重试",
                                     Toast.LENGTH_SHORT);
-                            getPresenter().loginFail();
                         }else {
                             if (jsonResponse.getCode() == 0) {
-                                LoginStatusUtils.isLogin = true;
-                                LoginStatusUtils.token = jsonResponse.getToken();
-                                LoginStatusUtils.mLogin = (Login) jsonResponse.getData();
-                                getPresenter().loginSuccess();
+                                LoginStatusUtils.isLogin = false;
+                                LoginStatusUtils.token = "";
+                                LoginStatusUtils.mLogin = null;
+                                getPresenter().logoutSuccess();
                             } else {
                                 getPresenter().sendErrorMsg(jsonResponse.getCode()+" : "
                                         +jsonResponse.getMsg(),Toast.LENGTH_SHORT);
-                                getPresenter().loginFail();
+                                getPresenter().logoutFail();
                             }
                         }
 
                     }
                 });
     }
-
-
-
-
-
-
-
 }

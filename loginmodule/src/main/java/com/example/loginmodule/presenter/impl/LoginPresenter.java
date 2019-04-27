@@ -1,13 +1,14 @@
-package com.example.loginmodule.presenter;
+package com.example.loginmodule.presenter.impl;
 
 import android.arch.lifecycle.LifecycleOwner;
 
 import com.example.basemodule.presenter.BasePresenter;
 import com.example.loginmodule.model.ILoginModel;
 import com.example.loginmodule.model.impl.ILoginModelimpl;
+import com.example.loginmodule.presenter.ILoginPresenter;
 import com.example.loginmodule.view.ILoginView;
 
-public class LoginPresenter extends BasePresenter<ILoginView> implements ILoginPresenter{
+public class LoginPresenter extends BasePresenter<ILoginView> implements ILoginPresenter {
 
     public LoginPresenter(ILoginView loginView, LifecycleOwner owner) {
         super(loginView,owner);
@@ -20,6 +21,7 @@ public class LoginPresenter extends BasePresenter<ILoginView> implements ILoginP
 
     @Override
     public void sendErrorMsg(String msg,int state) {
+        getView().dohide();
         getView().showToast(msg, state);
     }
 
@@ -33,45 +35,6 @@ public class LoginPresenter extends BasePresenter<ILoginView> implements ILoginP
         getView().loginFail();
     }
 
-    @Override
-    public void getLoginObjSuccess() {
-
-    }
-
-    @Override
-    public void getLoginObjFail() {
-
-    }
-
-    @Override
-    public void logoutSuccess() {
-
-    }
-
-    @Override
-    public void logoutFail() {
-
-    }
-
-    @Override
-    public void permanentLogoutSuccess() {
-
-    }
-
-    @Override
-    public void permanentLogoutFail() {
-
-    }
-
-    @Override
-    public void changePassWordSuccess() {
-
-    }
-
-    @Override
-    public void changePassWordFail() {
-
-    }
 
     public void login(String phone, String passWord) {
         ((ILoginModelimpl)getBaseModel()).AccountLogin(phone, passWord);

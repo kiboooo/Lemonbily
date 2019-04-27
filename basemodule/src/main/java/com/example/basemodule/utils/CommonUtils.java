@@ -1,5 +1,8 @@
 package com.example.basemodule.utils;
 
+import com.bumptech.glide.request.RequestOptions;
+import com.example.basemodule.R;
+
 import org.apaches.commons.codec.digest.DigestUtils;
 
 import java.util.regex.Matcher;
@@ -46,4 +49,14 @@ public class CommonUtils {
     public static String passwordEncode(String s) {
         return DigestUtils.md5Hex(s);
     }
+
+    public static RequestOptions avatarRequestOption(){
+        return new RequestOptions()
+                .circleCrop()
+                .placeholder(R.drawable.base_avatar_default)
+                .error(R.drawable.base_avatar_default)
+                .fallback(R.drawable.base_avatar_default_mind);
+    }
+
+
 }

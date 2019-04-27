@@ -16,7 +16,7 @@ import com.example.basemodule.utils.LoginStatusUtils;
 import com.example.basemodule.utils.OnMutiClickListener;
 import com.example.basemodule.view.BaseActivity;
 import com.example.loginmodule.R;
-import com.example.loginmodule.presenter.LoginPresenter;
+import com.example.loginmodule.presenter.impl.LoginPresenter;
 import com.example.loginmodule.view.ILoginView;
 
 @Route(path = "/LoginModule/LoginActivity")
@@ -78,13 +78,22 @@ public class LoginActivity extends BaseActivity<ILoginView,LoginPresenter>
         register.setOnClickListener(new OnMutiClickListener() {
             @Override
             public void onMutiClick(View view) {
-//                ARouter.getInstance()
+
+                //注册界面
+                //                ARouter.getInstance()
 //                        .build("/LoginModule/RegisterActivity")
+//                        .navigation();
+                //TODO: 开发测试模块，正式上线需要恢复
+                /*测试开始*/
+                //修改密码界面
+//                ARouter.getInstance()
+//                        .build("/LoginModule/ChangePasswordActivity")
 //                        .navigation();
 
                 ARouter.getInstance()
-                        .build("/LoginModule/ChangePasswordActivity")
+                        .build("/LoginModule/SettingActivity")
                         .navigation();
+                /*测试结束*/
             }
         });
         backBtn.setOnClickListener(this);
@@ -112,6 +121,11 @@ public class LoginActivity extends BaseActivity<ILoginView,LoginPresenter>
 
     @Override
     public void loginFail() {
+        hideLoading();
+    }
+
+    @Override
+    public void dohide() {
         hideLoading();
     }
 

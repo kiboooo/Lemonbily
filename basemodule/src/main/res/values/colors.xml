@@ -7,5 +7,6 @@
     <color name="base_statusBarColor">#FFFFFF</color>
     <color name="base_colorWeakAccent">#ffff2c</color>
     <color name="base_loading_back">#D7202020</color>
+    <color name="base_graybackground">#8DC5C5C5</color>
     <color name="base_transparent">#00000000</color>
 </resources>

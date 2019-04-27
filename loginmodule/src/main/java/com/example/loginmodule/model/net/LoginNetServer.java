@@ -11,6 +11,7 @@ import com.example.loginmodule.bus.generated.im.EventsDefineAsLoginEvents;
 import com.jeremyliao.im.core.InvokingMessage;
 import com.jeremyliao.liveeventbus.LiveEventBus;
 
+import okhttp3.MultipartBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -48,6 +49,20 @@ public class LoginNetServer {
         callLoginBack(mLoginServer.changePassWord(LoginStatusUtils.mLogin.getLphone(),
                 LoginStatusUtils.token,id, phone, oldPassWord, newPassWord),
                 eventBus.CHANGE_PASSWORD_EVENT());
+    }
+
+    //更新Account用户
+    public void modifyAccount(Account account) {
+        callAccountBack(mLoginServer.modifyAccount(LoginStatusUtils.mLogin.getLphone(),
+                LoginStatusUtils.token,account),
+                eventBus.MODIFY_ACCOUNT_EVENT());
+    }
+
+    //更新Account用户的头像
+    public void modifydAccountAvatar( int aid,MultipartBody.Part imag) {
+        callAccountBack(mLoginServer.modifydAccountAvatar(LoginStatusUtils.mLogin.getLphone(),
+                LoginStatusUtils.token, aid, imag),
+                eventBus.MODIFY_ACCOUNT_AVATAR_EVENT());
     }
 
 

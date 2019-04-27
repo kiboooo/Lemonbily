@@ -17,7 +17,7 @@ import com.example.basemodule.utils.CommonUtils;
 import com.example.basemodule.utils.OnMutiClickListener;
 import com.example.basemodule.view.BaseActivity;
 import com.example.loginmodule.R;
-import com.example.loginmodule.presenter.RegisterPresenter;
+import com.example.loginmodule.presenter.impl.RegisterPresenter;
 import com.example.loginmodule.view.IRegisterView;
 
 

@@ -34,4 +34,12 @@ public class LoginEvents {
     @EventType(JsonResponse.class)
     public static final String CHANGE_PASSWORD_EVENT = "account_change_password_event";
 
+    //修改密码
+    @EventType(JsonResponse.class)
+    public static final String MODIFY_ACCOUNT_EVENT = "modify_account_event";
+
+    //修改密码
+    @EventType(JsonResponse.class)
+    public static final String MODIFY_ACCOUNT_AVATAR_EVENT = "account_change_password_event";
+
 }

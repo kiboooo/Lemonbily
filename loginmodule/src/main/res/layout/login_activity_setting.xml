@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+
+    <include layout="@layout/base_normal_back_title_bar" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/title_guide_line"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="50dp"
+        />
+
+    <FrameLayout
+        android:id="@+id/setting_modify_data"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@drawable/base_normal_white_to_gray_btn"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toTopOf="@id/title_guide_line"
+        android:layout_marginTop="20dp"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:text="修改个人信息"
+            android:textSize="16sp"
+            android:textColor="@color/base_colorPrimary"
+            android:layout_gravity="center_vertical"
+            />
+
+        <ImageView
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/base_right_btn"
+            android:layout_gravity="end|center_vertical"
+            />
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/setting_logout"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@drawable/base_normal_white_to_gray_btn"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@id/setting_modify_data"
+        android:layout_marginTop="5dp"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:text="退出登录"
+            android:textSize="16sp"
+            android:textColor="@color/base_colorPrimary"
+            android:layout_gravity="center_vertical"
+            />
+
+    </FrameLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="V1.0.0 by kibo"
+        android:layout_marginBottom="30dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        />
+
+
+
+
+</android.support.constraint.ConstraintLayout>

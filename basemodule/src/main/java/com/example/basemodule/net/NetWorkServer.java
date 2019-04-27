@@ -15,9 +15,9 @@ public class NetWorkServer {
     /**
      * 服务器地址前缀URL
      */
+    public static final String SERVER_URL = "http://47.107.46.0:80";
     private static final String BASE_URL = "http://47.107.46.0:80/lemonbily/";
 
-    private static final String DEBUG_BASE_URL = "http://localhost:80/lemonbily/";
     private static final int READ_TIMEOUT  = 60;        //读取超时时间，单位秒
     private static final int CONNECT_TIMEOUT  = 50;     //链接超时时间，单位秒
 

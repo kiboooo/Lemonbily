@@ -1,4 +1,4 @@
-package com.example.loginmodule.presenter;
+package com.example.loginmodule.presenter.impl;
 
 import android.arch.lifecycle.LifecycleOwner;
 
@@ -6,6 +6,7 @@ import com.example.basemodule.model.IBaseModel;
 import com.example.basemodule.presenter.BasePresenter;
 import com.example.loginmodule.model.IChangePasswordModel;
 import com.example.loginmodule.model.impl.IChangePasswordModelImpl;
+import com.example.loginmodule.presenter.IChangePasswordPresenter;
 import com.example.loginmodule.view.IChangePasswordView;
 
 public class ChangePasswordPresenter extends BasePresenter<IChangePasswordView>
