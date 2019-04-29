@@ -21,9 +21,12 @@ public abstract class BaseActivity<V,T extends BasePresenter<V>> extends AppComp
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setColorForStatus();
+        initSP();
         initView(savedInstanceState);
         init();
     }
+
+
 
     @Override
     protected void onStart () {
@@ -43,6 +46,11 @@ public abstract class BaseActivity<V,T extends BasePresenter<V>> extends AppComp
      * 初始化Activity对应的视图，以及控件绑定
      */
     public abstract void initView(Bundle savedInstanceState);
+
+    /**
+     * 初始化SP中存放的资源
+     */
+    protected abstract void initSP();
 
     /**
      * 初始化MVP架构的P层处理逻辑

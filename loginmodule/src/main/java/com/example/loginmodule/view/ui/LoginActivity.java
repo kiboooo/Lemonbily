@@ -44,6 +44,11 @@ public class LoginActivity extends BaseActivity<ILoginView,LoginPresenter>
     }
 
     @Override
+    protected void initSP() {
+
+    }
+
+    @Override
     public LoginPresenter initPresenter() {
         return new LoginPresenter(this,this);
     }
@@ -78,11 +83,10 @@ public class LoginActivity extends BaseActivity<ILoginView,LoginPresenter>
         register.setOnClickListener(new OnMutiClickListener() {
             @Override
             public void onMutiClick(View view) {
-
-                //注册界面
-                //                ARouter.getInstance()
-//                        .build("/LoginModule/RegisterActivity")
-//                        .navigation();
+//                注册界面
+                ARouter.getInstance()
+                        .build("/LoginModule/RegisterActivity")
+                        .navigation();
                 //TODO: 开发测试模块，正式上线需要恢复
                 /*测试开始*/
                 //修改密码界面
@@ -90,9 +94,9 @@ public class LoginActivity extends BaseActivity<ILoginView,LoginPresenter>
 //                        .build("/LoginModule/ChangePasswordActivity")
 //                        .navigation();
 
-                ARouter.getInstance()
-                        .build("/LoginModule/SettingActivity")
-                        .navigation();
+//                ARouter.getInstance()
+//                        .build("/LoginModule/SettingActivity")
+//                        .navigation();
                 /*测试结束*/
             }
         });

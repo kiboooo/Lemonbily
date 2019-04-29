@@ -41,6 +41,11 @@ public class ChangePasswordActivity
     }
 
     @Override
+    protected void initSP() {
+
+    }
+
+    @Override
     public ChangePasswordPresenter initPresenter() {
         return new ChangePasswordPresenter(this, this);
     }

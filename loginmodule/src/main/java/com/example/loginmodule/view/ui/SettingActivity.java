@@ -37,6 +37,11 @@ public class SettingActivity extends BaseActivity<ISettingView, SettingPresenter
     }
 
     @Override
+    protected void initSP() {
+
+    }
+
+    @Override
     public SettingPresenter initPresenter() {
         return new SettingPresenter(this, this);
     }

@@ -1,6 +1,7 @@
 package com.example.basemodule.application;
 
 import android.app.Application;
+import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.util.Log;
 
@@ -8,6 +9,8 @@ import com.alibaba.android.arouter.launcher.ARouter;
 import com.example.basemodule.net.NetWorkServer;
 
 public abstract class BaseApplication extends Application {
+
+    private static Context mContext ;
 
     //由每个module中的独自的 Application 初始化的接口；
     public abstract void initApplication(Application application);
@@ -39,14 +42,15 @@ public abstract class BaseApplication extends Application {
      */
     private void init() {
         initApplication(this);
-
+        mContext = getApplicationContext();
         //初始化Retrofit
         NetWorkServer.getInstance().initRetrofit();
     }
 
-    public Application getApplication(){
-        return this;
+    public static Context getContext(){
+        return mContext;
     }
+
 
     public boolean isDebug(){
         try {

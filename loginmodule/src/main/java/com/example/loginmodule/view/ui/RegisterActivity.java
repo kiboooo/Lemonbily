@@ -49,6 +49,11 @@ public class RegisterActivity extends BaseActivity<IRegisterView, RegisterPresen
     }
 
     @Override
+    protected void initSP() {
+
+    }
+
+    @Override
     public RegisterPresenter initPresenter() {
         return new RegisterPresenter(this, this);
     }

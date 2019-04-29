@@ -18,7 +18,6 @@ public class MyApplication extends BaseApplication {
      *
      */
     private void init() {
-
     }
 
     /**
@@ -40,4 +39,6 @@ public class MyApplication extends BaseApplication {
             }
         }
     }
+
+
 }

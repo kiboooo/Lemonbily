@@ -49,6 +49,11 @@ public class ModifyAccountActivity extends BaseActivity<IModifyAccountView, Modi
     }
 
     @Override
+    protected void initSP() {
+
+    }
+
+    @Override
     public ModifyAccountPresenter initPresenter() {
         return new ModifyAccountPresenter(this, this);
     }

@@ -9,6 +9,7 @@ import android.widget.Button;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.example.basemodule.utils.LoginStatusUtils;
 import com.example.basemodule.view.BaseActivity;
 import com.example.lemonbily.R;
 import com.example.lemonbily.presenter.impl.MainPresenter;
@@ -51,6 +52,12 @@ public class MainActivity extends BaseActivity<IMainView,MainPresenter> implemen
         btnHome = findViewById(R.id.btn_home);
         btnMine = findViewById(R.id.btn_mine);
         btnPalCircle = findViewById(R.id.btn_circle);
+
+    }
+
+    @Override
+    protected void initSP() {
+        LoginStatusUtils.initLoginStatus();
     }
 
     @Override
@@ -81,7 +88,6 @@ public class MainActivity extends BaseActivity<IMainView,MainPresenter> implemen
         }
     }
 
-
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
@@ -97,5 +103,11 @@ public class MainActivity extends BaseActivity<IMainView,MainPresenter> implemen
                 selectTab(2);
                 break;
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        LoginStatusUtils.savaLoginStatus();
     }
 }
