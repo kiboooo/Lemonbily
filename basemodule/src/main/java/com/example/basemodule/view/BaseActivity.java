@@ -23,6 +23,11 @@ public abstract class BaseActivity<V,T extends BasePresenter<V>> extends AppComp
         setColorForStatus();
         initView(savedInstanceState);
         init();
+    }
+
+    @Override
+    protected void onStart () {
+        super.onStart();
         initBinding();
         initListener();
     }

@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.basemodule.presenter.BasePresenter;
 
@@ -94,6 +95,10 @@ public abstract class BaseFragment<V, T extends BasePresenter<V>> extends Fragme
      * @return
      */
     protected abstract T initPresenter();
+
+    protected void showToasts(String msg,int state){
+        Toast.makeText(getContext(), msg, state).show();
+    }
 
 
 }

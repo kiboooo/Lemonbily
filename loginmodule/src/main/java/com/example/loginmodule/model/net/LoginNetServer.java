@@ -51,6 +51,14 @@ public class LoginNetServer {
                 eventBus.CHANGE_PASSWORD_EVENT());
     }
 
+    //获取Account用户
+    public void getAccount(int aid) {
+        callAccountBack(mLoginServer.getAccount(LoginStatusUtils.mLogin.getLphone(),
+                LoginStatusUtils.token,
+                aid),
+                eventBus.INIT_ACCOUNT_EVENT());
+    }
+
     //更新Account用户
     public void modifyAccount(Account account) {
         callAccountBack(mLoginServer.modifyAccount(LoginStatusUtils.mLogin.getLphone(),

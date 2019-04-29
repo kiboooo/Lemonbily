@@ -49,12 +49,7 @@ public class SettingActivity extends BaseActivity<ISettingView, SettingPresenter
     @Override
     public void initListener() {
         backBtn.setOnClickListener(this);
-        modifyData.setOnClickListener(new OnMutiClickListener() {
-            @Override
-            public void onMutiClick(View view) {
-                toModifyActivty();
-            }
-        });
+        modifyData.setOnClickListener(this);
         logout.setOnClickListener(new OnMutiClickListener() {
             @Override
             public void onMutiClick(View view) {
@@ -74,17 +69,19 @@ public class SettingActivity extends BaseActivity<ISettingView, SettingPresenter
         }
     }
 
-
-    private void toModifyActivty() {
-        ARouter.getInstance().build("/LoginModule/ModifyAccountActivity").navigation();
-    }
-
     @Override
     public void onClick(View view) {
         int i = view.getId();
         if (i == R.id.base_normal_title_back_btn) {
             finish();
         }
+        if (i == R.id.setting_modify_data){
+            toModifyActivty();
+        }
+    }
+
+    private void toModifyActivty() {
+        ARouter.getInstance().build("/LoginModule/ModifyAccountActivity").navigation();
     }
 
     @Override

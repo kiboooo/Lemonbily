@@ -1,4 +1,4 @@
-package com.example.lemonbily.presenter;
+package com.example.lemonbily.presenter.impl;
 
 import android.arch.lifecycle.LifecycleOwner;
 
@@ -7,7 +7,7 @@ import com.example.basemodule.presenter.BasePresenter;
 import com.example.lemonbily.model.impl.IPalCircleModelImpl;
 import com.example.lemonbily.view.ui.IPalCircleView;
 
-public class PalCirclePresenter extends BasePresenter<IPalCircleView> {
+public class PalCirclePresenter extends BasePresenter<IPalCircleView>  {
 
     public PalCirclePresenter() {
     }
@@ -25,4 +25,5 @@ public class PalCirclePresenter extends BasePresenter<IPalCircleView> {
     public void sendErrorMsg(String msg, int state) {
 
     }
+
 }

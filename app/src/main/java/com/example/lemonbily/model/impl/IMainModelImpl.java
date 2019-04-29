@@ -4,7 +4,7 @@ import android.arch.lifecycle.LifecycleOwner;
 
 import com.example.basemodule.model.BaseModel;
 import com.example.lemonbily.model.IMainModel;
-import com.example.lemonbily.presenter.MainPresenter;
+import com.example.lemonbily.presenter.impl.MainPresenter;
 
 /**
  * 主要的对Model接口中的方法提供实现

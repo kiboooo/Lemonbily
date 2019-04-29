@@ -4,7 +4,7 @@ import android.arch.lifecycle.LifecycleOwner;
 
 import com.example.basemodule.model.BaseModel;
 import com.example.lemonbily.model.IHomeModel;
-import com.example.lemonbily.presenter.HomePresenter;
+import com.example.lemonbily.presenter.impl.HomePresenter;
 
 public class IHomeModelImpl extends BaseModel<HomePresenter> implements IHomeModel {
 

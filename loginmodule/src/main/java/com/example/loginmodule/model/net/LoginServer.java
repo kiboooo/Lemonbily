@@ -57,6 +57,11 @@ public interface LoginServer {
                                        @Header("token") String token, @Field("id") int id);
 
 
+    @POST("AccountController/selectByID")
+    @FormUrlEncoded
+    Call<JsonResponse<Account>> getAccount (@Header("phone") String loginPhone,
+                                               @Header("token") String token, @Field("aid") int aid);
+
     @POST("AccountController/update")
     Call<JsonResponse<Account>> modifyAccount (@Header("phone") String loginPhone,
                                                    @Header("token") String token,

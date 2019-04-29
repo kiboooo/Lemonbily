@@ -4,7 +4,7 @@ import android.arch.lifecycle.LifecycleOwner;
 
 import com.example.basemodule.model.BaseModel;
 import com.example.lemonbily.model.IPalCircleModel;
-import com.example.lemonbily.presenter.PalCirclePresenter;
+import com.example.lemonbily.presenter.impl.PalCirclePresenter;
 
 public class IPalCircleModelImpl extends BaseModel<PalCirclePresenter> implements IPalCircleModel {
 

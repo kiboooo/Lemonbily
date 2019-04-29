@@ -11,7 +11,7 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.example.basemodule.view.BaseActivity;
 import com.example.lemonbily.R;
-import com.example.lemonbily.presenter.MainPresenter;
+import com.example.lemonbily.presenter.impl.MainPresenter;
 import com.example.lemonbily.view.ui.IMainView;
 
 @Route(path = "/Lemonbily/MainActivity")

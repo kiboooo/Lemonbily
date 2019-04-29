@@ -6,7 +6,7 @@ import android.view.View;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.example.basemodule.view.BaseFragment;
 import com.example.lemonbily.R;
-import com.example.lemonbily.presenter.PalCirclePresenter;
+import com.example.lemonbily.presenter.impl.PalCirclePresenter;
 import com.example.lemonbily.view.ui.IPalCircleView;
 
 @Route(path = "/Lemonbily/PalCircleFragment")

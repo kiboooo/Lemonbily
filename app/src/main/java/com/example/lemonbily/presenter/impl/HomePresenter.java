@@ -1,21 +1,21 @@
-package com.example.lemonbily.presenter;
+package com.example.lemonbily.presenter.impl;
 
 import android.arch.lifecycle.LifecycleOwner;
 
 import com.example.basemodule.model.IBaseModel;
 import com.example.basemodule.presenter.BasePresenter;
-import com.example.lemonbily.model.impl.IMineModelImpl;
-import com.example.lemonbily.view.ui.IMineView;
+import com.example.lemonbily.model.impl.IHomeModelImpl;
+import com.example.lemonbily.view.ui.IHomeView;
 
-public class MinePresenter extends BasePresenter<IMineView> {
+public class HomePresenter extends BasePresenter<IHomeView> {
 
-    public MinePresenter(IMineView v, LifecycleOwner owner) {
+    public HomePresenter(IHomeView v, LifecycleOwner owner) {
         super(v, owner);
     }
 
     @Override
     protected IBaseModel initModel() {
-        return new IMineModelImpl(this);
+        return new IHomeModelImpl(this);
     }
 
     @Override

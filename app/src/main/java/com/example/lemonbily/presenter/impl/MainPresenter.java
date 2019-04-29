@@ -1,4 +1,4 @@
-package com.example.lemonbily.presenter;
+package com.example.lemonbily.presenter.impl;
 
 import android.arch.lifecycle.LifecycleOwner;
 

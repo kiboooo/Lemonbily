@@ -114,7 +114,7 @@ public class ModifyAccountActivity extends BaseActivity<IModifyAccountView, Modi
 
     private void doModify() {
         Account account = new Account(LoginStatusUtils.mAccount.getAid(),
-                accountName.getText().toString(), accountGender, null);
+                accountName.getText().toString(), accountGender, LoginStatusUtils.mAccount.getAavatar());
         mPresenter.modifyAccountData(account, avatarFile);
     }
 
