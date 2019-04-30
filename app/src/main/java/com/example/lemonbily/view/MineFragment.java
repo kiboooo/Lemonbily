@@ -3,14 +3,12 @@ package com.example.lemonbily.view;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.view.ViewStub;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.alibaba.android.arouter.facade.Postcard;
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.alibaba.android.arouter.facade.callback.NavigationCallback;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.bumptech.glide.Glide;
 import com.example.basemodule.net.NetWorkServer;
@@ -27,9 +25,8 @@ public class MineFragment extends BaseFragment<IMineView, MinePresenter>
         implements IMineView, View.OnClickListener {
 
 
-    private TextView loginButton;
-    private ViewStub loginAndRegisterView;
-    private ImageView mineSetting;
+    //    private ViewStub loginAndRegisterView;
+    private FrameLayout loginAndRegisterView;
     private ImageView mineAvaatr;
     private TextView mineAccountName;
     private ImageView mineGender;
@@ -48,56 +45,40 @@ public class MineFragment extends BaseFragment<IMineView, MinePresenter>
     @Override
     protected void initFragmentChildView(View view) {
         loginAndRegisterView = view.findViewById(R.id.not_login_view);
-        mineSetting = view.findViewById(R.id.mine_setting_btn);
+        ImageView mineSetting = view.findViewById(R.id.mine_setting_btn);
         mineAccountName = view.findViewById(R.id.mine_account_name);
         mineAvaatr = view.findViewById(R.id.mine_avatar);
         mineGender = view.findViewById(R.id.mine_gender);
         mineAttention = view.findViewById(R.id.mine_attention);
         mineCollection = view.findViewById(R.id.mine_collection);
-
+        TextView loginButton = view.findViewById(R.id.loginButton);
         if (!LoginStatusUtils.isLogin) {
             // 非登录状态就加载注册登录界面
-            try {
-                View rootView = loginAndRegisterView.inflate();
-                loginButton = rootView.findViewById(R.id.loginButton);
-                loginButton.setOnClickListener(new OnMutiClickListener() {
-                    @Override
-                    public void onMutiClick(View view) {
-                        Log.e(TAG, "onClick loginButton");
-                        ARouter.getInstance()
-                                .build("/LoginModule/LoginActivity")
-                                .navigation(getContext(), new NavigationCallback() {
-                                    @Override
-                                    public void onFound(Postcard postcard) {
-                                        Log.d(TAG, "找到");
-                                    }
+            loginButton.setOnClickListener(new OnMutiClickListener() {
+                @Override
+                public void onMutiClick(View view) {
+                    Log.e(TAG, "onClick loginButton");
+                    ARouter.getInstance()
+                            .build("/LoginModule/LoginActivity")
+                            .navigation();
+                }
+            });
 
-                                    @Override
-                                    public void onLost(Postcard postcard) {
-                                        Log.d(TAG, "onLost");
-                                    }
-
-                                    @Override
-                                    public void onArrival(Postcard postcard) {
-                                        Log.d(TAG, "onArrival");
-                                    }
-
-                                    @Override
-                                    public void onInterrupt(Postcard postcard) {
-
-                                    }
-                                });
-                    }
-                });
-            } catch (Exception e) {
-                loginAndRegisterView.setVisibility(View.VISIBLE);
-            }
-        } else {
-            loginAndRegisterView.setVisibility(View.GONE);
         }
         mineSetting.setOnClickListener(this);
         mineAttention.setOnClickListener(this);
         mineCollection.setOnClickListener(this);
+
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        if (!LoginStatusUtils.isLogin) {
+            loginAndRegisterView.setVisibility(View.VISIBLE);
+        }else {
+            loginAndRegisterView.setVisibility(View.GONE);
+        }
     }
 
     @Override
@@ -117,7 +98,8 @@ public class MineFragment extends BaseFragment<IMineView, MinePresenter>
 
     private void bindAccountData() {
         //绑定用户数据
-        if (LoginStatusUtils.mAccount != null) {
+        if (LoginStatusUtils.mAccount != null
+                && mineAvaatr!=null && mineAccountName!=null && mineGender!=null ) {
             Glide.with(this)
                     .load(NetWorkServer.SERVER_URL + LoginStatusUtils.mAccount.getAavatar())
                     .apply(CommonUtils.avatarRequestOption())
@@ -153,7 +135,6 @@ public class MineFragment extends BaseFragment<IMineView, MinePresenter>
 
     @Override
     public void accountInitSuccess() {
-        loginAndRegisterView.setVisibility(View.GONE);
         bindAccountData();
         showToasts("获取成功", Toast.LENGTH_SHORT);
     }

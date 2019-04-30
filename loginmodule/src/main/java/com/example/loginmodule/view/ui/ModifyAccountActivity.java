@@ -16,6 +16,7 @@ import com.example.basemodule.net.NetWorkServer;
 import com.example.basemodule.utils.CommonUtils;
 import com.example.basemodule.utils.LoginStatusUtils;
 import com.example.basemodule.utils.OnMutiClickListener;
+import com.example.basemodule.utils.SelectImageUtils;
 import com.example.basemodule.view.BaseActivity;
 import com.example.loginmodule.R;
 import com.example.loginmodule.presenter.impl.ModifyAccountPresenter;
@@ -135,13 +136,13 @@ public class ModifyAccountActivity extends BaseActivity<IModifyAccountView, Modi
         }
         if (i == R.id.modify_avatar) {
             toSelectAvatar();
-            showToasts("拉起选择头像界面", Toast.LENGTH_SHORT);
         }
     }
 
     private void toSelectAvatar() {
         //拉起图片选择界面
         // avatarFile = new File();
+        SelectImageUtils.selectImageForAndroid(this, SelectImageUtils.AVATAR_REQUEST_CODE);
     }
 
     @Override

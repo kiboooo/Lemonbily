@@ -47,6 +47,7 @@ public class ISettingModelImpl  extends LoginBaseModel<ISettingPresenter> implem
                                 LoginStatusUtils.isLogin = false;
                                 LoginStatusUtils.token = "";
                                 LoginStatusUtils.mLogin = null;
+                                LoginStatusUtils.mAccount = null;
                                 getPresenter().logoutSuccess();
                             } else {
                                 getPresenter().sendErrorMsg(jsonResponse.getCode()+" : "

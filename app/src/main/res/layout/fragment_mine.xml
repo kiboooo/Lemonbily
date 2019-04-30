@@ -103,11 +103,35 @@
         />
 
 
-    <ViewStub
+    <!--<ViewStub-->
+        <!---->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:layout="@layout/fragment_mine_not_login"-->
+        <!--/>-->
+
+    <FrameLayout
         android:id="@+id/not_login_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout="@layout/fragment_mine_not_login"
-        />
+        android:visibility="gone"
+        android:background="@color/base_colorBackground"
+        >
+
+        <TextView
+            android:id="@+id/loginButton"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:text="注册与登录"
+            android:background="@drawable/base_radius_button"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_gravity="center"
+            android:layout_marginStart="40dp"
+            android:layout_marginEnd="40dp"
+            />
+
+    </FrameLayout>
 
 </android.support.constraint.ConstraintLayout>
