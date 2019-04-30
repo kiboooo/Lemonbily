@@ -10,6 +10,9 @@ public class LoginEvents {
     @EventType(String.class)
     public static final String LOGIN_REQUEST_ERROR = "request_error";
 
+    @EventType(String.class)
+    public static final String MINE_UI_DATA_UPDATE = "mine_ui_data_update";
+
     /**
      * 用户登录事件
      *

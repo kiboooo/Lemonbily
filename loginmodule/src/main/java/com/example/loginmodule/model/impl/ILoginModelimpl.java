@@ -33,6 +33,11 @@ public class ILoginModelimpl extends LoginBaseModel<ILoginPresenter> implements 
         LoginNetServer.getInstance().login(phone, passWord);
     }
 
+    private void updateMineUI() {
+        InvokingMessage.get().as(EventsDefineAsLoginEvents.class).MINE_UI_DATA_UPDATE()
+                .post("update");
+    }
+
     //登录事件的观察者
     private void registerLoginEvenObserver(LifecycleOwner owner) {
         InvokingMessage.get().as(EventsDefineAsLoginEvents.class)
@@ -49,6 +54,7 @@ public class ILoginModelimpl extends LoginBaseModel<ILoginPresenter> implements 
                                 LoginStatusUtils.isLogin = true;
                                 LoginStatusUtils.token = jsonResponse.getToken();
                                 LoginStatusUtils.mLogin = (Login) jsonResponse.getData();
+                                updateMineUI();
                                 getPresenter().loginSuccess();
                             } else {
                                 getPresenter().sendErrorMsg(jsonResponse.getCode()+" : "
@@ -60,11 +66,6 @@ public class ILoginModelimpl extends LoginBaseModel<ILoginPresenter> implements 
                     }
                 });
     }
-
-
-
-
-
 
 
 }

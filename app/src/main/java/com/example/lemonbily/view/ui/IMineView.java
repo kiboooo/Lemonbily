@@ -6,4 +6,6 @@ public interface IMineView {
     void accountInitSuccess();
 
     void accountInitFail();
+
+    void updateView();
 }

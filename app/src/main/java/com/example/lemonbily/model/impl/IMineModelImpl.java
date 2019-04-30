@@ -31,6 +31,9 @@ public class IMineModelImpl extends BaseModel<MinePresenter> implements IMineMod
     @Override
     public void initObservers(LifecycleOwner owner) {
         registerInitAccountObserver(owner);
+        registerLoginEvenObserver(owner);
+        modifyAccountObserver(owner);
+        modifyAvatarObserver(owner);
     }
 
     @Override
@@ -69,6 +72,54 @@ public class IMineModelImpl extends BaseModel<MinePresenter> implements IMineMod
                                 getPresenter().sendErrorMsg(jsonResponse.getCode()+" : "
                                         +jsonResponse.getMsg(),Toast.LENGTH_SHORT);
                                 getPresenter().accountInitFail();
+                            }
+                        }
+
+                    }
+                });
+    }
+
+    //登录事件的观察者
+    private void registerLoginEvenObserver(LifecycleOwner owner) {
+        InvokingMessage.get().as(EventsDefineAsLoginEvents.class)
+                .MINE_UI_DATA_UPDATE()
+                .observe(owner, new Observer<String>() {
+                    @Override
+                    public void onChanged(@Nullable String s) {
+                        if (s != null && s.equals("update")) {
+                            initAccountData(LoginStatusUtils.mLogin.getId());
+                        }
+                    }
+                });
+    }
+
+    //更新Account事件的观察者
+    private void modifyAccountObserver(LifecycleOwner owner) {
+        InvokingMessage.get().as(EventsDefineAsLoginEvents.class)
+                .MODIFY_ACCOUNT_EVENT()
+                .observeSticky(owner, new Observer<JsonResponse>() {
+                    @Override
+                    public void onChanged(@Nullable JsonResponse jsonResponse) {
+                        if (null != jsonResponse) {
+                            if (jsonResponse.getCode() == 0) {
+                                    getPresenter().updateUIView();
+                            }
+                        }
+
+                    }
+                });
+    }
+
+    //上传头像事件的观察者
+    private void modifyAvatarObserver(LifecycleOwner owner) {
+        InvokingMessage.get().as(EventsDefineAsLoginEvents.class)
+                .MODIFY_ACCOUNT_AVATAR_EVENT()
+                .observeSticky(owner, new Observer<JsonResponse>() {
+                    @Override
+                    public void onChanged(@Nullable JsonResponse jsonResponse) {
+                        if (null != jsonResponse) {
+                            if (jsonResponse.getCode() == 0) {
+                                getPresenter().updateUIView();
                             }
                         }
 

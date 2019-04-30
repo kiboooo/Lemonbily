@@ -42,6 +42,7 @@ dependencies {
     implementation project(":basemodule") // 导入 baseModule
     // arouter-compiler 的注解依赖需要所有使用 ARouter 的 module 都添加依赖
     annotationProcessor rootProject.ext.dependencies.arouterCompiler
+    annotationProcessor rootProject.ext.dependencies.evenMsgCompiler
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'

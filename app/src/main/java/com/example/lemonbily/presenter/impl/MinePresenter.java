@@ -40,4 +40,10 @@ public class MinePresenter extends BasePresenter<IMineView> implements IMindPres
     public void accountInitFail() {
         getView().accountInitFail();
     }
+
+    @Override
+    public void updateUIView() {
+        getView().updateView();
+    }
+
 }

@@ -5,4 +5,6 @@ public interface IMindPressenter {
     void accountInitSuccess();
 
     void accountInitFail();
+
+    void updateUIView();
 }

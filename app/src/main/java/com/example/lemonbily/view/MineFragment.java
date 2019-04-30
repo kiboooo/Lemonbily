@@ -143,4 +143,9 @@ public class MineFragment extends BaseFragment<IMineView, MinePresenter>
     @Override
     public void accountInitFail() {
     }
+
+    @Override
+    public void updateView() {
+        bindAccountData();
+    }
 }
