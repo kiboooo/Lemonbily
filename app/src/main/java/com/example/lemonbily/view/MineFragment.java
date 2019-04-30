@@ -23,7 +23,8 @@ import com.example.lemonbily.presenter.impl.MinePresenter;
 import com.example.lemonbily.view.ui.IMineView;
 
 @Route(path = "/Lemonbily/MineFragment")
-public class MineFragment extends BaseFragment<IMineView, MinePresenter> implements IMineView,View. OnClickListener {
+public class MineFragment extends BaseFragment<IMineView, MinePresenter>
+        implements IMineView, View.OnClickListener {
 
 
     private TextView loginButton;
@@ -37,10 +38,9 @@ public class MineFragment extends BaseFragment<IMineView, MinePresenter> impleme
 
     @Override
     protected void initFragmentData(Bundle savedInstanceState) {
-        if (LoginStatusUtils.isLogin){
+        if (LoginStatusUtils.isLogin) {
             // 登录状态获取数据，登录后有关的数据
             initAccountData(LoginStatusUtils.mLogin.getId());
-            bindAccountData();
         }
     }
 
@@ -48,60 +48,56 @@ public class MineFragment extends BaseFragment<IMineView, MinePresenter> impleme
     @Override
     protected void initFragmentChildView(View view) {
         loginAndRegisterView = view.findViewById(R.id.not_login_view);
-        if (!LoginStatusUtils.isLogin){
+        mineSetting = view.findViewById(R.id.mine_setting_btn);
+        mineAccountName = view.findViewById(R.id.mine_account_name);
+        mineAvaatr = view.findViewById(R.id.mine_avatar);
+        mineGender = view.findViewById(R.id.mine_gender);
+        mineAttention = view.findViewById(R.id.mine_attention);
+        mineCollection = view.findViewById(R.id.mine_collection);
+
+        if (!LoginStatusUtils.isLogin) {
             // 非登录状态就加载注册登录界面
-            if (loginAndRegisterView != null) {
-                try {
-                    View rootView  = loginAndRegisterView.inflate();
-                    loginButton = rootView.findViewById(R.id.loginButton);
-                    loginButton.setOnClickListener(new OnMutiClickListener() {
-                        @Override
-                        public void onMutiClick(View view) {
-                            Log.e(TAG, "onClick loginButton");
-                            ARouter.getInstance()
-                                    .build("/LoginModule/LoginActivity")
-                                    .navigation(getContext(), new NavigationCallback() {
-                                        @Override
-                                        public void onFound(Postcard postcard) {
-                                            Log.d(TAG, "找到");
-                                        }
+            try {
+                View rootView = loginAndRegisterView.inflate();
+                loginButton = rootView.findViewById(R.id.loginButton);
+                loginButton.setOnClickListener(new OnMutiClickListener() {
+                    @Override
+                    public void onMutiClick(View view) {
+                        Log.e(TAG, "onClick loginButton");
+                        ARouter.getInstance()
+                                .build("/LoginModule/LoginActivity")
+                                .navigation(getContext(), new NavigationCallback() {
+                                    @Override
+                                    public void onFound(Postcard postcard) {
+                                        Log.d(TAG, "找到");
+                                    }
 
-                                        @Override
-                                        public void onLost(Postcard postcard) {
-                                            Log.d(TAG, "onLost");
-                                        }
+                                    @Override
+                                    public void onLost(Postcard postcard) {
+                                        Log.d(TAG, "onLost");
+                                    }
 
-                                        @Override
-                                        public void onArrival(Postcard postcard) {
-                                            Log.d(TAG, "onArrival");
-                                        }
+                                    @Override
+                                    public void onArrival(Postcard postcard) {
+                                        Log.d(TAG, "onArrival");
+                                    }
 
-                                        @Override
-                                        public void onInterrupt(Postcard postcard) {
+                                    @Override
+                                    public void onInterrupt(Postcard postcard) {
 
-                                        }
-                                    });
-                        }
-                    });
-                } catch (Exception e) {
-                    loginAndRegisterView.setVisibility(View.VISIBLE);
-                }
+                                    }
+                                });
+                    }
+                });
+            } catch (Exception e) {
+                loginAndRegisterView.setVisibility(View.VISIBLE);
             }
-        }else {
+        } else {
             loginAndRegisterView.setVisibility(View.GONE);
-            mineSetting = view.findViewById(R.id.mine_setting_btn);
-            mineAccountName = view.findViewById(R.id.mine_account_name);
-            mineAvaatr = view.findViewById(R.id.mine_avatar);
-            mineGender = view.findViewById(R.id.mine_gender);
-            mineAttention = view.findViewById(R.id.mine_attention);
-            mineCollection = view.findViewById(R.id.mine_collection);
-
-            mineSetting.setOnClickListener(this);
-            mineAvaatr.setOnClickListener(this);
-            mineAttention.setOnClickListener(this);
-            mineCollection.setOnClickListener(this);
         }
-
+        mineSetting.setOnClickListener(this);
+        mineAttention.setOnClickListener(this);
+        mineCollection.setOnClickListener(this);
     }
 
     @Override
@@ -111,7 +107,7 @@ public class MineFragment extends BaseFragment<IMineView, MinePresenter> impleme
 
     @Override
     protected MinePresenter initPresenter() {
-        return new MinePresenter(this,this);
+        return new MinePresenter(this, this);
     }
 
     private void initAccountData(int aid) {
@@ -148,9 +144,6 @@ public class MineFragment extends BaseFragment<IMineView, MinePresenter> impleme
         if (i == R.id.mine_collection) {
 
         }
-        if (i == R.id.mine_avatar) {
-
-        }
     }
 
     @Override
@@ -160,6 +153,8 @@ public class MineFragment extends BaseFragment<IMineView, MinePresenter> impleme
 
     @Override
     public void accountInitSuccess() {
+        loginAndRegisterView.setVisibility(View.GONE);
+        bindAccountData();
         showToasts("获取成功", Toast.LENGTH_SHORT);
     }
 
