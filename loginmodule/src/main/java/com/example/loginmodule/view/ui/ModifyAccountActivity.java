@@ -1,6 +1,13 @@
 package com.example.loginmodule.view.ui;
 
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -23,10 +30,13 @@ import com.example.loginmodule.presenter.impl.ModifyAccountPresenter;
 import com.example.loginmodule.view.IModifyAccountView;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 
 @Route(path = "/LoginModule/ModifyAccountActivity")
 public class ModifyAccountActivity extends BaseActivity<IModifyAccountView, ModifyAccountPresenter>
-        implements View.OnClickListener,IModifyAccountView {
+        implements View.OnClickListener, IModifyAccountView {
+
+    private static final String TAG = "ModifyAccountActivity";
 
     ImageView backBtn;
     TextView titleDescription;
@@ -37,6 +47,7 @@ public class ModifyAccountActivity extends BaseActivity<IModifyAccountView, Modi
 
     File avatarFile = null;
     String accountGender = "m";
+    Uri saveImageUri;
 
     @Override
     public void initView(Bundle savedInstanceState) {
@@ -67,7 +78,7 @@ public class ModifyAccountActivity extends BaseActivity<IModifyAccountView, Modi
             if (LoginStatusUtils.mAccount.getAsex().equals("w")) {
                 genderRG.check(R.id.gender_female);
                 accountGender = "w";
-            }else {
+            } else {
                 genderRG.check(R.id.gender_man);
                 accountGender = "m";
             }
@@ -79,6 +90,14 @@ public class ModifyAccountActivity extends BaseActivity<IModifyAccountView, Modi
         //通过Glide 加载图片
         Glide.with(this)
                 .load(NetWorkServer.SERVER_URL + avatarPath)
+                .apply(CommonUtils.avatarRequestOption())
+                .into(avatar);
+    }
+
+    private void showLocalAvatar(Bitmap avatarBitmap) {
+        //通过Glide 加载图片
+        Glide.with(this)
+                .load(avatarBitmap)
                 .apply(CommonUtils.avatarRequestOption())
                 .into(avatar);
     }
@@ -102,12 +121,13 @@ public class ModifyAccountActivity extends BaseActivity<IModifyAccountView, Modi
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
                 if (i == R.id.gender_man) {
                     accountGender = "m";
-                }else if (i == R.id.gender_female) {
+                } else if (i == R.id.gender_female) {
                     accountGender = "w";
                 }
             }
         });
     }
+
     private boolean checkModify() {
         String name = accountName.getText().toString();
         if (CommonUtils.isTextEmpty(name)) {
@@ -141,13 +161,12 @@ public class ModifyAccountActivity extends BaseActivity<IModifyAccountView, Modi
 
     private void toSelectAvatar() {
         //拉起图片选择界面
-        // avatarFile = new File();
         SelectImageUtils.selectImageForAndroid(this, SelectImageUtils.AVATAR_REQUEST_CODE);
     }
 
     @Override
     public void showToast(String msg, int state) {
-        showToasts(msg,state);
+        showToasts(msg, state);
     }
 
     @Override
@@ -164,5 +183,34 @@ public class ModifyAccountActivity extends BaseActivity<IModifyAccountView, Modi
     @Override
     public void doHider() {
         hideLoading();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode != RESULT_OK) {
+            return;
+        }
+        switch (requestCode) {
+            case SelectImageUtils.AVATAR_REQUEST_CODE:
+                Uri dataUri = data.getData();
+                Log.i(TAG, "uri:" + dataUri.getScheme() + ":" + dataUri.getSchemeSpecificPart());
+                Log.i(TAG, "path:" + dataUri.getPath());
+                saveImageUri = Uri.parse("file://" + "/" + Environment.getExternalStorageDirectory().getPath()
+                        + "/" +  "sample.jpg");
+                Log.i(TAG, "saveImageUri:  " + saveImageUri);
+                SelectImageUtils.cropPhoto(this, dataUri, saveImageUri);
+                break;
+
+            case SelectImageUtils.CROP_REQUEST_CODE:
+                try {
+                    Bitmap image = BitmapFactory.decodeStream(getContentResolver().openInputStream(saveImageUri));
+                    showLocalAvatar(image);
+                    avatarFile = new File(saveImageUri.getPath());
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
+                break;
+        }
     }
 }

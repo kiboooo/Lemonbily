@@ -78,6 +78,7 @@ public class MineFragment extends BaseFragment<IMineView, MinePresenter>
             loginAndRegisterView.setVisibility(View.VISIBLE);
         }else {
             loginAndRegisterView.setVisibility(View.GONE);
+            bindAccountData();
         }
     }
 

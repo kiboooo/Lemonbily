@@ -55,7 +55,7 @@ public class IModifyAccountModelImpl extends LoginBaseModel<IModifyAccountPresen
     private MultipartBody.Part produceMultiparBody(File file) {
         RequestBody requestFile =
                 RequestBody.create(MediaType.parse("multipart/form-data"), file);
-        return MultipartBody.Part.createFormData("avatarImages", file.getName(), requestFile);
+        return MultipartBody.Part.createFormData("avatarImage", file.getName(), requestFile);
     }
 
 

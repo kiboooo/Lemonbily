@@ -56,6 +56,12 @@ public abstract class BaseFragment<V, T extends BasePresenter<V>> extends Fragme
     }
 
     @Override
+    public void onStart() {
+        super.onStart();
+
+    }
+
+    @Override
     public void onResume() {
         super.onResume();
     }

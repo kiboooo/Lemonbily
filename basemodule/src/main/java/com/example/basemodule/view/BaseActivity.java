@@ -24,6 +24,7 @@ public abstract class BaseActivity<V,T extends BasePresenter<V>> extends AppComp
         initSP();
         initView(savedInstanceState);
         init();
+        initBinding();
     }
 
 
@@ -31,7 +32,6 @@ public abstract class BaseActivity<V,T extends BasePresenter<V>> extends AppComp
     @Override
     protected void onStart () {
         super.onStart();
-        initBinding();
         initListener();
     }
 
