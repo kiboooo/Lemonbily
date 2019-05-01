@@ -104,6 +104,7 @@ public class LoginNetServer {
         return result;
     }
 
+
     private void callLoginBack(Call<JsonResponse<Login>> mCall,
                                final LiveEventBus.Observable<JsonResponse> observable) {
         mCall.enqueue(new Callback<JsonResponse<Login>>() {
@@ -111,6 +112,9 @@ public class LoginNetServer {
             public void onResponse(Call<JsonResponse<Login>> call,
                                    Response<JsonResponse<Login>> response) {
                 if(isFailOnResponse(response)){
+                    if (response.body() != null && response.body().getCode() == 1004) {
+                        eventBus.USER_INACTIVATION().post(null);
+                    }
                     observable.post(response.body());
                 }
             }
@@ -130,6 +134,9 @@ public class LoginNetServer {
             public void onResponse(Call<JsonResponse<Account>> call,
                                    Response<JsonResponse<Account>> response) {
                 if(isFailOnResponse(response)){
+                    if (response.body() != null && response.body().getCode() == 1004) {
+                        eventBus.USER_INACTIVATION().post(null);
+                    }
                     observable.post(response.body());
                 }
             }

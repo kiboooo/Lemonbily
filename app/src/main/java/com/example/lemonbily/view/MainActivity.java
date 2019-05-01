@@ -1,6 +1,9 @@
 package com.example.lemonbily.view;
 
+import android.arch.lifecycle.LifecycleOwner;
+import android.arch.lifecycle.Observer;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -14,6 +17,8 @@ import com.example.basemodule.view.BaseActivity;
 import com.example.lemonbily.R;
 import com.example.lemonbily.presenter.impl.MainPresenter;
 import com.example.lemonbily.view.ui.IMainView;
+import com.example.loginmodule.bus.generated.im.EventsDefineAsLoginEvents;
+import com.jeremyliao.im.core.InvokingMessage;
 
 @Route(path = "/Lemonbily/MainActivity")
 public class MainActivity extends BaseActivity<IMainView,MainPresenter> implements IMainView,View.OnClickListener {
@@ -32,6 +37,7 @@ public class MainActivity extends BaseActivity<IMainView,MainPresenter> implemen
 
     @Override
     protected void initBinding() {
+        registerUserLifeEvenObserver(this);
         palCircleFragment =(PalCircleFragment) ARouter.getInstance()
                 .build("/Lemonbily/PalCircleFragment")
                 .navigation();
@@ -110,4 +116,16 @@ public class MainActivity extends BaseActivity<IMainView,MainPresenter> implemen
         super.onDestroy();
         LoginStatusUtils.savaLoginStatus();
     }
+
+    private void registerUserLifeEvenObserver(LifecycleOwner owner) {
+        InvokingMessage.get().as(EventsDefineAsLoginEvents.class)
+                .USER_INACTIVATION()
+                .observe(owner, new Observer<String>() {
+                    @Override
+                    public void onChanged(@Nullable String s) {
+                        LoginStatusUtils.clearAll();
+                    }
+                });
+    }
+
 }
