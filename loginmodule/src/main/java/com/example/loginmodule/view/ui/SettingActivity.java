@@ -114,4 +114,5 @@ public class SettingActivity extends BaseActivity<ISettingView, SettingPresenter
     public void doHider() {
         hideLoading();
     }
+
 }

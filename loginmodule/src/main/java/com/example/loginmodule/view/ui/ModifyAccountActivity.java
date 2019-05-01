@@ -23,6 +23,8 @@ import com.example.basemodule.net.NetWorkServer;
 import com.example.basemodule.utils.CommonUtils;
 import com.example.basemodule.utils.LoginStatusUtils;
 import com.example.basemodule.utils.OnMutiClickListener;
+import com.example.basemodule.utils.OnPermisstionCallback;
+import com.example.basemodule.utils.PermissionUtils;
 import com.example.basemodule.utils.SelectImageUtils;
 import com.example.basemodule.view.BaseActivity;
 import com.example.loginmodule.R;
@@ -34,7 +36,7 @@ import java.io.FileNotFoundException;
 
 @Route(path = "/LoginModule/ModifyAccountActivity")
 public class ModifyAccountActivity extends BaseActivity<IModifyAccountView, ModifyAccountPresenter>
-        implements View.OnClickListener, IModifyAccountView {
+        implements View.OnClickListener, IModifyAccountView , OnPermisstionCallback {
 
     private static final String TAG = "ModifyAccountActivity";
 
@@ -160,9 +162,9 @@ public class ModifyAccountActivity extends BaseActivity<IModifyAccountView, Modi
     }
 
     private void toSelectAvatar() {
-        //拉起图片选择界面
-        SelectImageUtils.selectImageForAndroid(this, SelectImageUtils.AVATAR_REQUEST_CODE);
-    }
+        initPermission(PermissionUtils.SavePermissionGroup,
+                PermissionUtils.REQUEST_SAVE_PERMISSION, this);
+        }
 
     @Override
     public void showToast(String msg, int state) {
@@ -212,5 +214,17 @@ public class ModifyAccountActivity extends BaseActivity<IModifyAccountView, Modi
                 }
                 break;
         }
+    }
+
+    @Override
+    public void onGranted() {
+        //拉起图片选择界面
+        SelectImageUtils.selectImageForAndroid(this,
+                SelectImageUtils.AVATAR_REQUEST_CODE);
+    }
+
+    @Override
+    public void onDenied() {
+        showToasts("未授权读写权限，无法使用该功能", Toast.LENGTH_SHORT);
     }
 }

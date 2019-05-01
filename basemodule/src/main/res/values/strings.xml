@@ -1,4 +1,6 @@
 <resources>
     <string name="base_app_name">BaseModule</string>
     <string name="base_back">back_button</string>
+    <string name="base_permission_rationale_content">如果没有您的授权，应用将无法正常工作。
+        我们将引导您到设置界面修改应用权限</string>
 </resources>
