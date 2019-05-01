@@ -124,6 +124,9 @@ public class MainActivity extends BaseActivity<IMainView,MainPresenter> implemen
                     @Override
                     public void onChanged(@Nullable String s) {
                         LoginStatusUtils.clearAll();
+                        ARouter.getInstance()
+                                .build("/LoginModule/LoginActivity")
+                                .navigation();
                     }
                 });
     }
