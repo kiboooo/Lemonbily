@@ -13,6 +13,8 @@ public class LoginEvents {
     @EventType(String.class)
     public static final String MINE_UI_DATA_UPDATE = "mine_ui_data_update";
 
+    public static final String USER_INACTIVATION = "user_inactivation";
+
     /**
      * 用户登录事件
      *

@@ -27,7 +27,7 @@ public class PermissionUtils {
     //检查是否授权了
     public static boolean checkPermission(Context context, String[] s) {
         for (String value : s) {
-            if (ContextCompat.checkSelfPermission(context, value) < 1) {
+            if (ContextCompat.checkSelfPermission(context, value) < 0) {
                 return false;
             }
         }
@@ -67,9 +67,26 @@ public class PermissionUtils {
 
     //打开系统设置界面
     private static void gotoSetting(Activity activity){
-        Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
-        intent.setData(Uri.fromParts("packge", activity.getPackageName(), null));
+        Intent intent;
+        if (SystemAdaptionUtils.isMIUI()) {
+            String rom = SystemAdaptionUtils.getMiuiVersion();
+            intent = new Intent("miui.intent.action.APP_PERM_EDITOR");
+            if ("V8".equals(rom) || "V9".equals(rom) || "V10".equals(rom) ) {
+                intent.setClassName("com.miui.securitycenter",
+                        "com.miui.permcenter.permissions.PermissionsEditorActivity");
+            } else {
+                intent.setClassName("com.miui.securitycenter",
+                        "com.miui.permcenter.permissions.AppPermissionsEditorActivity");
+            }
+            intent.putExtra("extra_pkgname", activity.getPackageName());
+        } else {
+            intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+            intent.setData(Uri.fromParts("packge", activity.getPackageName(), null));
+        }
         activity.startActivityForResult(intent, REQUEST_PERMISSION);
     }
+
+
+
 
 }
