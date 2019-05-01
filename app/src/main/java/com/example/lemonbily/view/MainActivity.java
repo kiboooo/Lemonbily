@@ -8,7 +8,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.View;
-import android.widget.Button;
+import android.widget.ImageView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
@@ -30,9 +30,9 @@ public class MainActivity extends BaseActivity<IMainView,MainPresenter> implemen
 
     private FragmentManager fragmentManager;
 
-    private Button btnHome;
-    private Button btnMine;
-    private Button btnPalCircle;
+    private ImageView btnHome;
+    private ImageView btnMine;
+    private ImageView btnPalCircle;
 
 
     @Override
@@ -84,6 +84,23 @@ public class MainActivity extends BaseActivity<IMainView,MainPresenter> implemen
         if (!fragments[i].isAdded()) {
             transaction.add(R.id.fragment, fragments[i]);
         }
+        switch (i) {
+            case 0:
+                btnHome.setSelected(true);
+                btnPalCircle.setSelected(false);
+                btnMine.setSelected(false);
+                break;
+            case 1:
+                btnHome.setSelected(false);
+                btnPalCircle.setSelected(true);
+                btnMine.setSelected(false);
+                break;
+            case 2:
+                btnHome.setSelected(false);
+                btnPalCircle.setSelected(false);
+                btnMine.setSelected(true);
+                break;
+        }
         transaction.show(fragments[i]);
         transaction.commit();
     }
@@ -98,14 +115,17 @@ public class MainActivity extends BaseActivity<IMainView,MainPresenter> implemen
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_home:
+
                 selectTab(0);
                 break;
 
             case R.id.btn_circle:
+
                 selectTab(1);
                 break;
 
             case R.id.btn_mine:
+
                 selectTab(2);
                 break;
         }

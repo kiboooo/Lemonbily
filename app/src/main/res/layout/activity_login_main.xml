@@ -12,44 +12,96 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/btn_home">
+        app:layout_constraintBottom_toTopOf="@id/bottom_navigation_guide_line">
 
     </FrameLayout>
 
-    <Button
-        android:layout_width="0dp"
-        android:layout_height="50dp"
+    <android.support.constraint.Guideline
+        android:id="@+id/bottom_navigation_guide_line"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.94"
+        />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/base_colorPrimary"
+        app:layout_constraintTop_toTopOf="@id/bottom_navigation_guide_line"
+        />
+
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
         android:id="@+id/btn_home"
-        android:text="首页"
+        android:state_selected="false"
+        android:layout_marginBottom="15dp"
+        android:background="@drawable/home_icon_selector"
         app:layout_constraintTop_toBottomOf="@id/fragment"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@id/btn_circle"
         app:layout_constraintBottom_toBottomOf="parent"
         />
 
-    <Button
-        android:layout_width="0dp"
-        android:layout_height="50dp"
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="首页"
+        android:textSize="11sp"
+        android:textColor="@color/base_colorPrimary"
+        app:layout_constraintTop_toBottomOf="@id/btn_home"
+        app:layout_constraintLeft_toLeftOf="@id/btn_home"
+        app:layout_constraintRight_toRightOf="@id/btn_home"
+        />
+
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
         android:id="@+id/btn_circle"
-        android:text="交友圈"
+        android:layout_marginBottom="15dp"
+        android:state_selected="false"
+        android:background="@drawable/pal_icon_selector"
         app:layout_constraintTop_toBottomOf="@id/fragment"
         app:layout_constraintLeft_toRightOf="@id/btn_home"
         app:layout_constraintRight_toLeftOf="@id/btn_mine"
         app:layout_constraintBottom_toBottomOf="parent"
         />
 
-    <Button
-        android:layout_width="0dp"
-        android:layout_height="50dp"
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="星球"
+        android:textSize="11sp"
+        android:textColor="@color/base_colorPrimary"
+        app:layout_constraintTop_toBottomOf="@id/btn_circle"
+        app:layout_constraintLeft_toLeftOf="@id/btn_circle"
+        app:layout_constraintRight_toRightOf="@id/btn_circle"
+        />
+
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
         android:id="@+id/btn_mine"
-        android:text="我的"
+        android:state_selected="false"
+        android:layout_marginBottom="15dp"
+        android:background="@drawable/mine_icon_selector"
         app:layout_constraintTop_toBottomOf="@id/fragment"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toRightOf="@id/btn_circle"
         />
 
-
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="我"
+        android:textSize="11sp"
+        android:textColor="@color/base_colorPrimary"
+        app:layout_constraintTop_toBottomOf="@id/btn_mine"
+        app:layout_constraintLeft_toLeftOf="@id/btn_mine"
+        app:layout_constraintRight_toRightOf="@id/btn_mine"
+        />
 
 
 </android.support.constraint.ConstraintLayout>
