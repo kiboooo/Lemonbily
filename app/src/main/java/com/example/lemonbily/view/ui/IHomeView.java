@@ -1,7 +1,5 @@
 package com.example.lemonbily.view.ui;
 
-import com.example.basemodule.presenter.BasePresenter;
-
 public interface IHomeView {
-
+    void showToast(String msg, int state);
 }

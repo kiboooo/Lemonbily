@@ -38,6 +38,10 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation rootProject.ext.dependencies.supportV7
     implementation rootProject.ext.dependencies.constraintLayout
+    //引入recyclerView
+    implementation rootProject.ext.dependencies.recyclerViewCompiler
+    //引入cardView
+    implementation rootProject.ext.dependencies.cardViewCompiler
     implementation "android.arch.lifecycle:extensions:1.1.1"
     implementation project(":basemodule") // 导入 baseModule
     // arouter-compiler 的注解依赖需要所有使用 ARouter 的 module 都添加依赖

@@ -5,6 +5,8 @@ import com.example.basemodule.R;
 
 import org.apaches.commons.codec.digest.DigestUtils;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -56,6 +58,23 @@ public class CommonUtils {
                 .placeholder(R.drawable.base_avatar_default)
                 .error(R.drawable.base_avatar_default)
                 .fallback(R.drawable.base_avatar_default_mind);
+    }
+
+    public static RequestOptions imageRequestOption(){
+        return new RequestOptions()
+                .placeholder(R.drawable.base_image_loading_error_state)
+                .error(R.drawable.base_image_loading_error_state)
+                .fallback(R.drawable.base_image_loading_error_state);
+    }
+
+    public static List<String> initBannerList(){
+        List<String> list = new ArrayList<>();
+        list.add("/lemonbily/picture/music_05.jpg");
+        list.add("/lemonbily/picture/movie_01.jpg");
+        list.add("/lemonbily/picture/music_03.jpg");
+        list.add("/lemonbily/picture/music_04.jpg");
+        list.add("/lemonbily/picture/music_02.jpg");
+        return list;
     }
 
 

@@ -54,7 +54,7 @@ public class MainActivity extends BaseActivity<IMainView,MainPresenter> implemen
 
     @Override
     public void initView(Bundle savedInstanceState) {
-        setContentView(R.layout.activity_login_main);
+        setContentView(R.layout.activity_main);
         btnHome = findViewById(R.id.btn_home);
         btnMine = findViewById(R.id.btn_mine);
         btnPalCircle = findViewById(R.id.btn_circle);
