@@ -1,10 +1,12 @@
 package com.example.lemonbily.model.adapter;
 
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 public interface onRecyclerViewItemClickListener {
 
-    void onItemClick( View v, int position);
+    void onItemClick(RecyclerView.ViewHolder vh, View v, int position);
 
-    void onLongItemClick( View v, int position);
+
+    void onLongItemClick(RecyclerView.ViewHolder vh, View v, int position);
 }

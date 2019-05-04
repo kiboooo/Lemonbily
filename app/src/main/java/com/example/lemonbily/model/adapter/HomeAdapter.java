@@ -8,7 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.basemodule.bean.UIBeans;
-import com.example.basemodule.utils.CommonUtils;
 import com.example.lemonbily.R;
 import com.example.lemonbily.model.bean.HomeUIBeans;
 import com.example.lemonbily.model.viewHolder.BannerViewHolder;
@@ -34,7 +33,7 @@ public class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     }
 
     public void setItemClickListener(onRecyclerViewItemClickListener itemClickListener) {
-        this.itemClickListener = itemClickListener;
+        HomeAdapter.itemClickListener = itemClickListener;
     }
 
     @NonNull
@@ -90,10 +89,7 @@ public class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
         if (viewHolder instanceof BannerViewHolder) {
             BannerViewHolder bannerViewHolder = (BannerViewHolder) viewHolder;
-            BannerAdapter adapter = new BannerAdapter(mContext, CommonUtils.initBannerList());
-            bannerViewHolder.bannerRecyclerView.setAdapter(adapter);
-            bannerViewHolder.bannerContent.setText(CommonUtils.initBannerList()
-                    .get(bannerViewHolder.getAdapterPosition()));
+            bannerViewHolder.startPoll();
         }
 
         if (viewHolder instanceof NormalViewHolder) {
@@ -139,7 +135,8 @@ public class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         }
     }
 
-    static class NormalViewHolder extends RecyclerView.ViewHolder
+
+   public static class NormalViewHolder extends RecyclerView.ViewHolder
             implements View.OnClickListener,View.OnLongClickListener{
 
         public NormalViewHolder(@NonNull View itemView) {
@@ -150,21 +147,22 @@ public class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         @Override
         public void onClick(View view) {
             if (itemClickListener != null) {
-                itemClickListener.onItemClick(view, getLayoutPosition());
+                itemClickListener.onItemClick(this, view, getLayoutPosition());
             }
         }
 
         @Override
         public boolean onLongClick(View view) {
             if (itemClickListener != null) {
-                itemClickListener.onLongItemClick(view, getLayoutPosition());
+                itemClickListener.onLongItemClick(this, view, getLayoutPosition());
                 return true;
             }
             return false;
         }
     }
 
-    static class TwoViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener,View.OnLongClickListener{
+   public static class TwoViewHolder extends RecyclerView.ViewHolder
+            implements View.OnClickListener,View.OnLongClickListener{
 
         public TwoViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -174,21 +172,21 @@ public class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         @Override
         public void onClick(View view) {
             if (itemClickListener != null) {
-                itemClickListener.onItemClick(view, getLayoutPosition());
+                itemClickListener.onItemClick(this, view, getLayoutPosition());
             }
         }
 
         @Override
         public boolean onLongClick(View view) {
             if (itemClickListener != null) {
-                itemClickListener.onLongItemClick(view, getLayoutPosition());
+                itemClickListener.onLongItemClick(this, view, getLayoutPosition());
                 return true;
             }
             return false;
         }
     }
 
-    static class FourViewHolder extends RecyclerView.ViewHolder
+   public static class FourViewHolder extends RecyclerView.ViewHolder
             implements View.OnClickListener,View.OnLongClickListener{
 
         public FourViewHolder(@NonNull View itemView) {
@@ -199,14 +197,14 @@ public class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         @Override
         public void onClick(View view) {
             if (itemClickListener != null) {
-                itemClickListener.onItemClick(view, getLayoutPosition());
+                itemClickListener.onItemClick(this,view, getAdapterPosition());
             }
         }
 
         @Override
         public boolean onLongClick(View view) {
             if (itemClickListener != null) {
-                itemClickListener.onLongItemClick(view, getLayoutPosition());
+                itemClickListener.onLongItemClick(this,view, getAdapterPosition());
                 return true;
             }
             return false;

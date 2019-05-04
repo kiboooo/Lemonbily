@@ -2,12 +2,15 @@ package com.example.lemonbily.model.impl;
 
 import android.arch.lifecycle.LifecycleOwner;
 import android.content.Context;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Toast;
 
 import com.example.basemodule.bean.UIBeans;
 import com.example.basemodule.model.BaseModel;
+import com.example.basemodule.utils.CommonUtils;
 import com.example.lemonbily.model.IHomeModel;
+import com.example.lemonbily.model.adapter.BannerAdapter;
 import com.example.lemonbily.model.adapter.HomeAdapter;
 import com.example.lemonbily.model.adapter.onRecyclerViewItemClickListener;
 import com.example.lemonbily.model.bean.HomeUIBeans;
@@ -57,14 +60,23 @@ public class IHomeModelImpl extends BaseModel<HomePresenter> implements IHomeMod
     }
 
     @Override
-    public void onItemClick(View v, int position) {
-        if (uiBeansList != null && uiBeansList.size() > 0) {
-            getPresenter().showToast("viewType is " + uiBeansList.get(position).getUiType(), Toast.LENGTH_SHORT);
+    public void onItemClick(RecyclerView.ViewHolder vh, View v, int position) {
+        if (vh instanceof HomeAdapter.NormalViewHolder
+                || vh instanceof HomeAdapter.TwoViewHolder
+                || vh instanceof HomeAdapter.FourViewHolder) {
+            if (uiBeansList != null && uiBeansList.size() > 0) {
+                getPresenter().showToast("viewType is "
+                        + uiBeansList.get(position).getUiType(), Toast.LENGTH_SHORT);
+            }
         }
+        if (vh instanceof BannerAdapter.BannerItemViewHolder) {
+            getPresenter().showToast(CommonUtils.initBannerList().get(position), Toast.LENGTH_SHORT);
+        }
+
     }
 
     @Override
-    public void onLongItemClick(View v, int position) {
+    public void onLongItemClick(RecyclerView.ViewHolder vh, View v, int position) {
 
     }
 }

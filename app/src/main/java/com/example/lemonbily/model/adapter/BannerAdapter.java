@@ -18,7 +18,9 @@ import java.util.List;
 public class BannerAdapter extends RecyclerView.Adapter<BannerAdapter.BannerItemViewHolder>  {
 
     private List<String> bannerImageList;
+    public static int bannerSize;
     private Context mContext;
+    private static onRecyclerViewItemClickListener mListener;
 
     public void updateData(List<String> list) {
         bannerImageList = list;
@@ -28,6 +30,18 @@ public class BannerAdapter extends RecyclerView.Adapter<BannerAdapter.BannerItem
     public BannerAdapter(Context context, List<String> bannerImageList) {
         this.mContext = context;
         this.bannerImageList = bannerImageList;
+        bannerSize = bannerImageList.size();
+    }
+
+    public void setmListener(onRecyclerViewItemClickListener mListener) {
+        BannerAdapter.mListener = mListener;
+    }
+
+    public String getBannerImageListData(int position) {
+        if (position >= 0 && position < bannerSize) {
+            return bannerImageList.get(position);
+        }
+        return null;
     }
 
     @NonNull
@@ -41,7 +55,7 @@ public class BannerAdapter extends RecyclerView.Adapter<BannerAdapter.BannerItem
     @Override
     public void onBindViewHolder(@NonNull BannerItemViewHolder holder, int i) {
         Glide.with(mContext)
-                .load(NetWorkServer.SERVER_URL + bannerImageList.get(i % bannerImageList.size()))
+                .load(NetWorkServer.SERVER_URL + bannerImageList.get(i % bannerSize))
                 .apply(CommonUtils.imageRequestOption())
                 .into(holder.itemImage);
     }
@@ -56,12 +70,30 @@ public class BannerAdapter extends RecyclerView.Adapter<BannerAdapter.BannerItem
         return bannerImageList.size() < 2 ? 1 : Integer.MAX_VALUE;
     }
 
-    static class BannerItemViewHolder extends RecyclerView.ViewHolder {
+    public static class BannerItemViewHolder extends RecyclerView.ViewHolder
+            implements View.OnClickListener,View.OnLongClickListener {
         ImageView itemImage;
 
         public BannerItemViewHolder(@NonNull View itemView) {
             super(itemView);
             itemImage = itemView.findViewById(R.id.banner_image_view);
+            itemImage.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View view) {
+            if (mListener != null) {
+                mListener.onItemClick(this, view, (getAdapterPosition() % bannerSize));
+            }
+        }
+
+        @Override
+        public boolean onLongClick(View view) {
+            if (mListener != null) {
+                mListener.onLongItemClick(this, view, (getAdapterPosition() % bannerSize));
+                return true;
+            }
+            return false;
         }
     }
 }
