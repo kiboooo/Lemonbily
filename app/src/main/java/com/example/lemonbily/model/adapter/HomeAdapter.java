@@ -43,12 +43,12 @@ public class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         switch (viewType) {
             case HomeUIBeans.EMPTY_VIEW:
                 mView = LayoutInflater.from(viewGroup.getContext())
-                        .inflate(R.layout.fragment_home_item_list, viewGroup, false);
+                        .inflate(R.layout.fragment_home_one_item, viewGroup, false);
                 return new NormalViewHolder(mView);
 
             case HomeUIBeans.NORMAL_VIEW:
                 mView = LayoutInflater.from(viewGroup.getContext())
-                        .inflate(R.layout.fragment_home_item_list, viewGroup, false);
+                        .inflate(R.layout.fragment_home_one_item, viewGroup, false);
                 return new NormalViewHolder(mView);
 
             case HEAD_VIEW:
@@ -75,7 +75,7 @@ public class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
             default:
                 mView = LayoutInflater.from(viewGroup.getContext())
-                        .inflate(R.layout.fragment_home_item_list, viewGroup, false);
+                        .inflate(R.layout.fragment_home_one_item, viewGroup, false);
                 return new NormalViewHolder(mView);
 
         }

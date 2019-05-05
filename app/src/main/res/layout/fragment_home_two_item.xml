@@ -1,39 +1,134 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="180dp"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_height="250dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginTop="10dp"
+    android:layout_marginStart="12dp"
+    android:layout_marginEnd="12dp"
+    >
+
+    <include
+        android:id="@+id/tow_item_title"
+        layout="@layout/title_content_left_icon_bar"
+        />
 
     <android.support.v7.widget.CardView
-        android:id="@+id/oneCard"
+        android:id="@+id/onecard"
         android:layout_width="0dp"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
         app:cardCornerRadius="5dp"
-        app:cardElevation="5dp"
-        app:cardBackgroundColor="#FFC107"
-        android:layout_margin="20dp"
+        app:cardElevation="2dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintDimensionRatio="4:3"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintRight_toLeftOf="@id/twoCard"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tow_item_title"
+        app:layout_constraintRight_toLeftOf="@id/twocard"
         >
+
+        <ImageView
+            android:id="@+id/tow_onecard_image_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/base_image_loading_error_state"
+            />
 
     </android.support.v7.widget.CardView>
 
-    <android.support.v7.widget.CardView
-        android:id="@+id/twoCard"
+    <TextView
+        android:id="@+id/onecard_main_content"
         android:layout_width="0dp"
-        android:layout_height="match_parent"
-        app:cardCornerRadius="5dp"
-        app:cardElevation="5dp"
-        android:layout_margin="20dp"
-        app:cardBackgroundColor="#FFEB3B"
-        app:layout_constraintLeft_toRightOf="@id/oneCard"
-        app:layout_constraintTop_toTopOf="parent"
+        android:layout_height="35dp"
+        android:gravity="center_vertical"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:text="《山丘》"
+        android:maxLength="10"
+        android:maxLines="1"
+        android:ellipsize="end"
+        android:textStyle="bold"
+        android:textColor="@color/base_colorPrimary"
+        app:layout_constraintTop_toBottomOf="@id/onecard"
+        app:layout_constraintLeft_toLeftOf="@id/onecard"
+        app:layout_constraintRight_toRightOf="@id/onecard"
+        />
+
+    <TextView
+        android:id="@+id/onecard_introduction_content"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:textSize="12sp"
+        android:text="《山丘》是由李宗盛作词作曲并演唱的"
+        android:maxLines="2"
+        app:layout_constraintTop_toBottomOf="@id/onecard_main_content"
+        app:layout_constraintLeft_toLeftOf="@id/onecard"
+        app:layout_constraintRight_toRightOf="@id/onecard"
         app:layout_constraintBottom_toBottomOf="parent"
+        />
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/twocard"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:cardCornerRadius="5dp"
+        app:cardElevation="2dp"
+        android:layout_marginStart="5dp"
+        app:layout_constraintDimensionRatio="4:3"
+        app:layout_constraintLeft_toRightOf="@id/onecard"
+        app:layout_constraintTop_toTopOf="@id/onecard"
+        app:layout_constraintBottom_toBottomOf="@id/onecard"
         app:layout_constraintRight_toRightOf="parent"
         >
 
+        <ImageView
+            android:id="@+id/tow_towcard_image_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#FFEB3B"
+            />
+
     </android.support.v7.widget.CardView>
+
+    <TextView
+        android:id="@+id/twocard_main_content"
+        android:layout_width="0dp"
+        android:layout_height="35dp"
+        android:gravity="center_vertical"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:text="李宗盛《新写的旧歌》"
+        android:maxLength="10"
+        android:maxLines="1"
+        android:ellipsize="end"
+        android:textStyle="bold"
+        android:textColor="@color/base_colorPrimary"
+        app:layout_constraintTop_toBottomOf="@id/twocard"
+        app:layout_constraintLeft_toLeftOf="@id/twocard"
+        app:layout_constraintRight_toRightOf="@id/twocard"
+        />
+
+    <TextView
+        android:id="@+id/twocard_introduction_content"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:textSize="12sp"
+        android:text="这是一首新写的旧歌，是一个埋藏在大哥心里多年的心事。"
+        android:maxLines="2"
+        app:layout_constraintTop_toBottomOf="@id/twocard_main_content"
+        app:layout_constraintLeft_toLeftOf="@id/twocard"
+        app:layout_constraintRight_toRightOf="@id/twocard"
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.1dp"
+        android:background="@color/base_colorWeakPoint"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
 
 </android.support.constraint.ConstraintLayout>

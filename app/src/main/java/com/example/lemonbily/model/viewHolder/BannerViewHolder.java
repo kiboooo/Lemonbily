@@ -20,7 +20,8 @@ public class BannerViewHolder extends RecyclerView.ViewHolder
 
     private static final int WHAT_AUTO_PLAY = 99999;
 
-    private int autoPlayDuration = 3000;
+    //滚动的时间间隔
+    private int autoPlayDuration = 5000;
     private int currentIndex = 0;
     public RecyclerView bannerRecyclerView;
     public TextView bannerContent;
