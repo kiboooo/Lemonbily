@@ -56,6 +56,7 @@ public class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                         .inflate(R.layout.fragment_home_banner, viewGroup, false);
                 BannerViewHolder bannerViewHolder = new BannerViewHolder(mView, mContext);
                 bannerViewHolder.setItemClickListener(itemClickListener);
+                bannerViewHolder.startPoll();
                 return bannerViewHolder;
 
             case HomeUIBeans.TOW_IN_LINE_VIEW:
@@ -89,7 +90,6 @@ public class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
         if (viewHolder instanceof BannerViewHolder) {
             BannerViewHolder bannerViewHolder = (BannerViewHolder) viewHolder;
-            bannerViewHolder.startPoll();
         }
 
         if (viewHolder instanceof NormalViewHolder) {
