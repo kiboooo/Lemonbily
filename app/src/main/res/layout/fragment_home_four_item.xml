@@ -35,7 +35,7 @@
         app:layout_constraintRight_toLeftOf="@id/twocard"
         >
         <ImageView
-            android:id="@+id/onecard_image_view"
+            android:id="@+id/four_onecard_image_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="#FFEB3B"
@@ -44,7 +44,7 @@
     </android.support.v7.widget.CardView>
 
     <TextView
-        android:id="@+id/onecard_main_content"
+        android:id="@+id/four_onecard_main_content"
         android:layout_width="0dp"
         android:layout_height="35dp"
         android:gravity="center_vertical"
@@ -62,13 +62,13 @@
         />
 
     <TextView
-        android:id="@+id/onecard_introduction_content"
+        android:id="@+id/four_onecard_introduction_content"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:textSize="12sp"
         android:text="《山丘》是由李宗盛作词作曲并演唱的"
         android:maxLines="2"
-        app:layout_constraintTop_toBottomOf="@id/onecard_main_content"
+        app:layout_constraintTop_toBottomOf="@id/four_onecard_main_content"
         app:layout_constraintLeft_toLeftOf="@id/onecard"
         app:layout_constraintRight_toRightOf="@id/onecard"
         app:layout_constraintBottom_toBottomOf="@id/center_guide_line"
@@ -89,7 +89,7 @@
         >
 
         <ImageView
-            android:id="@+id/twocard_image_view"
+            android:id="@+id/four_twocard_image_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="#03A9F4"
@@ -98,7 +98,7 @@
     </android.support.v7.widget.CardView>
 
     <TextView
-        android:id="@+id/twocard_main_content"
+        android:id="@+id/four_twocard_main_content"
         android:layout_width="0dp"
         android:layout_height="35dp"
         android:gravity="center_vertical"
@@ -116,13 +116,13 @@
         />
 
     <TextView
-        android:id="@+id/twocard_introduction_content"
+        android:id="@+id/four_twocard_introduction_content"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:textSize="12sp"
         android:text="这是一首新写的旧歌，是一个埋藏在大哥心里多年的心事。"
         android:maxLines="2"
-        app:layout_constraintTop_toBottomOf="@id/twocard_main_content"
+        app:layout_constraintTop_toBottomOf="@id/four_twocard_main_content"
         app:layout_constraintLeft_toLeftOf="@id/twocard"
         app:layout_constraintRight_toRightOf="@id/twocard"
         app:layout_constraintBottom_toBottomOf="@id/center_guide_line"
@@ -142,7 +142,7 @@
         >
 
         <ImageView
-            android:id="@+id/threecard_image_view"
+            android:id="@+id/four_threecard_image_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="#FFC107"
@@ -151,7 +151,7 @@
     </android.support.v7.widget.CardView>
 
     <TextView
-        android:id="@+id/threecard_main_content"
+        android:id="@+id/four_threecard_main_content"
         android:layout_width="0dp"
         android:layout_height="35dp"
         android:gravity="center_vertical"
@@ -169,13 +169,13 @@
         />
 
     <TextView
-        android:id="@+id/threecard_introduction_content"
+        android:id="@+id/four_threecard_introduction_content"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:textSize="12sp"
         android:text="《死侍2》全新加料版预告片震撼来袭。历经两年的漫长等待,"
         android:maxLines="2"
-        app:layout_constraintTop_toBottomOf="@id/threecard_main_content"
+        app:layout_constraintTop_toBottomOf="@id/four_threecard_main_content"
         app:layout_constraintLeft_toLeftOf="@id/threecard"
         app:layout_constraintRight_toRightOf="@id/threecard"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -196,7 +196,7 @@
         >
 
         <ImageView
-            android:id="@+id/fourcard_image_view"
+            android:id="@+id/four_fourcard_image_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="#FF5722"
@@ -205,7 +205,7 @@
     </android.support.v7.widget.CardView>
 
     <TextView
-        android:id="@+id/fourcard_main_content"
+        android:id="@+id/four_fourcard_main_content"
         android:layout_width="0dp"
         android:layout_height="35dp"
         android:gravity="center_vertical"
@@ -223,13 +223,13 @@
         />
 
     <TextView
-        android:id="@+id/fourcard_introduction_content"
+        android:id="@+id/four_fourcard_introduction_content"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:textSize="12sp"
         android:text="李宗盛现场演唱这些经典歌曲，超级好听！"
         android:maxLines="2"
-        app:layout_constraintTop_toBottomOf="@id/fourcard_main_content"
+        app:layout_constraintTop_toBottomOf="@id/four_fourcard_main_content"
         app:layout_constraintLeft_toLeftOf="@id/fourcard"
         app:layout_constraintRight_toRightOf="@id/fourcard"
         app:layout_constraintBottom_toBottomOf="parent"

@@ -11,6 +11,9 @@ import com.example.basemodule.bean.UIBeans;
 import com.example.lemonbily.R;
 import com.example.lemonbily.model.bean.HomeUIBeans;
 import com.example.lemonbily.model.viewHolder.BannerViewHolder;
+import com.example.lemonbily.model.viewHolder.FourViewHolder;
+import com.example.lemonbily.model.viewHolder.OneViewHolder;
+import com.example.lemonbily.model.viewHolder.TwoViewHolder;
 
 import java.util.List;
 
@@ -27,7 +30,7 @@ public class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     public HomeAdapter() {
     }
 
-    public HomeAdapter(Context context,List<UIBeans> uiBeansList ) {
+    public HomeAdapter(Context context, List<UIBeans> uiBeansList) {
         this.mContext = context;
         this.uiBeansList = uiBeansList;
     }
@@ -43,13 +46,15 @@ public class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         switch (viewType) {
             case HomeUIBeans.EMPTY_VIEW:
                 mView = LayoutInflater.from(viewGroup.getContext())
-                        .inflate(R.layout.fragment_home_one_item, viewGroup, false);
-                return new NormalViewHolder(mView);
+                        .inflate(R.layout.fragment_empty_view, viewGroup, false);
+                return new EmptyViewHolder(mView);
 
             case HomeUIBeans.NORMAL_VIEW:
                 mView = LayoutInflater.from(viewGroup.getContext())
                         .inflate(R.layout.fragment_home_one_item, viewGroup, false);
-                return new NormalViewHolder(mView);
+                OneViewHolder oneViewHolder = new OneViewHolder(mView);
+                oneViewHolder.setListener(itemClickListener);
+                return oneViewHolder;
 
             case HEAD_VIEW:
                 mView = LayoutInflater.from(viewGroup.getContext())
@@ -62,12 +67,16 @@ public class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             case HomeUIBeans.TOW_IN_LINE_VIEW:
                 mView = LayoutInflater.from(viewGroup.getContext())
                         .inflate(R.layout.fragment_home_two_item, viewGroup, false);
-                return new TwoViewHolder(mView);
+                TwoViewHolder twoViewHolder = new TwoViewHolder(mView);
+                twoViewHolder.setListener(itemClickListener);
+                return twoViewHolder;
 
             case HomeUIBeans.FOUR_GRID_VIEW:
                 mView = LayoutInflater.from(viewGroup.getContext())
                         .inflate(R.layout.fragment_home_four_item, viewGroup, false);
-                return new FourViewHolder(mView);
+                FourViewHolder fourViewHolder = new FourViewHolder(mView);
+                fourViewHolder.setListener(itemClickListener);
+                return fourViewHolder;
 
             case FOOT_VIEW:
                 mView = LayoutInflater.from(viewGroup.getContext())
@@ -77,7 +86,7 @@ public class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             default:
                 mView = LayoutInflater.from(viewGroup.getContext())
                         .inflate(R.layout.fragment_home_one_item, viewGroup, false);
-                return new NormalViewHolder(mView);
+                return new OneViewHolder(mView);
 
         }
     }
@@ -92,8 +101,8 @@ public class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             BannerViewHolder bannerViewHolder = (BannerViewHolder) viewHolder;
         }
 
-        if (viewHolder instanceof NormalViewHolder) {
-            NormalViewHolder normalViewHolder = (NormalViewHolder) viewHolder;
+        if (viewHolder instanceof OneViewHolder) {
+            OneViewHolder normalViewHolder = (OneViewHolder) viewHolder;
         }
 
         if (viewHolder instanceof TwoViewHolder) {
@@ -118,7 +127,7 @@ public class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     public Object getItemData(int position) {
         if (uiBeansList != null) {
             return uiBeansList.get(position).getObject();
-        }else
+        } else
             return null;
     }
 
@@ -126,88 +135,19 @@ public class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     public int getItemViewType(int position) {
         if (uiBeansList.size() == 0) {
             return HomeUIBeans.EMPTY_VIEW;
-        }else if (position == uiBeansList.size()) {
+        } else if (position == uiBeansList.size()) {
             return FOOT_VIEW;
-        }else if (uiBeansList.get(position).getUiType() == HomeUIBeans.BANNER_VIEW) {
+        } else if (uiBeansList.get(position).getUiType() == HomeUIBeans.BANNER_VIEW) {
             return HEAD_VIEW;
-        }  else {
+        } else {
             return uiBeansList.get(position).getUiType();
         }
     }
 
+    public static class EmptyViewHolder extends RecyclerView.ViewHolder {
 
-   public static class NormalViewHolder extends RecyclerView.ViewHolder
-            implements View.OnClickListener,View.OnLongClickListener{
-
-        public NormalViewHolder(@NonNull View itemView) {
+        public EmptyViewHolder(@NonNull View itemView) {
             super(itemView);
-            itemView.setOnClickListener(this);
-        }
-
-        @Override
-        public void onClick(View view) {
-            if (itemClickListener != null) {
-                itemClickListener.onItemClick(this, view, getLayoutPosition());
-            }
-        }
-
-        @Override
-        public boolean onLongClick(View view) {
-            if (itemClickListener != null) {
-                itemClickListener.onLongItemClick(this, view, getLayoutPosition());
-                return true;
-            }
-            return false;
-        }
-    }
-
-   public static class TwoViewHolder extends RecyclerView.ViewHolder
-            implements View.OnClickListener,View.OnLongClickListener{
-
-        public TwoViewHolder(@NonNull View itemView) {
-            super(itemView);
-            itemView.setOnClickListener(this);
-        }
-
-        @Override
-        public void onClick(View view) {
-            if (itemClickListener != null) {
-                itemClickListener.onItemClick(this, view, getLayoutPosition());
-            }
-        }
-
-        @Override
-        public boolean onLongClick(View view) {
-            if (itemClickListener != null) {
-                itemClickListener.onLongItemClick(this, view, getLayoutPosition());
-                return true;
-            }
-            return false;
-        }
-    }
-
-   public static class FourViewHolder extends RecyclerView.ViewHolder
-            implements View.OnClickListener,View.OnLongClickListener{
-
-        public FourViewHolder(@NonNull View itemView) {
-            super(itemView);
-            itemView.setOnClickListener(this);
-        }
-
-        @Override
-        public void onClick(View view) {
-            if (itemClickListener != null) {
-                itemClickListener.onItemClick(this,view, getAdapterPosition());
-            }
-        }
-
-        @Override
-        public boolean onLongClick(View view) {
-            if (itemClickListener != null) {
-                itemClickListener.onLongItemClick(this,view, getAdapterPosition());
-                return true;
-            }
-            return false;
         }
     }
 
