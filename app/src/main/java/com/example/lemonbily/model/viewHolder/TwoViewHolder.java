@@ -1,13 +1,22 @@
 package com.example.lemonbily.model.viewHolder;
 
+import android.content.Context;
+import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.example.basemodule.bean.UIBeans;
+import com.example.basemodule.bean.Video;
+import com.example.basemodule.net.NetWorkServer;
+import com.example.basemodule.utils.CommonUtils;
 import com.example.lemonbily.R;
 import com.example.lemonbily.model.adapter.onRecyclerViewItemClickListener;
+
+import java.util.List;
 
 public  class TwoViewHolder extends RecyclerView.ViewHolder
         implements View.OnClickListener,View.OnLongClickListener{
@@ -65,5 +74,34 @@ public  class TwoViewHolder extends RecyclerView.ViewHolder
             return true;
         }
         return false;
+    }
+
+    public void bindData(Context mContext, UIBeans beans) {
+        titleViewContent.setText(beans.getTitleContext());
+        List<Video> datas = (List<Video>) beans.getObject();
+        if (datas != null && datas.size() >= 2) {
+            Video v1 = datas.get(0);
+            Video v2 = datas.get(1);
+            if (v1 == null || v2 == null) {
+                return;
+            }
+            oneMainContent.setText(v1.getVname());
+            oneIntroductionContent.setText(v1.getVdescribe());
+            oneImageView.setBackgroundColor(Color.TRANSPARENT);
+            Glide.with(mContext)
+                    .load(NetWorkServer.SERVER_URL
+                            + v1.getVpicture())
+                    .apply(CommonUtils.imageRequestOption())
+                    .into(oneImageView);
+
+            twoMainContent.setText(v2.getVname());
+            twoIntroductionContent.setText(v2.getVdescribe());
+            twoImageView.setBackgroundColor(Color.TRANSPARENT);
+            Glide.with(mContext)
+                    .load(NetWorkServer.SERVER_URL
+                            + v2.getVpicture())
+                    .apply(CommonUtils.imageRequestOption())
+                    .into(twoImageView);
+        }
     }
 }

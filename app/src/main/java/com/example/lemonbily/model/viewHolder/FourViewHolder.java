@@ -1,13 +1,22 @@
 package com.example.lemonbily.model.viewHolder;
 
+import android.content.Context;
+import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.example.basemodule.bean.UIBeans;
+import com.example.basemodule.bean.Video;
+import com.example.basemodule.net.NetWorkServer;
+import com.example.basemodule.utils.CommonUtils;
 import com.example.lemonbily.R;
 import com.example.lemonbily.model.adapter.onRecyclerViewItemClickListener;
+
+import java.util.List;
 
 public class FourViewHolder extends RecyclerView.ViewHolder
         implements View.OnClickListener, View.OnLongClickListener {
@@ -90,5 +99,38 @@ public class FourViewHolder extends RecyclerView.ViewHolder
             return true;
         }
         return false;
+    }
+
+    public void bindData(Context mContext, UIBeans beans) {
+        if (beans == null) {
+            return;
+        }
+        titleViewContent.setText(beans.getTitleContext());
+        List<Video> datas = (List<Video>) beans.getObject();
+        if (datas == null || datas.size() < 4) {
+            return;
+        }
+        for (int i = 0; i < datas.size(); i++) {
+            if (i == 0) {
+                bindDataForVH(mContext, oneMainContent, oneIntroductionContent, oneImageView, datas.get(i));
+            } else if (i == 1) {
+                bindDataForVH(mContext, twoMainContent, twoIntroductionContent, twoImageView, datas.get(i));
+            } else if (i == 2) {
+                bindDataForVH(mContext, threeMainContent, threeIntroductionContent, threeImageView, datas.get(i));
+            } else if (i == 3) {
+                bindDataForVH(mContext, fourMainContent, fourIntroductionContent, fourImageView, datas.get(i));
+            }
+        }
+    }
+
+    private void bindDataForVH(Context context, TextView main, TextView introduction, ImageView imageView, Video v) {
+        main.setText(v.getVname());
+        introduction.setText(v.getVdescribe());
+        imageView.setBackgroundColor(Color.TRANSPARENT);
+        Glide.with(context)
+                .load(NetWorkServer.SERVER_URL
+                        + v.getVpicture())
+                .apply(CommonUtils.imageRequestOption())
+                .into(imageView);
     }
 }

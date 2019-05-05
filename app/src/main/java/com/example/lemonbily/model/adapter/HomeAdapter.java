@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.basemodule.bean.UIBeans;
+import com.example.basemodule.bean.Video;
 import com.example.lemonbily.R;
 import com.example.lemonbily.model.bean.HomeUIBeans;
 import com.example.lemonbily.model.viewHolder.BannerViewHolder;
@@ -93,25 +94,31 @@ public class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
-        if (viewHolder instanceof FootViewHolder) {
-            FootViewHolder footViewHolder = (FootViewHolder) viewHolder;
-        }
 
         if (viewHolder instanceof BannerViewHolder) {
             BannerViewHolder bannerViewHolder = (BannerViewHolder) viewHolder;
+            bannerViewHolder.initAdapter((List<Video>) uiBeansList.get(i).getObject());
         }
 
         if (viewHolder instanceof OneViewHolder) {
             OneViewHolder normalViewHolder = (OneViewHolder) viewHolder;
+            normalViewHolder.bindData(mContext,uiBeansList.get(i));
         }
 
         if (viewHolder instanceof TwoViewHolder) {
             TwoViewHolder twoViewHolder = (TwoViewHolder) viewHolder;
+            twoViewHolder.bindData(mContext, uiBeansList.get(i));
         }
 
         if (viewHolder instanceof FourViewHolder) {
             FourViewHolder fourViewHolder = (FourViewHolder) viewHolder;
+            fourViewHolder.bindData(mContext, uiBeansList.get(i));
         }
+
+        if (viewHolder instanceof FootViewHolder) {
+            FootViewHolder footViewHolder = (FootViewHolder) viewHolder;
+        }
+
 
     }
 

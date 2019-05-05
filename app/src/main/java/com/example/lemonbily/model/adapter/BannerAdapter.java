@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.example.basemodule.bean.Video;
 import com.example.basemodule.net.NetWorkServer;
 import com.example.basemodule.utils.CommonUtils;
 import com.example.lemonbily.R;
@@ -17,18 +18,21 @@ import java.util.List;
 
 public class BannerAdapter extends RecyclerView.Adapter<BannerAdapter.BannerItemViewHolder>  {
 
-    private List<String> bannerImageList;
+    private List<Video> bannerImageList;
     public static int bannerSize;
     private Context mContext;
     private static onRecyclerViewItemClickListener mListener;
 
-    public void updateData(List<String> list) {
+    public void updateData(List<Video> list) {
         bannerImageList = list;
         notifyDataSetChanged();
     }
 
-    public BannerAdapter(Context context, List<String> bannerImageList) {
+    public BannerAdapter(Context context) {
         this.mContext = context;
+    }
+
+    public void init(List<Video> bannerImageList){
         this.bannerImageList = bannerImageList;
         bannerSize = bannerImageList.size();
     }
@@ -37,7 +41,7 @@ public class BannerAdapter extends RecyclerView.Adapter<BannerAdapter.BannerItem
         BannerAdapter.mListener = mListener;
     }
 
-    public String getBannerImageListData(int position) {
+    public Video getBannerImageListData(int position) {
         if (position >= 0 && position < bannerSize) {
             return bannerImageList.get(position);
         }
@@ -55,7 +59,8 @@ public class BannerAdapter extends RecyclerView.Adapter<BannerAdapter.BannerItem
     @Override
     public void onBindViewHolder(@NonNull BannerItemViewHolder holder, int i) {
         Glide.with(mContext)
-                .load(NetWorkServer.SERVER_URL + bannerImageList.get(i % bannerSize))
+                .load(NetWorkServer.SERVER_URL
+                        + bannerImageList.get(i % bannerSize).getVpicture())
                 .apply(CommonUtils.imageRequestOption())
                 .into(holder.itemImage);
     }

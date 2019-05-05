@@ -10,10 +10,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
 
-import com.example.basemodule.utils.CommonUtils;
+import com.example.basemodule.bean.Video;
 import com.example.lemonbily.R;
 import com.example.lemonbily.model.adapter.BannerAdapter;
 import com.example.lemonbily.model.adapter.onRecyclerViewItemClickListener;
+
+import java.util.List;
 
 public class BannerViewHolder extends RecyclerView.ViewHolder
         implements View.OnClickListener,View.OnLongClickListener {
@@ -69,18 +71,22 @@ public class BannerViewHolder extends RecyclerView.ViewHolder
                 }
             }
         });
-
-        adapter = new BannerAdapter(context, CommonUtils.initBannerList());
-
-        bannerRecyclerView.setAdapter(adapter);
+        adapter = new BannerAdapter(context);
         bannerContent = itemView.findViewById(R.id.banner_content);
-        bannerContent.setText(adapter.getBannerImageListData(0));
         itemView.setOnClickListener(this);
     }
 
     public void setItemClickListener(onRecyclerViewItemClickListener itemClickListener) {
         this.itemClickListener = itemClickListener;
-        adapter.setmListener(itemClickListener);
+    }
+
+    public void initAdapter(List<Video> bannerImageList) {
+        if (itemClickListener != null && adapter != null) {
+            adapter.init(bannerImageList);
+            adapter.setmListener(itemClickListener);
+            bannerRecyclerView.setAdapter(adapter);
+            bannerContent.setText(adapter.getBannerImageListData(0).getVname());
+        }
     }
 
     @Override
@@ -115,7 +121,9 @@ public class BannerViewHolder extends RecyclerView.ViewHolder
     }
 
     private void refreshTextContent(int position) {
-        bannerContent.setText(adapter.getBannerImageListData(position % BannerAdapter.bannerSize));
+        bannerContent.setText(adapter
+                .getBannerImageListData(position % BannerAdapter.bannerSize)
+                .getVname());
     }
 
 }

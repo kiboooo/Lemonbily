@@ -5,6 +5,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.Toast;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.example.basemodule.view.BaseFragment;
@@ -13,14 +14,15 @@ import com.example.lemonbily.presenter.impl.HomePresenter;
 import com.example.lemonbily.view.ui.IHomeView;
 
 @Route(path = "/Lemonbily/HomeFragment")
-public class HomeFragment extends BaseFragment<IHomeView, HomePresenter> implements IHomeView, SwipeRefreshLayout.OnRefreshListener {
+public class HomeFragment extends BaseFragment<IHomeView, HomePresenter>
+        implements IHomeView, SwipeRefreshLayout.OnRefreshListener {
 
     RecyclerView mRecyclerView;
     SwipeRefreshLayout swipeRefreshLayout;
 
     @Override
     protected void initFragmentData(Bundle savedInstanceState) {
-        mRecyclerView.setAdapter(mPresenter.getHomeAdapter(getContext()));
+
     }
     @Override
     protected void initFragmentChildView(View view) {
@@ -46,6 +48,17 @@ public class HomeFragment extends BaseFragment<IHomeView, HomePresenter> impleme
     @Override
     public void showToast(String msg, int state) {
         showToasts(msg, state);
+    }
+
+    @Override
+    public void initHomeDataSuccess() {
+        showToasts("获取Video成功", Toast.LENGTH_SHORT);
+        mRecyclerView.setAdapter(mPresenter.getHomeAdapter(getContext()));
+    }
+
+    @Override
+    public void initHomeDataFail() {
+        showToasts("获取Video失败" , Toast.LENGTH_SHORT);
     }
 
     //下拉刷新

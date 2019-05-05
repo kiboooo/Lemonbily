@@ -35,4 +35,14 @@ public class HomePresenter extends BasePresenter<IHomeView> implements IHomePres
     public void showToast(String msg, int state) {
         getView().showToast(msg, state);
     }
+
+    @Override
+    public void initHomeDataSuccess() {
+        getView().initHomeDataSuccess();
+    }
+
+    @Override
+    public void initHomeDataFail() {
+        getView().initHomeDataFail();
+    }
 }

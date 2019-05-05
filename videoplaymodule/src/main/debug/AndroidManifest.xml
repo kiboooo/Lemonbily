@@ -1,12 +1,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
 package="com.example.videoplaymodule">
     <application
-        android:name=".com.example.loginmodule.debug.VideoPlayApplication"
+        android:name=".debug.VideoPlayApplication"
         android:allowBackup="true"
         android:label="@string/videoplay_app_name"
         android:supportsRtl="true"
         android:theme="@style/videoplay_AppTheme">
-        <activity android:name=".VideoPlayActivity">
+        <activity android:name=".view.ui.VideoDetailedPage">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -8,5 +8,8 @@
     <color name="base_colorWeakAccent">#ffff2c</color>
     <color name="base_loading_back">#D7202020</color>
     <color name="base_graybackground">#8DC5C5C5</color>
+    <color name="base_loading_image_background">#91989F</color>
+    <color name="base_loading_mian_content_background">#BDC0BA</color>
+    <color name="base_loading_introduction_content_background">#D5D5D5</color>
     <color name="base_transparent">#00000000</color>
 </resources>

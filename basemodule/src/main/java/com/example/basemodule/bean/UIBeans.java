@@ -8,6 +8,7 @@ package com.example.basemodule.bean;
 public class UIBeans {
 
     private int uiType;
+    private String titleContext;
     private Object object;
 
     public UIBeans() {
@@ -16,6 +17,20 @@ public class UIBeans {
     public UIBeans(int uiType, Object object) {
         this.uiType = uiType;
         this.object = object;
+    }
+
+    public UIBeans(int uiType, String titleContext, Object object) {
+        this.uiType = uiType;
+        this.titleContext = titleContext;
+        this.object = object;
+    }
+
+    public String getTitleContext() {
+        return titleContext;
+    }
+
+    public void setTitleContext(String titleContext) {
+        this.titleContext = titleContext;
     }
 
     public int getUiType() {

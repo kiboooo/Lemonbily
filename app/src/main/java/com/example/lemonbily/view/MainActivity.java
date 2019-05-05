@@ -18,6 +18,7 @@ import com.example.lemonbily.R;
 import com.example.lemonbily.presenter.impl.MainPresenter;
 import com.example.lemonbily.view.ui.IMainView;
 import com.example.loginmodule.bus.generated.im.EventsDefineAsLoginEvents;
+import com.example.videoplaymodule.model.net.VideoNetServer;
 import com.jeremyliao.im.core.InvokingMessage;
 
 @Route(path = "/Lemonbily/MainActivity")
@@ -38,6 +39,7 @@ public class MainActivity extends BaseActivity<IMainView,MainPresenter> implemen
     @Override
     protected void initBinding() {
         registerUserLifeEvenObserver(this);
+        VideoNetServer.getInstance().loadAllVideoData();
         palCircleFragment =(PalCircleFragment) ARouter.getInstance()
                 .build("/Lemonbily/PalCircleFragment")
                 .navigation();
@@ -58,7 +60,6 @@ public class MainActivity extends BaseActivity<IMainView,MainPresenter> implemen
         btnHome = findViewById(R.id.btn_home);
         btnMine = findViewById(R.id.btn_mine);
         btnPalCircle = findViewById(R.id.btn_circle);
-
     }
 
     @Override

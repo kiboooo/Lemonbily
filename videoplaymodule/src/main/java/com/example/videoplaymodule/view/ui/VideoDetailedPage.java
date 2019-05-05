@@ -1,14 +1,14 @@
-package com.example.videoplaymodule;
-
+package com.example.videoplaymodule.view.ui;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
-/**
- * 视频播放暂定主页面
- */
-public class VideoPlayActivity extends AppCompatActivity {
+import com.alibaba.android.arouter.facade.annotation.Route;
+import com.example.videoplaymodule.R;
+
+@Route(path = "/VideoPlayModule/VideoDetailedPage")
+public class VideoDetailedPage extends AppCompatActivity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

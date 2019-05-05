@@ -20,6 +20,7 @@
         android:layout_marginTop="8dp"
         app:cardCornerRadius="5dp"
         app:cardElevation="1dp"
+        app:layout_constraintDimensionRatio="16:9"
         app:layout_constraintTop_toBottomOf="@id/one_item_title"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -29,7 +30,7 @@
             android:id="@+id/one_item_image_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#4CAF50"
+            android:background="@color/base_loading_image_background"
             />
 
     </android.support.v7.widget.CardView>
@@ -41,7 +42,6 @@
         android:gravity="center_vertical"
         android:paddingStart="10dp"
         android:paddingEnd="10dp"
-        android:text="死蚀- 像我这样的人"
         android:maxLines="1"
         android:textStyle="bold"
         android:textColor="@color/base_colorPrimary"
@@ -57,7 +57,6 @@
         android:paddingStart="10dp"
         android:paddingEnd="10dp"
         android:textSize="12sp"
-        android:text="《死侍2》全新加料版预告片震撼来袭。历经两年的漫长等待."
         android:maxLines="2"
         app:layout_constraintTop_toBottomOf="@id/one_main_content"
         app:layout_constraintLeft_toLeftOf="parent"

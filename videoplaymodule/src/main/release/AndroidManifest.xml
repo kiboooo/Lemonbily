@@ -9,7 +9,7 @@
         >
 
         <activity
-            android:name=".VideoPlayActivity"
+            android:name=".view.ui.VideoDetailedPage"
             android:screenOrientation="portrait"
             android:exported="true"
             >
