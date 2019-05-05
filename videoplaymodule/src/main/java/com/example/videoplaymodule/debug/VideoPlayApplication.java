@@ -16,6 +16,5 @@ public class VideoPlayApplication extends Application {
      * 需要的第三方数据，以及一些特殊资源的初始化
      */
     private void init(){
-
     }
 }

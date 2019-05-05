@@ -8,6 +8,8 @@ public interface IHomePressenter {
 
     HomeAdapter getHomeAdapter(Context context);
 
+    void adapterNotifyDataSetChanged();
+
     void showToast(String msg, int state);
 
     void initHomeDataSuccess();

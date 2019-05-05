@@ -25,10 +25,14 @@ public class HomePresenter extends BasePresenter<IHomeView> implements IHomePres
 
     }
 
-
     @Override
     public HomeAdapter getHomeAdapter(Context context) {
         return ((IHomeModelImpl)getBaseModel()).produceAdapter(context);
+    }
+
+    @Override
+    public void adapterNotifyDataSetChanged() {
+        ((IHomeModelImpl) getBaseModel()).adapterNotifyDataSetChanged();
     }
 
     @Override

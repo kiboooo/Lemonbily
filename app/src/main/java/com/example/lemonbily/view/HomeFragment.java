@@ -12,6 +12,7 @@ import com.example.basemodule.view.BaseFragment;
 import com.example.lemonbily.R;
 import com.example.lemonbily.presenter.impl.HomePresenter;
 import com.example.lemonbily.view.ui.IHomeView;
+import com.example.videoplaymodule.model.net.VideoNetServer;
 
 @Route(path = "/Lemonbily/HomeFragment")
 public class HomeFragment extends BaseFragment<IHomeView, HomePresenter>
@@ -19,6 +20,7 @@ public class HomeFragment extends BaseFragment<IHomeView, HomePresenter>
 
     RecyclerView mRecyclerView;
     SwipeRefreshLayout swipeRefreshLayout;
+    private boolean isRefresh = false;
 
     @Override
     protected void initFragmentData(Bundle savedInstanceState) {
@@ -52,8 +54,13 @@ public class HomeFragment extends BaseFragment<IHomeView, HomePresenter>
 
     @Override
     public void initHomeDataSuccess() {
-        showToasts("获取Video成功", Toast.LENGTH_SHORT);
-        mRecyclerView.setAdapter(mPresenter.getHomeAdapter(getContext()));
+        if (!isRefresh) {
+            mRecyclerView.setAdapter(mPresenter.getHomeAdapter(getContext()));
+        }else {
+            isRefresh = false;
+            swipeRefreshLayout.setRefreshing(false);
+            mPresenter.adapterNotifyDataSetChanged();
+        }
     }
 
     @Override
@@ -65,16 +72,7 @@ public class HomeFragment extends BaseFragment<IHomeView, HomePresenter>
     @Override
     public void onRefresh() {
         //执行网络请求操作，获取新的首页数据；
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    Thread.sleep(2000);
-                    swipeRefreshLayout.setRefreshing(false);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-        }).start();
+        isRefresh = true;
+        VideoNetServer.getInstance().loadAllVideoData();
     }
 }
