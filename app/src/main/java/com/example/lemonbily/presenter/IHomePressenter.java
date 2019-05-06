@@ -1,4 +1,4 @@
-package com.example.lemonbily.presenter.impl;
+package com.example.lemonbily.presenter;
 
 import android.content.Context;
 

@@ -7,9 +7,10 @@ import com.example.basemodule.model.IBaseModel;
 import com.example.basemodule.presenter.BasePresenter;
 import com.example.lemonbily.model.adapter.HomeAdapter;
 import com.example.lemonbily.model.impl.IHomeModelImpl;
+import com.example.lemonbily.presenter.IHomePressenter;
 import com.example.lemonbily.view.ui.IHomeView;
 
-public class HomePresenter extends BasePresenter<IHomeView> implements IHomePressenter{
+public class HomePresenter extends BasePresenter<IHomeView> implements IHomePressenter {
 
     public HomePresenter(IHomeView v, LifecycleOwner owner) {
         super(v, owner);

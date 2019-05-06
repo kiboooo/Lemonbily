@@ -1,32 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout 
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="#FF5722"
     >
 
-    <TextView
+   <android.support.design.widget.TabLayout
+       android:id="@+id/pal_table_layout"
+       android:layout_width="match_parent"
+       android:layout_height="60dp"
+       android:background="@color/base_colorBackground"
+       app:tabMode="fixed"
+       app:tabGravity="center"
+       app:tabBackground="@android:color/transparent"
+       app:tabRippleColor="@android:color/transparent"
+       app:tabIndicatorColor="@color/base_colorAccent"
+       app:tabTextColor="@color/base_colorWeakPoint"
+       app:tabSelectedTextColor="@color/base_colorPrimary"
+       app:layout_constraintTop_toTopOf="parent"
+       app:layout_constraintLeft_toLeftOf="parent"
+       app:layout_constraintRight_toRightOf="parent"
+       >
+
+       <android.support.design.widget.TabItem
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:text="@string/pal_square"
+           />
+
+       <android.support.design.widget.TabItem
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:text="@string/pal_im"
+           />
+
+   </android.support.design.widget.TabLayout>
+
+    <View
+        android:id="@+id/table_title_line"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="#ffffff"
-        android:id="@+id/pal_tablelayout"
-        android:text="TableLayout"
-        android:textColor="#000000"
-        android:gravity="center"
-        app:layout_constraintTop_toTopOf="parent"
+        android:layout_height="0.1dp"
+        android:background="@color/base_colorWeakPoint"
+        app:layout_constraintTop_toBottomOf="@id/pal_table_layout"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="社交内容"
-        app:layout_constraintTop_toTopOf="parent"
+    <android.support.v4.view.ViewPager
+        android:id="@+id/pal_view_pager"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/table_title_line"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        />
+        >
+
+
+    </android.support.v4.view.ViewPager>
 
 </android.support.constraint.ConstraintLayout>
