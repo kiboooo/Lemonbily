@@ -5,6 +5,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.Toast;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.example.basemodule.view.BaseFragment;
@@ -13,8 +14,8 @@ import com.example.lemonbily.presenter.impl.PalSquarePresenter;
 import com.example.lemonbily.view.ui.IPalSquareView;
 
 @Route(path = "/Lemonbily/PalCircleSquareFragment")
-public class PalCircleSquareFragment  extends BaseFragment<IPalSquareView, PalSquarePresenter>
-        implements IPalSquareView,SwipeRefreshLayout.OnRefreshListener {
+public class PalCircleSquareFragment extends BaseFragment<IPalSquareView, PalSquarePresenter>
+        implements IPalSquareView, SwipeRefreshLayout.OnRefreshListener {
 
     private SwipeRefreshLayout swipeRefreshLayout;
     private RecyclerView recyclerView;
@@ -24,6 +25,7 @@ public class PalCircleSquareFragment  extends BaseFragment<IPalSquareView, PalSq
     @Override
     protected void initFragmentData(Bundle savedInstanceState) {
         recyclerView.setAdapter(mPresenter.getPalSquareAdapter(getContext()));
+
     }
 
     @Override
@@ -35,11 +37,15 @@ public class PalCircleSquareFragment  extends BaseFragment<IPalSquareView, PalSq
         recyclerView = view.findViewById(R.id.pal_square_recycler_view);
         LinearLayoutManager manager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(manager);
+
     }
 
     @Override
     protected int initFragmentView() {
+
         return R.layout.fragment_pal_square;
+
+
     }
 
     @Override
@@ -60,11 +66,13 @@ public class PalCircleSquareFragment  extends BaseFragment<IPalSquareView, PalSq
 
     @Override
     public void initPalDataSuccess() {
+        showToasts("获取成功ssss", Toast.LENGTH_SHORT);
+
     }
 
     @Override
     public void initPalDataFail() {
-
+        showToasts("获取失败ssss", Toast.LENGTH_SHORT);
     }
 
 

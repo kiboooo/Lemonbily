@@ -1,7 +1,6 @@
 package com.example.lemonbily.view;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -44,22 +43,22 @@ public class MineFragment extends BaseFragment<IMineView, MinePresenter>
 
     @Override
     protected void initFragmentChildView(View view) {
-        loginAndRegisterView = view.findViewById(R.id.not_login_view);
+        loginAndRegisterView = view.findViewById(R.id.mine_not_login_view);
         ImageView mineSetting = view.findViewById(R.id.mine_setting_btn);
         mineAccountName = view.findViewById(R.id.mine_account_name);
         mineAvaatr = view.findViewById(R.id.mine_avatar);
         mineGender = view.findViewById(R.id.mine_gender);
         mineAttention = view.findViewById(R.id.mine_attention);
         mineCollection = view.findViewById(R.id.mine_collection);
-        TextView loginButton = view.findViewById(R.id.loginButton);
+        TextView loginButton = view.findViewById(R.id.mine_login_button);
         if (!LoginStatusUtils.isLogin) {
             // 非登录状态就加载注册登录界面
             loginButton.setOnClickListener(new OnMutiClickListener() {
                 @Override
                 public void onMutiClick(View view) {
-                    Log.e(TAG, "onClick loginButton");
                     ARouter.getInstance()
                             .build("/LoginModule/LoginActivity")
+                            .withBoolean("exPush", true)
                             .navigation();
                 }
             });

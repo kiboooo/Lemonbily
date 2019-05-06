@@ -9,8 +9,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.basemodule.bean.UIBeans;
 import com.example.lemonbily.R;
+import com.example.basemodule.bean.PalSquareBean;
 
 import java.util.List;
 
@@ -20,12 +20,12 @@ public class PalSquareAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     private static final int NORMAL_VIEW = 444444;
 
     private Context mContext;
-    private List<UIBeans> beansList;
+    private List<PalSquareBean> palSquareBeans;
     private static onRecyclerViewItemClickListener itemClickListener;
 
-    public PalSquareAdapter(Context mContext, List<UIBeans> beansList) {
+    public PalSquareAdapter(Context mContext, List<PalSquareBean> palSquareBeans) {
         this.mContext = mContext;
-        this.beansList = beansList;
+        this.palSquareBeans = palSquareBeans;
     }
 
     public static void setItemClickListener(onRecyclerViewItemClickListener itemClickListener) {
@@ -64,7 +64,7 @@ public class PalSquareAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
     @Override
     public int getItemCount() {
-        return beansList.size() + 1;
+        return palSquareBeans.size() + 1;
     }
 
     public static class PalSquareViewHolder extends RecyclerView.ViewHolder

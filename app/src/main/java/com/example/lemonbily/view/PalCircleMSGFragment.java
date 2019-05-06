@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.example.basemodule.utils.LoginStatusUtils;
 import com.example.basemodule.view.BaseFragment;
 import com.example.lemonbily.R;
 import com.example.lemonbily.presenter.impl.PalMSGPresenter;
@@ -11,9 +12,13 @@ import com.example.lemonbily.view.ui.IPalMSGView;
 
 @Route(path = "/Lemonbily/PalCircleMSGFragment")
 public class PalCircleMSGFragment extends BaseFragment<IPalMSGView, PalMSGPresenter> implements IPalMSGView {
+
+
     @Override
     protected void initFragmentData(Bundle savedInstanceState) {
+        if (LoginStatusUtils.isLogin) {
 
+        }
     }
 
     @Override
@@ -24,6 +29,7 @@ public class PalCircleMSGFragment extends BaseFragment<IPalMSGView, PalMSGPresen
     @Override
     protected int initFragmentView() {
         return R.layout.fragment_pal_msg;
+
     }
 
     @Override

@@ -22,7 +22,8 @@ import com.example.videoplaymodule.model.net.VideoNetServer;
 import com.jeremyliao.im.core.InvokingMessage;
 
 @Route(path = "/Lemonbily/MainActivity")
-public class MainActivity extends BaseActivity<IMainView,MainPresenter> implements IMainView,View.OnClickListener {
+public class MainActivity extends BaseActivity<IMainView,MainPresenter>
+        implements IMainView,View.OnClickListener {
 
     private Fragment[] fragments = new Fragment[3];
     private HomeFragment homeFragment;
@@ -147,9 +148,11 @@ public class MainActivity extends BaseActivity<IMainView,MainPresenter> implemen
                         LoginStatusUtils.clearAll();
                         ARouter.getInstance()
                                 .build("/LoginModule/LoginActivity")
+                                .withBoolean("exPush", false)
                                 .navigation();
                     }
                 });
     }
+
 
 }

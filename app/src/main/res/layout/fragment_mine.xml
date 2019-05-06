@@ -103,16 +103,8 @@
         app:layout_constraintRight_toRightOf="parent"
         />
 
-
-    <!--<ViewStub-->
-        <!---->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"-->
-        <!--android:layout="@layout/fragment_mine_not_login"-->
-        <!--/>-->
-
     <FrameLayout
-        android:id="@+id/not_login_view"
+        android:id="@+id/mine_not_login_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:visibility="gone"
@@ -120,7 +112,7 @@
         >
 
         <TextView
-            android:id="@+id/loginButton"
+            android:id="@+id/mine_login_button"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:gravity="center"

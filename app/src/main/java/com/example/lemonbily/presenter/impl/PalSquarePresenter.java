@@ -26,7 +26,7 @@ public class PalSquarePresenter extends BasePresenter<IPalSquareView> implements
 
     @Override
     public void sendErrorMsg(String msg, int state) {
-
+        getView().showToast(msg, state);
     }
 
     @Override

@@ -24,6 +24,12 @@ public class LoginEvents {
     @EventType(JsonResponse.class)
     public static final String LOGIN_EVENT = "account_login_event";
 
+    @EventType(String.class)
+    public static final String LOGIN_SUCCESS_EVENT = "account_login_success_event";
+
+    @EventType(String.class)
+    public static final String LOGOUT_SUCCESS_EVENT = "account_logout_success_event";
+
     //用户注册事件
     @EventType(JsonResponse.class)
     public static final String REGISTER_EVENT = "account_register_event";

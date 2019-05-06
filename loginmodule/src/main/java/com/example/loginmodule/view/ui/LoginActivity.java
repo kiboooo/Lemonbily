@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.example.basemodule.utils.CommonUtils;
@@ -20,8 +21,11 @@ import com.example.loginmodule.presenter.impl.LoginPresenter;
 import com.example.loginmodule.view.ILoginView;
 
 @Route(path = "/LoginModule/LoginActivity")
-public class LoginActivity extends BaseActivity<ILoginView,LoginPresenter>
-        implements View.OnClickListener,ILoginView {
+public class LoginActivity extends BaseActivity<ILoginView, LoginPresenter>
+        implements View.OnClickListener, ILoginView {
+
+    @Autowired(name = "exPush")
+    boolean isHomePageEx;
 
     ImageView backBtn;
     TextView titleDescription;
@@ -50,7 +54,7 @@ public class LoginActivity extends BaseActivity<ILoginView,LoginPresenter>
 
     @Override
     public LoginPresenter initPresenter() {
-        return new LoginPresenter(this,this);
+        return new LoginPresenter(this, this);
     }
 
     @Override
@@ -64,7 +68,7 @@ public class LoginActivity extends BaseActivity<ILoginView,LoginPresenter>
             public void onMutiClick(View view) {
                 String mPhone = phone.getText().toString();
                 String mPass = password.getText().toString();
-                if (mPhone.equals(getResources().getString(R.string.login_phone_hint))||
+                if (mPhone.equals(getResources().getString(R.string.login_phone_hint)) ||
                         CommonUtils.isTextEmpty(mPhone) || !CommonUtils.isMobile(mPhone)) {
                     phone.setError(getResources().getString(R.string.login_phone_error));
                     return;
@@ -87,17 +91,7 @@ public class LoginActivity extends BaseActivity<ILoginView,LoginPresenter>
                 ARouter.getInstance()
                         .build("/LoginModule/RegisterActivity")
                         .navigation();
-                //TODO: 开发测试模块，正式上线需要恢复
-                /*测试开始*/
-                //修改密码界面
-//                ARouter.getInstance()
-//                        .build("/LoginModule/ChangePasswordActivity")
-//                        .navigation();
 
-//                ARouter.getInstance()
-//                        .build("/LoginModule/SettingActivity")
-//                        .navigation();
-                /*测试结束*/
             }
         });
         backBtn.setOnClickListener(this);
@@ -119,7 +113,7 @@ public class LoginActivity extends BaseActivity<ILoginView,LoginPresenter>
     @Override
     public void loginSuccess() {
         hideLoading();
-        toHomeView(false);
+        toHomeView();
         showToast("登录成功 token :" + LoginStatusUtils.token, Toast.LENGTH_SHORT);
     }
 
@@ -133,15 +127,16 @@ public class LoginActivity extends BaseActivity<ILoginView,LoginPresenter>
         hideLoading();
     }
 
-    private void toHomeView(boolean isExPull){
-        if (isExPull) {
-            //判断是否是外部拉起
+    private void toHomeView() {
+        //判断是否是外部拉起
+        if (isHomePageEx) {
             ARouter.getInstance().build("/Lemonbily/MainActivity")
                     .withFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                     .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
                     .navigation();
         }
         finish();
+
     }
 
 

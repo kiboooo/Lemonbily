@@ -1,25 +1,30 @@
 package com.example.lemonbily.model.impl;
 
 import android.arch.lifecycle.LifecycleOwner;
+import android.arch.lifecycle.Observer;
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Toast;
 
-import com.example.basemodule.bean.UIBeans;
+import com.example.basemodule.bean.JsonResponse;
+import com.example.basemodule.bean.PalSquareBean;
 import com.example.basemodule.model.BaseModel;
 import com.example.lemonbily.R;
+import com.example.lemonbily.bus.generated.im.EventsDefineAsPalSquareEvents;
 import com.example.lemonbily.model.IPalSquareModel;
 import com.example.lemonbily.model.adapter.PalSquareAdapter;
 import com.example.lemonbily.model.adapter.onRecyclerViewItemClickListener;
 import com.example.lemonbily.presenter.impl.PalSquarePresenter;
+import com.jeremyliao.im.core.InvokingMessage;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class IPalSquareModelImpl extends BaseModel<PalSquarePresenter>
-        implements IPalSquareModel , onRecyclerViewItemClickListener {
+        implements IPalSquareModel, onRecyclerViewItemClickListener {
 
     PalSquareAdapter palSquareAdapter;
 
@@ -31,16 +36,15 @@ public class IPalSquareModelImpl extends BaseModel<PalSquarePresenter>
     }
 
     public PalSquareAdapter produceAdapter(Context context) {
-        List<UIBeans> test = new ArrayList<>();
-        test.add(new UIBeans(11, null));
-        test.add(new UIBeans(11, null));
-        test.add(new UIBeans(11, null));
-        test.add(new UIBeans(11, null));
-        test.add(new UIBeans(11, null));
-        test.add(new UIBeans(11, null));
-        test.add(new UIBeans(11, null));
-        test.add(new UIBeans(11, null));
-        test.add(new UIBeans(11, null));
+        List<PalSquareBean> test = new ArrayList<>();
+        test.add(new PalSquareBean());
+        test.add(new PalSquareBean());
+        test.add(new PalSquareBean());
+        test.add(new PalSquareBean());
+        test.add(new PalSquareBean());
+        test.add(new PalSquareBean());
+        test.add(new PalSquareBean());
+        test.add(new PalSquareBean());
         palSquareAdapter = new PalSquareAdapter(context, test);
         PalSquareAdapter.setItemClickListener(this);
         return palSquareAdapter;
@@ -48,12 +52,12 @@ public class IPalSquareModelImpl extends BaseModel<PalSquarePresenter>
 
     @Override
     public void initObservers(LifecycleOwner owner) {
-
+        registerInitPalDataObserver(owner);
     }
 
     @Override
     public void initErrorObservers(LifecycleOwner owner) {
-
+        registerPalErrorBusObserver(owner);
     }
 
 
@@ -101,5 +105,42 @@ public class IPalSquareModelImpl extends BaseModel<PalSquarePresenter>
     @Override
     public void onLongItemClick(RecyclerView.ViewHolder vh, @NonNull View v, int position) {
 
+    }
+
+    /* 注册数据总线事件监听 */
+    private void registerInitPalDataObserver(LifecycleOwner owner) {
+        InvokingMessage.get().as(EventsDefineAsPalSquareEvents.class)
+                .LOAD_PAL_DATA()
+                .observe(owner, new Observer<JsonResponse>() {
+                    @Override
+                    public void onChanged(@Nullable JsonResponse jsonResponse) {
+                        if (null == jsonResponse) {
+                            getPresenter().sendErrorMsg("获取Video出错，请稍后重试",
+                                    Toast.LENGTH_SHORT);
+                        } else {
+                            if (jsonResponse.getCode() == 0) {
+                                getPresenter().initPalDataSuccess();
+                            } else {
+                                getPresenter().sendErrorMsg(jsonResponse.getCode() + " : "
+                                        + jsonResponse.getMsg(), Toast.LENGTH_SHORT);
+                                getPresenter().initPalDataFail();
+                            }
+                        }
+
+                    }
+                });
+    }
+
+    private void registerPalErrorBusObserver(LifecycleOwner owner) {
+        InvokingMessage.get().as(EventsDefineAsPalSquareEvents.class)
+                .LOAD_PAL_DATA_ERROR()
+                .observe(owner, new Observer<String>() {
+                    @Override
+                    public void onChanged(@Nullable String s) {
+                        if (getPresenter() != null) {
+                            getPresenter().sendErrorMsg(s, Toast.LENGTH_SHORT);
+                        }
+                    }
+                });
     }
 }
