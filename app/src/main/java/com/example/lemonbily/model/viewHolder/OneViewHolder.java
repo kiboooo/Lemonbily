@@ -47,14 +47,14 @@ public class OneViewHolder extends RecyclerView.ViewHolder
     @Override
     public void onClick(View view) {
         if (listener != null) {
-            listener.onItemClick(this, view, getLayoutPosition());
+            listener.onItemClick(this, view, getAdapterPosition());
         }
     }
 
     @Override
     public boolean onLongClick(View view) {
         if (listener != null) {
-            listener.onLongItemClick(this, view, getLayoutPosition());
+            listener.onLongItemClick(this, view, getAdapterPosition());
             return true;
         }
         return false;

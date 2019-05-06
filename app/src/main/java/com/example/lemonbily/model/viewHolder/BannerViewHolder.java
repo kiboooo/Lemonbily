@@ -92,14 +92,14 @@ public class BannerViewHolder extends RecyclerView.ViewHolder
     @Override
     public void onClick(View view) {
         if (itemClickListener != null) {
-            itemClickListener.onItemClick(this,view, getLayoutPosition());
+            itemClickListener.onItemClick(this,view, getAdapterPosition());
         }
     }
 
     @Override
     public boolean onLongClick(View view) {
         if (itemClickListener != null) {
-            itemClickListener.onLongItemClick(this, view, getLayoutPosition());
+            itemClickListener.onLongItemClick(this, view, getAdapterPosition());
             return true;
         }
         return false;

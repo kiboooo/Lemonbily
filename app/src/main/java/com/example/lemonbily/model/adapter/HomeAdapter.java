@@ -153,14 +153,14 @@ public class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     public static class EmptyViewHolder extends RecyclerView.ViewHolder {
 
-        public EmptyViewHolder(@NonNull View itemView) {
+        EmptyViewHolder(@NonNull View itemView) {
             super(itemView);
         }
     }
 
     static class FootViewHolder extends RecyclerView.ViewHolder {
 
-        public FootViewHolder(@NonNull View itemView) {
+        FootViewHolder(@NonNull View itemView) {
             super(itemView);
         }
     }
