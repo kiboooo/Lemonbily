@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Toast;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.example.basemodule.bean.Buddy;
 import com.example.basemodule.bean.JsonResponse;
 import com.example.basemodule.bean.Like;
@@ -71,12 +72,12 @@ public class IPalSquareModelImpl extends BaseModel<PalSquarePresenter>
                 case R.id.square_attention:
                     doAttention(position);
                     break;
-                case R.id.square_like_icon:
+                case R.id.square_detail_like_icon:
                     //修改该Item对应的数据中是否点赞的信息
                     doLike(position);//执行点赞操作；
                     break;
-                case R.id.square_conment_icon:
-                    toPalDetailPage();
+                case R.id.square_detail_conment_icon:
+                    toPalDetailPage(position);
                     break;
                 default:
                     break;
@@ -130,8 +131,12 @@ public class IPalSquareModelImpl extends BaseModel<PalSquarePresenter>
         }
     }
 
-    private void toPalDetailPage() {
+    private void toPalDetailPage(int position) {
         getPresenter().showToast("点击了 评论", Toast.LENGTH_SHORT);
+        ARouter.getInstance()
+                .build("/Lemonbily/CommentActivty")
+                .withSerializable("psb", palSquareAdapter.getPalSquareBean(position))
+                .navigation();
     }
 
     private void toUserDetailPage() {

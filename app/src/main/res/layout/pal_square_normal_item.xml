@@ -71,25 +71,25 @@
             app:layout_constraintTop_toBottomOf="@id/square_gender" />
 
         <ImageView
-            android:id="@+id/square_like_icon"
+            android:id="@+id/square_detail_like_icon"
             android:layout_width="43dp"
             android:layout_height="40dp"
             android:layout_marginTop="10dp"
-            android:background="@drawable/base_lick_icon_select"
+            android:background="@drawable/base_like_icon_select"
             app:layout_constraintHorizontal_chainStyle="spread"
            app:layout_constraintTop_toBottomOf="@id/square_content"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toLeftOf="@id/square_conment_icon"
+            app:layout_constraintRight_toLeftOf="@id/square_detail_conment_icon"
             />
 
         <ImageView
-            android:id="@+id/square_conment_icon"
+            android:id="@+id/square_detail_conment_icon"
             android:layout_width="23dp"
             android:layout_height="20dp"
             android:background="@drawable/base_comment_icon"
-            app:layout_constraintTop_toTopOf="@id/square_like_icon"
-            app:layout_constraintBottom_toBottomOf="@id/square_like_icon"
-            app:layout_constraintLeft_toRightOf="@id/square_like_icon"
+            app:layout_constraintTop_toTopOf="@id/square_detail_like_icon"
+            app:layout_constraintBottom_toBottomOf="@id/square_detail_like_icon"
+            app:layout_constraintLeft_toRightOf="@id/square_detail_like_icon"
             app:layout_constraintRight_toRightOf="parent"
             />
 

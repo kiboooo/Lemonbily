@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    >
+
+    <TextView
+        android:id="@+id/comment_user_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="一个啥地方看来"
+        android:padding="5dp"
+        android:textSize="16sp"
+        android:textColor="@color/base_colorPrimary"
+        android:textStyle="bold"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=":"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="5dp"
+        android:textSize="18sp"
+        android:textColor="@color/base_colorPrimary"
+        android:textStyle="bold"
+        />
+
+    <TextView
+        android:id="@+id/comment_user_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/base_colorPrimary"
+        android:padding="5dp"
+        android:maxLines="3"
+        android:text="dsfhksadlkgfjaslk;djlk;jag;首发式地方gfsdfgsdfgsdfgsdfgdsfg撒旦发射点发大水发射点发射点发射点发;lkjg;lkaj "
+        />
+
+</LinearLayout>

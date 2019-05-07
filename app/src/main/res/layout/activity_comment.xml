@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <include
+        android:id="@+id/comment_activity_title_bar"
+        layout="@layout/base_normal_back_title_bar" />
+
+    <ImageView
+        android:id="@+id/square_detail_avatar"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="70dp"
+        android:layout_marginStart="20dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/square_detail_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginBottom="15dp"
+        android:maxLength="20"
+        android:maxLines="1"
+        android:text="kibos"
+        android:textColor="@color/base_colorPrimary"
+        android:textSize="17sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@id/square_detail_avatar"
+        app:layout_constraintLeft_toRightOf="@id/square_detail_avatar"
+        app:layout_constraintTop_toTopOf="@id/square_detail_avatar" />
+
+    <ImageView
+        android:id="@+id/square_detail_gender"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:src="@drawable/pal_gender_select"
+        app:layout_constraintLeft_toLeftOf="@id/square_detail_name"
+        app:layout_constraintTop_toBottomOf="@id/square_detail_name" />
+
+    <TextView
+        android:id="@+id/comment_detail_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="20dp"
+        android:text="关于FragmentStatePagerAdapter"
+        android:padding="10dp"
+        android:maxLines="10"
+        android:minHeight="100dp"
+        android:textColor="@color/base_colorPrimary"
+        android:textSize="16sp"
+        android:background="@drawable/pal_square_attention_unback"
+        app:layout_constraintTop_toBottomOf="@id/square_detail_gender"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        />
+
+    <ImageView
+        android:id="@+id/square_detail_like_icon"
+        android:layout_width="43dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/base_like_icon_select"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintTop_toBottomOf="@id/comment_detail_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/base_colorWeakPoint"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="15dp"
+        app:layout_constraintTop_toBottomOf="@id/square_detail_like_icon"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        />
+
+    <ImageView
+        android:id="@+id/detail_like_icon"
+        android:layout_width="20dp"
+        android:layout_height="18dp"
+        android:background="@drawable/base_like_icon_2"
+        android:layout_marginTop="30dp"
+        android:layout_marginStart="30dp"
+        app:layout_constraintTop_toBottomOf="@id/square_detail_like_icon"
+        app:layout_constraintLeft_toLeftOf="parent"
+        />
+
+    <TextView
+        android:id="@+id/detail_like_number"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:textColor="@color/base_colorAccent"
+        android:text="255 个赞"
+        android:textStyle="bold"
+        android:layout_marginStart="10dp"
+        app:layout_constraintTop_toTopOf="@id/detail_like_icon"
+        app:layout_constraintLeft_toRightOf="@id/detail_like_icon"
+        app:layout_constraintBottom_toBottomOf="@id/detail_like_icon"
+        />
+
+    <ImageView
+        android:id="@+id/detail_comment_icon"
+        android:layout_width="20dp"
+        android:layout_height="18dp"
+        android:background="@drawable/base_comment_icon_2"
+        android:layout_marginTop="15dp"
+        android:layout_marginStart="30dp"
+        app:layout_constraintTop_toBottomOf="@id/detail_like_icon"
+        app:layout_constraintLeft_toLeftOf="parent"
+        />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/detail_comment_recycler"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="30dp"
+        app:layout_constraintTop_toTopOf="@id/detail_comment_icon"
+        app:layout_constraintLeft_toRightOf="@id/detail_comment_icon"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/comment_detail_push"
+        >
+
+    </android.support.v7.widget.RecyclerView>
+
+    <EditText
+        android:id="@+id/comment_detail_push"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:maxLength="100"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/comment_detail_push_btn"
+        />
+
+    <Button
+        android:id="@+id/comment_detail_push_btn"
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
+        android:text="发送"
+        android:background="@color/base_colorBackground"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        />
+
+
+</android.support.constraint.ConstraintLayout>

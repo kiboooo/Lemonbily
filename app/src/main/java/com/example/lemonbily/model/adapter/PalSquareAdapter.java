@@ -138,8 +138,8 @@ public class PalSquareAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             genderIcon = itemView.findViewById(R.id.square_gender);
             attentionBtn = itemView.findViewById(R.id.square_attention);
             content = itemView.findViewById(R.id.square_content);
-            likeBtn = itemView.findViewById(R.id.square_like_icon);
-            commentBtn = itemView.findViewById(R.id.square_conment_icon);
+            likeBtn = itemView.findViewById(R.id.square_detail_like_icon);
+            commentBtn = itemView.findViewById(R.id.square_detail_conment_icon);
 
             avatar.setOnClickListener(this);
             attentionBtn.setOnClickListener(this);
@@ -150,15 +150,22 @@ public class PalSquareAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         @Override
         public void onClick(View view) {
             if (itemClickListener != null) {
-                if (view.getId() == R.id.square_like_icon) {
+                if (view.getId() == R.id.square_detail_like_icon) {
                     if (palSquareBeans != null) {
+                        int i ;
                         if (!likeBtn.isSelected()) {
                             likeBtn.setSelected(true);
                             palSquareBeans.get(getAdapterPosition()).setLike(true);
+                            i = 1;
                         }else {
                             likeBtn.setSelected(false);
                             palSquareBeans.get(getAdapterPosition()).setLike(false);
+                            i = -1;
                         }
+                        palSquareBeans.get(getAdapterPosition())
+                                .getPalcircle().setPallicknum(
+                                palSquareBeans.get(getAdapterPosition())
+                                        .getPalcircle().getPallicknum() + i);
                     }
                 }
                 if (view.getId() == R.id.square_attention) {
