@@ -9,24 +9,28 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Toast;
 
+import com.example.basemodule.bean.Buddy;
 import com.example.basemodule.bean.JsonResponse;
+import com.example.basemodule.bean.Like;
 import com.example.basemodule.bean.PalSquareBean;
 import com.example.basemodule.model.BaseModel;
+import com.example.basemodule.utils.LoginStatusUtils;
 import com.example.lemonbily.R;
 import com.example.lemonbily.bus.generated.im.EventsDefineAsPalSquareEvents;
 import com.example.lemonbily.model.IPalSquareModel;
 import com.example.lemonbily.model.adapter.PalSquareAdapter;
 import com.example.lemonbily.model.adapter.onRecyclerViewItemClickListener;
+import com.example.lemonbily.model.net.PalSquareNetServer;
 import com.example.lemonbily.presenter.impl.PalSquarePresenter;
 import com.jeremyliao.im.core.InvokingMessage;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class IPalSquareModelImpl extends BaseModel<PalSquarePresenter>
         implements IPalSquareModel, onRecyclerViewItemClickListener {
 
-    PalSquareAdapter palSquareAdapter;
+    private PalSquareAdapter palSquareAdapter;
+    private List<PalSquareBean> palSquareBeanList;
 
     public IPalSquareModelImpl() {
     }
@@ -36,18 +40,13 @@ public class IPalSquareModelImpl extends BaseModel<PalSquarePresenter>
     }
 
     public PalSquareAdapter produceAdapter(Context context) {
-        List<PalSquareBean> test = new ArrayList<>();
-        test.add(new PalSquareBean());
-        test.add(new PalSquareBean());
-        test.add(new PalSquareBean());
-        test.add(new PalSquareBean());
-        test.add(new PalSquareBean());
-        test.add(new PalSquareBean());
-        test.add(new PalSquareBean());
-        test.add(new PalSquareBean());
-        palSquareAdapter = new PalSquareAdapter(context, test);
-        PalSquareAdapter.setItemClickListener(this);
-        return palSquareAdapter;
+        if (palSquareBeanList != null) {
+            palSquareAdapter = new PalSquareAdapter(context, palSquareBeanList);
+            PalSquareAdapter.setItemClickListener(this);
+            return palSquareAdapter;
+        } else {
+            return null;
+        }
     }
 
     @Override
@@ -70,12 +69,11 @@ public class IPalSquareModelImpl extends BaseModel<PalSquarePresenter>
                     toUserDetailPage();
                     break;
                 case R.id.square_attention:
-                    doAttention();
+                    doAttention(position);
                     break;
                 case R.id.square_like_icon:
                     //修改该Item对应的数据中是否点赞的信息
-
-                    doLike();//执行点赞操作；
+                    doLike(position);//执行点赞操作；
                     break;
                 case R.id.square_conment_icon:
                     toPalDetailPage();
@@ -86,12 +84,50 @@ public class IPalSquareModelImpl extends BaseModel<PalSquarePresenter>
         }
     }
 
-    private void doAttention() {
+    private void doAttention(int position) {
         getPresenter().showToast("点击了关注", Toast.LENGTH_SHORT);
+        //上传关注信息
+        PalSquareBean psb = palSquareAdapter.getPalSquareBean(position);
+        if (psb != null) {
+            int Buddyid;
+            int Userid;
+            if (LoginStatusUtils.mLogin.getId() > psb.getAccount().getAid()) {
+                Buddyid = LoginStatusUtils.mLogin.getId();
+                Userid = psb.getAccount().getAid();
+            } else {
+                Buddyid = psb.getAccount().getAid();
+                Userid = LoginStatusUtils.mLogin.getId();
+            }
+            if (psb.isAttention()) {
+                //关注操作
+                Buddy b = new Buddy();
+                b.setBuddyid(Buddyid);
+                b.setUserid(Userid);
+                PalSquareNetServer.getInstance().doAttentionOperating(b);
+            } else {
+                //取消关注操作
+                PalSquareNetServer.getInstance().doUnAttentionOperating(Userid, Buddyid);
+            }
+        }
     }
 
-    private void doLike() {
+    private void doLike(int position) {
         getPresenter().showToast("点击了点赞", Toast.LENGTH_SHORT);
+        //上传点赞信息
+        PalSquareBean psb = palSquareAdapter.getPalSquareBean(position);
+        if (psb != null) {
+            if (psb.isLike()) {
+                //点赞操作
+                Like l = new Like();
+                l.setLtopalid(psb.getPalcircle().getPalid());
+                l.setLuserid(LoginStatusUtils.mLogin.getId());
+                PalSquareNetServer.getInstance().doLikeOperating(l);
+            } else {
+                //取消点赞操作
+                PalSquareNetServer.getInstance().doUnLikeOperating(
+                        LoginStatusUtils.mLogin.getId(),psb.getPalcircle().getPalid());
+            }
+        }
     }
 
     private void toPalDetailPage() {
@@ -107,19 +143,32 @@ public class IPalSquareModelImpl extends BaseModel<PalSquarePresenter>
 
     }
 
+    public void notifyRecyclerViewBindData() {
+        if (palSquareBeanList != null) {
+            palSquareAdapter.updateDataList(palSquareBeanList);
+        }
+    }
+
     /* 注册数据总线事件监听 */
     private void registerInitPalDataObserver(LifecycleOwner owner) {
         InvokingMessage.get().as(EventsDefineAsPalSquareEvents.class)
-                .LOAD_PAL_DATA()
+                .LOAD_PAL_SQUARE_DATA()
                 .observe(owner, new Observer<JsonResponse>() {
                     @Override
                     public void onChanged(@Nullable JsonResponse jsonResponse) {
                         if (null == jsonResponse) {
-                            getPresenter().sendErrorMsg("获取Video出错，请稍后重试",
+                            getPresenter().sendErrorMsg("获取PalData出错，请稍后重试",
                                     Toast.LENGTH_SHORT);
                         } else {
                             if (jsonResponse.getCode() == 0) {
-                                getPresenter().initPalDataSuccess();
+                                if (jsonResponse.getData() != null) {
+                                    palSquareBeanList = (List<PalSquareBean>) jsonResponse.getData();
+                                    getPresenter().initPalDataSuccess();
+                                } else {
+                                    getPresenter().sendErrorMsg("获取PalData为空，请稍后重试",
+                                            Toast.LENGTH_SHORT);
+                                    getPresenter().initPalDataFail();
+                                }
                             } else {
                                 getPresenter().sendErrorMsg(jsonResponse.getCode() + " : "
                                         + jsonResponse.getMsg(), Toast.LENGTH_SHORT);
@@ -133,7 +182,7 @@ public class IPalSquareModelImpl extends BaseModel<PalSquarePresenter>
 
     private void registerPalErrorBusObserver(LifecycleOwner owner) {
         InvokingMessage.get().as(EventsDefineAsPalSquareEvents.class)
-                .LOAD_PAL_DATA_ERROR()
+                .PAL_ERROR()
                 .observe(owner, new Observer<String>() {
                     @Override
                     public void onChanged(@Nullable String s) {

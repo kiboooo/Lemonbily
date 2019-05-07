@@ -8,8 +8,11 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.example.basemodule.utils.LoginStatusUtils;
 import com.example.basemodule.view.BaseFragment;
 import com.example.lemonbily.R;
+import com.example.lemonbily.model.adapter.PalSquareAdapter;
+import com.example.lemonbily.model.net.PalSquareNetServer;
 import com.example.lemonbily.presenter.impl.PalSquarePresenter;
 import com.example.lemonbily.view.ui.IPalSquareView;
 
@@ -24,8 +27,6 @@ public class PalCircleSquareFragment extends BaseFragment<IPalSquareView, PalSqu
 
     @Override
     protected void initFragmentData(Bundle savedInstanceState) {
-        recyclerView.setAdapter(mPresenter.getPalSquareAdapter(getContext()));
-
     }
 
     @Override
@@ -37,7 +38,6 @@ public class PalCircleSquareFragment extends BaseFragment<IPalSquareView, PalSqu
         recyclerView = view.findViewById(R.id.pal_square_recycler_view);
         LinearLayoutManager manager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(manager);
-
     }
 
     @Override
@@ -56,7 +56,10 @@ public class PalCircleSquareFragment extends BaseFragment<IPalSquareView, PalSqu
     //下拉刷新
     @Override
     public void onRefresh() {
-
+        if (LoginStatusUtils.isLogin) {
+            isRefresh = true;
+            PalSquareNetServer.getInstance().loadPalSquareAllData(LoginStatusUtils.mLogin.getId());
+        }
     }
 
     @Override
@@ -66,12 +69,21 @@ public class PalCircleSquareFragment extends BaseFragment<IPalSquareView, PalSqu
 
     @Override
     public void initPalDataSuccess() {
+        if (isRefresh) {
+            mPresenter.notifyRecyclerViewAdapter();
+        } else {
+            PalSquareAdapter adapter = mPresenter.getPalSquareAdapter(getContext());
+            if (adapter != null) {
+                recyclerView.setAdapter(adapter);
+            }
+        }
+        swipeRefreshLayout.setRefreshing(false);
         showToasts("获取成功ssss", Toast.LENGTH_SHORT);
-
     }
 
     @Override
     public void initPalDataFail() {
+        swipeRefreshLayout.setRefreshing(false);
         showToasts("获取失败ssss", Toast.LENGTH_SHORT);
     }
 

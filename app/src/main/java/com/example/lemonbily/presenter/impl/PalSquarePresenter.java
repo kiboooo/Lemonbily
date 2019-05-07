@@ -50,7 +50,7 @@ public class PalSquarePresenter extends BasePresenter<IPalSquareView> implements
     }
 
     @Override
-    public void updateLikeIconState(boolean isSelect) {
-
+    public void notifyRecyclerViewAdapter() {
+        ((IPalSquareModelImpl) getBaseModel()).notifyRecyclerViewBindData();
     }
 }

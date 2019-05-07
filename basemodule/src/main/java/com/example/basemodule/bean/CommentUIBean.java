@@ -1,6 +1,8 @@
 package com.example.basemodule.bean;
 
-public class CommentUIBean {
+import java.io.Serializable;
+
+public class CommentUIBean implements Serializable {
     private Account mAccount;
     private Comment mComment;
 

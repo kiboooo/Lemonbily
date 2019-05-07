@@ -35,7 +35,7 @@ public class PalCircleFragment extends BaseFragment<IPalCircleView, PalCirclePre
     protected void initFragmentData(Bundle savedInstanceState) {
         if (LoginStatusUtils.isLogin) {
             Objects.requireNonNull(tableLayout.getTabAt(0)).select();
-            PalSquareNetServer.getInstance().loadPalCircleAllData();
+            PalSquareNetServer.getInstance().loadPalSquareAllData(LoginStatusUtils.mLogin.getId());
         }
     }
 

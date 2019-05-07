@@ -9,8 +9,12 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.lemonbily.R;
+import com.bumptech.glide.Glide;
 import com.example.basemodule.bean.PalSquareBean;
+import com.example.basemodule.net.NetWorkServer;
+import com.example.basemodule.utils.CommonUtils;
+import com.example.basemodule.utils.LoginStatusUtils;
+import com.example.lemonbily.R;
 
 import java.util.List;
 
@@ -20,7 +24,7 @@ public class PalSquareAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     private static final int NORMAL_VIEW = 444444;
 
     private Context mContext;
-    private List<PalSquareBean> palSquareBeans;
+    private static List<PalSquareBean> palSquareBeans;
     private static onRecyclerViewItemClickListener itemClickListener;
 
     public PalSquareAdapter(Context mContext, List<PalSquareBean> palSquareBeans) {
@@ -39,7 +43,7 @@ public class PalSquareAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         if (i == FOOT_VIEW) {
             view = LayoutInflater.from(viewGroup.getContext())
                     .inflate(R.layout.fragment_home_foot_view, viewGroup, false);
-            new HomeAdapter.FootViewHolder(view);
+           return new HomeAdapter.FootViewHolder(view);
         }
         view = LayoutInflater.from(viewGroup.getContext())
                 .inflate(R.layout.pal_square_normal_item, viewGroup, false);
@@ -49,7 +53,43 @@ public class PalSquareAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
+        if (viewHolder instanceof PalSquareViewHolder) {
+            if (palSquareBeans != null && palSquareBeans.size() > 0) {
+                PalSquareBean psb = palSquareBeans.get(i);
+                if (psb != null) {
+                    PalSquareViewHolder vh = (PalSquareViewHolder) viewHolder;
+                    vh.likeBtn.setSelected(psb.isLike());
+                    if (psb.getAccount().getAid() == LoginStatusUtils.mLogin.getId()) {
+                        vh.attentionBtn.setVisibility(View.INVISIBLE);
+                    } else {
+                        bindAttention(vh.attentionBtn, psb.isAttention());
+                    }
+                    vh.name.setText(psb.getAccount().getAname());
+                    vh.genderIcon.setSelected(psb.getAccount().getAsex() != null
+                            && psb.getAccount().getAsex().equals("w"));
+                    vh.content.setText(psb.getPalcircle().getPalcontent());
+                    Glide.with(mContext)
+                            .load(NetWorkServer.SERVER_URL
+                                    + psb.getAccount().getAavatar())
+                            .apply(CommonUtils.avatarRequestOption())
+                            .into(vh.avatar);
+                }
+            }
+        }
 
+        if (viewHolder instanceof FootViewHolder) {
+
+        }
+    }
+
+    private void bindAttention(TextView attentionBtn, boolean attention) {
+        if (attention) {
+            attentionBtn.setText("已关注");
+            attentionBtn.setSelected(true);
+        }else {
+            attentionBtn.setText("+关注");
+            attentionBtn.setSelected(false);
+        }
     }
 
 
@@ -64,7 +104,19 @@ public class PalSquareAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
     @Override
     public int getItemCount() {
+        if (palSquareBeans == null) {
+            return 0;
+        }
         return palSquareBeans.size() + 1;
+    }
+
+    public void updateDataList(List<PalSquareBean> palSquareBeans) {
+        this.palSquareBeans = palSquareBeans;
+        notifyDataSetChanged();
+    }
+
+    public PalSquareBean getPalSquareBean(int position) {
+        return palSquareBeans.get(position);
     }
 
     public static class PalSquareViewHolder extends RecyclerView.ViewHolder
@@ -99,19 +151,27 @@ public class PalSquareAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         public void onClick(View view) {
             if (itemClickListener != null) {
                 if (view.getId() == R.id.square_like_icon) {
-                    if (!likeBtn.isSelected()) {
-                        likeBtn.setSelected(true);
-                    }else {
-                        likeBtn.setSelected(false);
+                    if (palSquareBeans != null) {
+                        if (!likeBtn.isSelected()) {
+                            likeBtn.setSelected(true);
+                            palSquareBeans.get(getAdapterPosition()).setLike(true);
+                        }else {
+                            likeBtn.setSelected(false);
+                            palSquareBeans.get(getAdapterPosition()).setLike(false);
+                        }
                     }
                 }
                 if (view.getId() == R.id.square_attention) {
-                    if (!attentionBtn.isSelected()) {
-                        attentionBtn.setText("已关注");
-                        attentionBtn.setSelected(true);
-                    }else {
-                        attentionBtn.setText("+关注");
-                        attentionBtn.setSelected(false);
+                    if (palSquareBeans != null) {
+                        if (!attentionBtn.isSelected()) {
+                            attentionBtn.setText("已关注");
+                            attentionBtn.setSelected(true);
+                            palSquareBeans.get(getAdapterPosition()).setAttention(true);
+                        }else {
+                            attentionBtn.setText("+关注");
+                            attentionBtn.setSelected(false);
+                            palSquareBeans.get(getAdapterPosition()).setAttention(false);
+                        }
                     }
                 }
                 itemClickListener.onItemClick(this, view, getAdapterPosition());

@@ -24,7 +24,6 @@ public class MineFragment extends BaseFragment<IMineView, MinePresenter>
         implements IMineView, View.OnClickListener {
 
 
-    //    private ViewStub loginAndRegisterView;
     private FrameLayout loginAndRegisterView;
     private ImageView mineAvaatr;
     private TextView mineAccountName;
@@ -101,7 +100,8 @@ public class MineFragment extends BaseFragment<IMineView, MinePresenter>
         if (LoginStatusUtils.mAccount != null
                 && mineAvaatr!=null && mineAccountName!=null && mineGender!=null ) {
             Glide.with(this)
-                    .load(NetWorkServer.SERVER_URL + LoginStatusUtils.mAccount.getAavatar())
+                    .load(NetWorkServer.SERVER_URL
+                            + LoginStatusUtils.mAccount.getAavatar())
                     .apply(CommonUtils.avatarRequestOption())
                     .into(mineAvaatr);
             mineAccountName.setText(LoginStatusUtils.mAccount.getAname());

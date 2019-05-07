@@ -10,7 +10,22 @@ public class PalSquareEvents {
     @EventType(JsonResponse.class)
     public static final String LOAD_PAL_DATA = "load_pal_data";
 
+    @EventType(JsonResponse.class)
+    public static final String LOAD_PAL_SQUARE_DATA = "load_pal_square_data";
+
     @EventType(String.class)
-    public static final String LOAD_PAL_DATA_ERROR = "load_pal_data_error";
+    public static final String PAL_ERROR = "pal_error";
+
+    @EventType(JsonResponse.class)
+    public static final String DO_LIKE_OPERATION = "do_like_operation";
+
+    @EventType(JsonResponse.class)
+    public static final String DO_UNLIKE_OPERATION = "do_unlike_operation";
+
+    @EventType(JsonResponse.class)
+    public static final String DO_ATTENTION_OPERATION = "do_attention_operation";
+
+    @EventType(JsonResponse.class)
+    public static final String DO_UNATTENTION_OPERATION = "do_unattention_operation";
 
 }

@@ -14,6 +14,6 @@ public interface IPalSquarePressenter {
 
     PalSquareAdapter getPalSquareAdapter(Context context);
 
-    void updateLikeIconState(boolean isSelect);
+    void notifyRecyclerViewAdapter();
 
 }

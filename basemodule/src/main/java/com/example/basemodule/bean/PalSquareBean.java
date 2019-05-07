@@ -1,10 +1,11 @@
 package com.example.basemodule.bean;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class PalSquareBean {
-    private boolean isLike = false;
-    private boolean isAttention = false;
+public class PalSquareBean implements Serializable {
+    private boolean like = false;
+    private boolean attention = false;
 
     private Account account;
     private Palcircle palcircle;
@@ -13,29 +14,28 @@ public class PalSquareBean {
     public PalSquareBean() {
     }
 
-    public PalSquareBean(boolean isLike, boolean isAttention,
-                         Account account, Palcircle palcircle, List<CommentUIBean> commentUIBeans) {
-        this.isLike = isLike;
-        this.isAttention = isAttention;
+    public PalSquareBean(boolean like, boolean attention, Account account, Palcircle palcircle, List<CommentUIBean> commentUIBeans) {
+        this.like = like;
+        this.attention = attention;
         this.account = account;
         this.palcircle = palcircle;
         this.commentUIBeans = commentUIBeans;
     }
 
     public boolean isLike() {
-        return isLike;
+        return like;
     }
 
     public void setLike(boolean like) {
-        isLike = like;
+        this.like = like;
     }
 
     public boolean isAttention() {
-        return isAttention;
+        return attention;
     }
 
     public void setAttention(boolean attention) {
-        isAttention = attention;
+        this.attention = attention;
     }
 
     public Account getAccount() {
