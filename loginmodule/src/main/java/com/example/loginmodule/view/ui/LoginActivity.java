@@ -129,13 +129,13 @@ public class LoginActivity extends BaseActivity<ILoginView, LoginPresenter>
 
     private void toHomeView() {
         //判断是否是外部拉起
-        if (isHomePageEx) {
+//        if (isHomePageEx) {
             ARouter.getInstance().build("/Lemonbily/MainActivity")
                     .withFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                     .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
                     .navigation();
-        }
-        finish();
+//        }
+//        finish();
 
     }
 

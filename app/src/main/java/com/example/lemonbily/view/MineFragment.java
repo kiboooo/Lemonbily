@@ -30,6 +30,7 @@ public class MineFragment extends BaseFragment<IMineView, MinePresenter>
     private ImageView mineGender;
     private TextView mineAttention;
     private TextView mineCollection;
+    TextView loginButton;
 
     @Override
     protected void initFragmentData(Bundle savedInstanceState) {
@@ -49,7 +50,7 @@ public class MineFragment extends BaseFragment<IMineView, MinePresenter>
         mineGender = view.findViewById(R.id.mine_gender);
         mineAttention = view.findViewById(R.id.mine_attention);
         mineCollection = view.findViewById(R.id.mine_collection);
-        TextView loginButton = view.findViewById(R.id.mine_login_button);
+       loginButton = view.findViewById(R.id.mine_login_button);
         if (!LoginStatusUtils.isLogin) {
             // 非登录状态就加载注册登录界面
             loginButton.setOnClickListener(new OnMutiClickListener() {
@@ -74,6 +75,15 @@ public class MineFragment extends BaseFragment<IMineView, MinePresenter>
         super.onStart();
         if (!LoginStatusUtils.isLogin) {
             loginAndRegisterView.setVisibility(View.VISIBLE);
+            loginButton.setOnClickListener(new OnMutiClickListener() {
+                @Override
+                public void onMutiClick(View view) {
+                    ARouter.getInstance()
+                            .build("/LoginModule/LoginActivity")
+                            .withBoolean("exPush", true)
+                            .navigation();
+                }
+            });
         }else {
             loginAndRegisterView.setVisibility(View.GONE);
             bindAccountData();
