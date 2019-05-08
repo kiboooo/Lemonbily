@@ -32,6 +32,13 @@ android {
         }
     }
 
+    //ijkPlayer 接入
+    allprojects {
+        repositories {
+            jcenter()
+        }
+    }
+
     sourceSets{
         main{
             if(rootProject.ext.isApplication){
@@ -67,6 +74,10 @@ dependencies {
     implementation project(":danmakuflamemastermodule") //  danmakuflamemastermodule Module
     implementation project(":publishmodule") //  publish Module
     implementation project(":commentmodule") //  commentmodule Module
+
+    //ijkPlayer 接入
+    implementation 'com.shuyu:GSYVideoPlayer:7.0.1'
+
     // arouter-compiler 的注解依赖需要所有使用 ARouter 的 module 都添加依赖
     annotationProcessor rootProject.ext.dependencies.arouterCompiler
     annotationProcessor rootProject.ext.dependencies.evenMsgCompiler

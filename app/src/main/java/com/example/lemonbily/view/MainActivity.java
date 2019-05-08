@@ -18,7 +18,7 @@ import com.example.basemodule.view.BaseActivity;
 import com.example.lemonbily.R;
 import com.example.lemonbily.presenter.impl.MainPresenter;
 import com.example.lemonbily.view.ui.IMainView;
-import com.example.videoplaymodule.model.net.VideoNetServer;
+import com.example.basemodule.net.VideoNetServer;
 import com.jeremyliao.im.core.InvokingMessage;
 
 @Route(path = "/Lemonbily/MainActivity")

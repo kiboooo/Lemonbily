@@ -6,7 +6,7 @@ package="com.example.videoplaymodule">
         android:label="@string/videoplay_app_name"
         android:supportsRtl="true"
         android:theme="@style/videoplay_AppTheme">
-        <activity android:name=".view.ui.VideoDetailedPageActivity">
+        <activity android:name=".view.VideoDetailedPageActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

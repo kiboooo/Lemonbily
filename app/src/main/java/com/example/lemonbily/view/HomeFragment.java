@@ -12,7 +12,7 @@ import com.example.basemodule.view.BaseFragment;
 import com.example.lemonbily.R;
 import com.example.lemonbily.presenter.impl.HomePresenter;
 import com.example.lemonbily.view.ui.IHomeView;
-import com.example.videoplaymodule.model.net.VideoNetServer;
+import com.example.basemodule.net.VideoNetServer;
 
 @Route(path = "/Lemonbily/HomeFragment")
 public class HomeFragment extends BaseFragment<IHomeView, HomePresenter>

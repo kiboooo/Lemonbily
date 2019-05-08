@@ -1,11 +1,11 @@
-package com.example.videoplaymodule.model.net;
+package com.example.basemodule.net;
 
 import android.util.Log;
 
 import com.example.basemodule.bean.JsonResponse;
 import com.example.basemodule.bean.Video;
-import com.example.basemodule.net.NetWorkServer;
-import com.example.videoplaymodule.bus.generated.im.EventsDefineAsVideoEvents;
+import com.example.basemodule.bus.generated.im.EventsDefineAsVideoEvents;
+import com.example.basemodule.net.path.VideoServer;
 import com.jeremyliao.im.core.InvokingMessage;
 import com.jeremyliao.liveeventbus.LiveEventBus;
 

@@ -1,4 +1,4 @@
-package com.example.videoplaymodule.model.net;
+package com.example.basemodule.net.path;
 
 import com.example.basemodule.bean.JsonResponse;
 import com.example.basemodule.bean.Video;

@@ -12,6 +12,7 @@ import com.alibaba.android.arouter.launcher.ARouter;
 import com.example.basemodule.bean.JsonResponse;
 import com.example.basemodule.bean.UIBeans;
 import com.example.basemodule.bean.Video;
+import com.example.basemodule.bus.generated.im.EventsDefineAsVideoEvents;
 import com.example.basemodule.model.BaseModel;
 import com.example.lemonbily.R;
 import com.example.lemonbily.model.IHomeModel;
@@ -24,7 +25,6 @@ import com.example.lemonbily.model.viewHolder.FourViewHolder;
 import com.example.lemonbily.model.viewHolder.OneViewHolder;
 import com.example.lemonbily.model.viewHolder.TwoViewHolder;
 import com.example.lemonbily.presenter.impl.HomePresenter;
-import com.example.videoplaymodule.bus.generated.im.EventsDefineAsVideoEvents;
 import com.jeremyliao.im.core.InvokingMessage;
 
 import java.util.ArrayList;
