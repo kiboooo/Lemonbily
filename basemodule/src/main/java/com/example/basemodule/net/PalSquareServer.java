@@ -1,4 +1,4 @@
-package com.example.lemonbily.model.net;
+package com.example.basemodule.net;
 
 import com.example.basemodule.bean.Buddy;
 import com.example.basemodule.bean.JsonResponse;

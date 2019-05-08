@@ -1,2 +1,21 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.commentmodule" />
+    package="com.example.commentmodule" >
+
+    <application
+        android:allowBackup="false"
+        android:label="@string/comment_app_name"
+        android:supportsRtl="true"
+        >
+
+        <activity
+            android:name=".view.CommentActivty"
+            android:screenOrientation="portrait"
+            android:exported="true">
+
+        </activity>
+
+
+
+    </application>
+
+</manifest>

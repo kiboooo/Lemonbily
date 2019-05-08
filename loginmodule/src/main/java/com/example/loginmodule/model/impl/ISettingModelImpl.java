@@ -6,10 +6,10 @@ import android.support.annotation.Nullable;
 import android.widget.Toast;
 
 import com.example.basemodule.bean.JsonResponse;
+import com.example.basemodule.bus.generated.im.EventsDefineAsLoginEvents;
+import com.example.basemodule.net.LoginNetServer;
 import com.example.basemodule.utils.LoginStatusUtils;
-import com.example.loginmodule.bus.generated.im.EventsDefineAsLoginEvents;
 import com.example.loginmodule.model.ISettingModel;
-import com.example.loginmodule.model.net.LoginNetServer;
 import com.example.loginmodule.presenter.ISettingPresenter;
 import com.jeremyliao.im.core.InvokingMessage;
 

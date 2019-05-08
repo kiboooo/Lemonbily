@@ -14,14 +14,14 @@ import com.example.basemodule.bean.Buddy;
 import com.example.basemodule.bean.JsonResponse;
 import com.example.basemodule.bean.Like;
 import com.example.basemodule.bean.PalSquareBean;
+import com.example.basemodule.bus.generated.im.EventsDefineAsPalSquareEvents;
 import com.example.basemodule.model.BaseModel;
+import com.example.basemodule.net.PalSquareNetServer;
 import com.example.basemodule.utils.LoginStatusUtils;
 import com.example.lemonbily.R;
-import com.example.lemonbily.bus.generated.im.EventsDefineAsPalSquareEvents;
 import com.example.lemonbily.model.IPalSquareModel;
 import com.example.lemonbily.model.adapter.PalSquareAdapter;
 import com.example.lemonbily.model.adapter.onRecyclerViewItemClickListener;
-import com.example.lemonbily.model.net.PalSquareNetServer;
 import com.example.lemonbily.presenter.impl.PalSquarePresenter;
 import com.jeremyliao.im.core.InvokingMessage;
 
@@ -134,7 +134,7 @@ public class IPalSquareModelImpl extends BaseModel<PalSquarePresenter>
     private void toPalDetailPage(int position) {
         getPresenter().showToast("点击了 评论", Toast.LENGTH_SHORT);
         ARouter.getInstance()
-                .build("/Lemonbily/CommentActivty")
+                .build("/CommentModule/CommentActivity")
                 .withSerializable("psb", palSquareAdapter.getPalSquareBean(position))
                 .navigation();
     }

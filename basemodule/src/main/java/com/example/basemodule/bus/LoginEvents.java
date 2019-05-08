@@ -1,4 +1,4 @@
-package com.example.loginmodule.bus;
+package com.example.basemodule.bus;
 
 import com.example.basemodule.bean.JsonResponse;
 import com.jeremyliao.im.base.annotation.EventType;

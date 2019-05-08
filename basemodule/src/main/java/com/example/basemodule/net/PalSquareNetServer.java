@@ -1,4 +1,4 @@
-package com.example.lemonbily.model.net;
+package com.example.basemodule.net;
 
 import android.util.Log;
 
@@ -7,10 +7,9 @@ import com.example.basemodule.bean.JsonResponse;
 import com.example.basemodule.bean.Like;
 import com.example.basemodule.bean.PalSquareBean;
 import com.example.basemodule.bean.Palcircle;
-import com.example.basemodule.net.NetWorkServer;
+import com.example.basemodule.bus.generated.im.EventsDefineAsLoginEvents;
+import com.example.basemodule.bus.generated.im.EventsDefineAsPalSquareEvents;
 import com.example.basemodule.utils.LoginStatusUtils;
-import com.example.lemonbily.bus.generated.im.EventsDefineAsPalSquareEvents;
-import com.example.loginmodule.bus.generated.im.EventsDefineAsLoginEvents;
 import com.jeremyliao.im.core.InvokingMessage;
 import com.jeremyliao.liveeventbus.LiveEventBus;
 

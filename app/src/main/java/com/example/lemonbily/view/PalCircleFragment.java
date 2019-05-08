@@ -5,15 +5,17 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.example.basemodule.net.PalSquareNetServer;
 import com.example.basemodule.utils.LoginStatusUtils;
 import com.example.basemodule.view.BaseFragment;
 import com.example.lemonbily.R;
 import com.example.lemonbily.model.adapter.PalPagerAdapter;
-import com.example.lemonbily.model.net.PalSquareNetServer;
 import com.example.lemonbily.presenter.impl.PalCirclePresenter;
 import com.example.lemonbily.view.ui.IPalCircleView;
 
@@ -27,6 +29,7 @@ public class PalCircleFragment extends BaseFragment<IPalCircleView, PalCirclePre
 
     private TabLayout tableLayout;
     private ViewPager viewPager;
+    private ImageView publishBtn;
 
     private PalCircleSquareFragment squareFragment;
     private PalCircleMSGFragment msgFragment;
@@ -36,6 +39,12 @@ public class PalCircleFragment extends BaseFragment<IPalCircleView, PalCirclePre
         if (LoginStatusUtils.isLogin) {
             Objects.requireNonNull(tableLayout.getTabAt(0)).select();
             PalSquareNetServer.getInstance().loadPalSquareAllData(LoginStatusUtils.mLogin.getId());
+            publishBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    showToasts("进入动态发表页面", Toast.LENGTH_SHORT);
+                }
+            });
         }
     }
 
@@ -44,12 +53,18 @@ public class PalCircleFragment extends BaseFragment<IPalCircleView, PalCirclePre
         if (LoginStatusUtils.isLogin) {
             tableLayout = view.findViewById(R.id.pal_table_layout);
             viewPager = view.findViewById(R.id.pal_view_pager);
+            publishBtn = view.findViewById(R.id.publishBtn);
             viewPager.setAdapter(new PalPagerAdapter(getFragmentManager(), initChildFragmentList()));
             viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tableLayout));
             tableLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
                 @Override
                 public void onTabSelected(TabLayout.Tab tab) {
                     viewPager.setCurrentItem(tab.getPosition());
+                    if (LoginStatusUtils.isLogin && tab.getPosition() == 0) {
+                        publishBtn.setVisibility(View.VISIBLE);
+                    } else {
+                        publishBtn.setVisibility(View.INVISIBLE);
+                    }
                 }
 
                 @Override

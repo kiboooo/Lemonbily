@@ -12,12 +12,12 @@ import android.widget.ImageView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.example.basemodule.bus.generated.im.EventsDefineAsLoginEvents;
 import com.example.basemodule.utils.LoginStatusUtils;
 import com.example.basemodule.view.BaseActivity;
 import com.example.lemonbily.R;
 import com.example.lemonbily.presenter.impl.MainPresenter;
 import com.example.lemonbily.view.ui.IMainView;
-import com.example.loginmodule.bus.generated.im.EventsDefineAsLoginEvents;
 import com.example.videoplaymodule.model.net.VideoNetServer;
 import com.jeremyliao.im.core.InvokingMessage;
 

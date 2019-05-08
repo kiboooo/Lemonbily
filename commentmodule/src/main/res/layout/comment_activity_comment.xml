@@ -37,7 +37,7 @@
         android:id="@+id/square_detail_gender"
         android:layout_width="20dp"
         android:layout_height="20dp"
-        android:src="@drawable/pal_gender_select"
+        android:src="@drawable/base_pal_gender_select"
         app:layout_constraintLeft_toLeftOf="@id/square_detail_name"
         app:layout_constraintTop_toBottomOf="@id/square_detail_name" />
 
@@ -54,7 +54,7 @@
         android:minHeight="100dp"
         android:textColor="@color/base_colorPrimary"
         android:textSize="16sp"
-        android:background="@drawable/pal_square_attention_unback"
+        android:background="@drawable/base_pal_square_attention_unback"
         app:layout_constraintTop_toBottomOf="@id/square_detail_gender"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"

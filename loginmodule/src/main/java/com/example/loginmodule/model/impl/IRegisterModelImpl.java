@@ -8,11 +8,11 @@ import android.widget.Toast;
 import com.example.basemodule.bean.Account;
 import com.example.basemodule.bean.JsonResponse;
 import com.example.basemodule.bean.Login;
+import com.example.basemodule.bus.generated.im.EventsDefineAsLoginEvents;
+import com.example.basemodule.net.LoginNetServer;
 import com.example.basemodule.utils.CommonUtils;
 import com.example.basemodule.utils.LoginStatusUtils;
-import com.example.loginmodule.bus.generated.im.EventsDefineAsLoginEvents;
 import com.example.loginmodule.model.IRegisterModel;
-import com.example.loginmodule.model.net.LoginNetServer;
 import com.example.loginmodule.presenter.IRegisterPresenter;
 import com.jeremyliao.im.core.InvokingMessage;
 

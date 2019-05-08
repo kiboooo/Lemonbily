@@ -1,11 +1,11 @@
-package com.example.lemonbily.presenter.impl;
+package com.example.commentmodule.presenter;
 
 import android.arch.lifecycle.LifecycleOwner;
 
 import com.example.basemodule.model.IBaseModel;
 import com.example.basemodule.presenter.BasePresenter;
-import com.example.lemonbily.model.impl.CommentModelImpl;
-import com.example.lemonbily.view.ui.ICommentView;
+import com.example.commentmodule.model.impl.CommentModelImpl;
+import com.example.commentmodule.view.ICommentView;
 
 public class CommentPressenter extends BasePresenter<ICommentView> implements ICommentPressenter{
 
@@ -29,5 +29,10 @@ public class CommentPressenter extends BasePresenter<ICommentView> implements IC
     @Override
     public void uploadCommentData(String s) {
         //生成commentData 对象，存放如recyclerView进行假显；接着上传到服务器；
+    }
+
+    @Override
+    public void updateLikeNumber(int pid, int upORdown) {
+        ((CommentModelImpl) getBaseModel()).updateLike(pid, upORdown);
     }
 }

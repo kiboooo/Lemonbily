@@ -64,6 +64,9 @@ dependencies {
     implementation  rootProject.ext.dependencies.supportV7
     implementation  rootProject.ext.dependencies.constraintLayout
     implementation project(":basemodule") // 导入 baseModule
+    implementation project(":danmakuflamemastermodule") //  danmakuflamemastermodule Module
+    implementation project(":publishmodule") //  publish Module
+    implementation project(":commentmodule") //  commentmodule Module
     // arouter-compiler 的注解依赖需要所有使用 ARouter 的 module 都添加依赖
     annotationProcessor rootProject.ext.dependencies.arouterCompiler
     annotationProcessor rootProject.ext.dependencies.evenMsgCompiler
@@ -71,4 +74,5 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+
 }

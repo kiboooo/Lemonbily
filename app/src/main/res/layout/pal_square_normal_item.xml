@@ -39,7 +39,7 @@
             android:id="@+id/square_gender"
             android:layout_width="20dp"
             android:layout_height="20dp"
-            android:src="@drawable/pal_gender_select"
+            android:src="@drawable/base_pal_gender_select"
             app:layout_constraintBottom_toBottomOf="@id/three_guide_line"
             app:layout_constraintLeft_toLeftOf="@id/square_name"
             app:layout_constraintTop_toBottomOf="@id/square_name" />
@@ -84,8 +84,8 @@
 
         <ImageView
             android:id="@+id/square_detail_conment_icon"
-            android:layout_width="23dp"
-            android:layout_height="20dp"
+            android:layout_width="43dp"
+            android:layout_height="40dp"
             android:background="@drawable/base_comment_icon"
             app:layout_constraintTop_toTopOf="@id/square_detail_like_icon"
             app:layout_constraintBottom_toBottomOf="@id/square_detail_like_icon"

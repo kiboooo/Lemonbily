@@ -1,4 +1,4 @@
-package com.example.lemonbily.view;
+package com.example.commentmodule.view;
 
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -22,13 +22,12 @@ import com.example.basemodule.bean.PalSquareBean;
 import com.example.basemodule.net.NetWorkServer;
 import com.example.basemodule.utils.CommonUtils;
 import com.example.basemodule.view.BaseActivity;
-import com.example.lemonbily.R;
-import com.example.lemonbily.presenter.impl.CommentPressenter;
-import com.example.lemonbily.view.ui.ICommentView;
+import com.example.commentmodule.R;
+import com.example.commentmodule.presenter.CommentPressenter;
 
 import java.util.List;
 
-@Route(path = "/Lemonbily/CommentActivty")
+@Route(path = "/CommentModule/CommentActivity")
 public class CommentActivty extends BaseActivity<ICommentView, CommentPressenter>
         implements ICommentView, View.OnClickListener {
 
@@ -51,11 +50,11 @@ public class CommentActivty extends BaseActivity<ICommentView, CommentPressenter
 
     @Override
     public void initView(Bundle savedInstanceState) {
-        setContentView(R.layout.activity_comment);
+        setContentView(R.layout.comment_activity_comment);
         ARouter.getInstance().inject(this);
-        titleDescription = findViewById(com.example.loginmodule.R.id.base_normal_back_title);
+        titleDescription = findViewById(R.id.base_normal_back_title);
         titleDescription.setText("动态详情页");
-        backBtn = findViewById(com.example.loginmodule.R.id.base_normal_title_back_btn);
+        backBtn = findViewById(R.id.base_normal_title_back_btn);
         content = findViewById(R.id.comment_detail_content);
         avatar = findViewById(R.id.square_detail_avatar);
         gender = findViewById(R.id.square_detail_gender);
@@ -144,33 +143,28 @@ public class CommentActivty extends BaseActivity<ICommentView, CommentPressenter
     @Override
     public void onClick(View view) {
         int id = view.getId();
-        switch (id) {
-            case R.id.square_detail_like_icon:
-                int i;
-                if (!likeBtn.isSelected()) {
-                    likeBtn.setSelected(true);
-                    psb.setLike(true);
-                    i = 1;
-                }else {
-                    likeBtn.setSelected(false);
-                    psb.setLike(false);
-                    i = -1;
-                }
-                psb.getPalcircle().setPallicknum(psb.getPalcircle().getPallicknum() + i);
-                //更新点赞结果
-//                updateLikeNumber(psb.getPalcircle().getPalid(), i);
-                likeNumContent.setVisibility(View.VISIBLE);
-                likeNumContent.setText(psb.getPalcircle().getPallicknum() + " 个赞");
-                break;
+        if (id == R.id.square_detail_like_icon) {
+            int i;
+            if (!likeBtn.isSelected()) {
+                likeBtn.setSelected(true);
+                psb.setLike(true);
+                i = 1;
+            }else {
+                likeBtn.setSelected(false);
+                psb.setLike(false);
+                i = -1;
+            }
+            psb.getPalcircle().setPallicknum(psb.getPalcircle().getPallicknum() + i);
+            //更新点赞结果
+            mPresenter.updateLikeNumber(psb.getPalcircle().getPalid(), i);
+            likeNumContent.setVisibility(View.VISIBLE);
+            likeNumContent.setText(psb.getPalcircle().getPallicknum() + " 个赞");
+        }
 
-            case R.id.comment_detail_push_btn:
-                //发送到RecycylerView 中进行假显
-                Toast.makeText(this, commentPush.getText().toString(), Toast.LENGTH_SHORT).show();
-                mPresenter.uploadCommentData(commentPush.getText().toString());
-                break;
-
-            default:
-                break;
+        if (id == R.id.comment_detail_push_btn) {
+            //发送到RecycylerView 中进行假显
+            Toast.makeText(this, commentPush.getText().toString(), Toast.LENGTH_SHORT).show();
+            mPresenter.uploadCommentData(commentPush.getText().toString());
         }
     }
 

@@ -5,10 +5,10 @@ import android.arch.lifecycle.Observer;
 import android.support.annotation.Nullable;
 import android.widget.Toast;
 
+import com.example.basemodule.bus.generated.im.EventsDefineAsLoginEvents;
 import com.example.basemodule.model.BaseModel;
 import com.example.basemodule.model.IBaseModel;
 import com.example.basemodule.presenter.IBasePresenter;
-import com.example.loginmodule.bus.generated.im.EventsDefineAsLoginEvents;
 import com.jeremyliao.im.core.InvokingMessage;
 
 public abstract class LoginBaseModel<T extends IBasePresenter> extends BaseModel<T> implements IBaseModel {

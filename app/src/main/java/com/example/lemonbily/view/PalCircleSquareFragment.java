@@ -12,7 +12,7 @@ import com.example.basemodule.utils.LoginStatusUtils;
 import com.example.basemodule.view.BaseFragment;
 import com.example.lemonbily.R;
 import com.example.lemonbily.model.adapter.PalSquareAdapter;
-import com.example.lemonbily.model.net.PalSquareNetServer;
+import com.example.basemodule.net.PalSquareNetServer;
 import com.example.lemonbily.presenter.impl.PalSquarePresenter;
 import com.example.lemonbily.view.ui.IPalSquareView;
 

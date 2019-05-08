@@ -1,4 +1,4 @@
-package com.example.loginmodule.model.net;
+package com.example.basemodule.net;
 
 import com.example.basemodule.bean.Account;
 import com.example.basemodule.bean.JsonResponse;

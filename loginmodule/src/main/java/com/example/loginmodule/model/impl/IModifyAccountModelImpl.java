@@ -7,10 +7,10 @@ import android.widget.Toast;
 
 import com.example.basemodule.bean.Account;
 import com.example.basemodule.bean.JsonResponse;
+import com.example.basemodule.bus.generated.im.EventsDefineAsLoginEvents;
+import com.example.basemodule.net.LoginNetServer;
 import com.example.basemodule.utils.LoginStatusUtils;
-import com.example.loginmodule.bus.generated.im.EventsDefineAsLoginEvents;
 import com.example.loginmodule.model.IModifyAccountModel;
-import com.example.loginmodule.model.net.LoginNetServer;
 import com.example.loginmodule.presenter.IModifyAccountPresenter;
 import com.jeremyliao.im.core.InvokingMessage;
 

@@ -7,12 +7,12 @@ import android.widget.Toast;
 
 import com.example.basemodule.bean.Account;
 import com.example.basemodule.bean.JsonResponse;
+import com.example.basemodule.bus.generated.im.EventsDefineAsLoginEvents;
 import com.example.basemodule.model.BaseModel;
+import com.example.basemodule.net.LoginNetServer;
 import com.example.basemodule.utils.LoginStatusUtils;
 import com.example.lemonbily.model.IMineModel;
 import com.example.lemonbily.presenter.impl.MinePresenter;
-import com.example.loginmodule.bus.generated.im.EventsDefineAsLoginEvents;
-import com.example.loginmodule.model.net.LoginNetServer;
 import com.jeremyliao.im.core.InvokingMessage;
 
 public class IMineModelImpl extends BaseModel<MinePresenter> implements IMineModel {
