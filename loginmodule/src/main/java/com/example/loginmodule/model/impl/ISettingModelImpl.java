@@ -9,6 +9,7 @@ import com.example.basemodule.bean.JsonResponse;
 import com.example.basemodule.bus.generated.im.EventsDefineAsLoginEvents;
 import com.example.basemodule.net.LoginNetServer;
 import com.example.basemodule.utils.LoginStatusUtils;
+import com.example.basemodule.utils.PalSquareUtils;
 import com.example.loginmodule.model.ISettingModel;
 import com.example.loginmodule.presenter.ISettingPresenter;
 import com.jeremyliao.im.core.InvokingMessage;
@@ -48,6 +49,7 @@ public class ISettingModelImpl  extends LoginBaseModel<ISettingPresenter> implem
                                 LoginStatusUtils.token = "";
                                 LoginStatusUtils.mLogin = null;
                                 LoginStatusUtils.mAccount = null;
+                                PalSquareUtils.palSquareBeans = null;
                                 InvokingMessage.get()
                                         .as(EventsDefineAsLoginEvents.class)
                                         .LOGOUT_SUCCESS_EVENT().post(null);

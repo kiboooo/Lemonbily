@@ -17,15 +17,14 @@ import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.bumptech.glide.Glide;
-import com.example.basemodule.bean.CommentUIBean;
 import com.example.basemodule.bean.PalSquareBean;
 import com.example.basemodule.net.NetWorkServer;
 import com.example.basemodule.utils.CommonUtils;
+import com.example.basemodule.utils.PalSquareUtils;
 import com.example.basemodule.view.BaseActivity;
 import com.example.commentmodule.R;
-import com.example.commentmodule.presenter.CommentPressenter;
-
-import java.util.List;
+import com.example.commentmodule.presenter.impl.CommentPressenter;
+import com.example.commentmodule.view.ui.ICommentView;
 
 @Route(path = "/CommentModule/CommentActivity")
 public class CommentActivty extends BaseActivity<ICommentView, CommentPressenter>
@@ -43,10 +42,8 @@ public class CommentActivty extends BaseActivity<ICommentView, CommentPressenter
     Button pushBtn;
     RecyclerView commentListRecyclerView;
 
-    private List<CommentUIBean> commentUIBeanList = null;
-
-    @Autowired
-    PalSquareBean psb;
+    @Autowired(name = "position")
+    int curPosition;
 
     @Override
     public void initView(Bundle savedInstanceState) {
@@ -80,6 +77,7 @@ public class CommentActivty extends BaseActivity<ICommentView, CommentPressenter
 
     @Override
     protected void initBinding() {
+        PalSquareBean psb = PalSquareUtils.palSquareBeans.get(curPosition);
         if (psb != null) {
             Glide.with(this)
                     .load(NetWorkServer.SERVER_URL
@@ -96,11 +94,7 @@ public class CommentActivty extends BaseActivity<ICommentView, CommentPressenter
             } else {
                 likeNumContent.setVisibility(View.INVISIBLE);
             }
-            if (psb.getCommentUIBeans() != null && psb.getCommentUIBeans().size() > 0) {
-                commentUIBeanList = psb.getCommentUIBeans();
-                //adapter bindData(commentUIBeanList);
-//                commentListRecyclerView.setAdapter(adapter);
-            }
+            commentListRecyclerView.setAdapter(mPresenter.produceCommentAdapter(curPosition));
         }
     }
 
@@ -143,18 +137,20 @@ public class CommentActivty extends BaseActivity<ICommentView, CommentPressenter
     @Override
     public void onClick(View view) {
         int id = view.getId();
+        PalSquareBean psb = PalSquareUtils.palSquareBeans.get(curPosition);
         if (id == R.id.square_detail_like_icon) {
             int i;
             if (!likeBtn.isSelected()) {
                 likeBtn.setSelected(true);
-                psb.setLike(true);
+                PalSquareUtils.palSquareBeans.get(curPosition).setLike(true);
                 i = 1;
             }else {
                 likeBtn.setSelected(false);
-                psb.setLike(false);
+                PalSquareUtils.palSquareBeans.get(curPosition).setLike(false);
                 i = -1;
             }
-            psb.getPalcircle().setPallicknum(psb.getPalcircle().getPallicknum() + i);
+            PalSquareUtils.palSquareBeans.get(curPosition)
+                    .getPalcircle().setPallicknum(psb.getPalcircle().getPallicknum() + i);
             //更新点赞结果
             mPresenter.updateLikeNumber(psb.getPalcircle().getPalid(), i);
             likeNumContent.setVisibility(View.VISIBLE);
@@ -164,13 +160,28 @@ public class CommentActivty extends BaseActivity<ICommentView, CommentPressenter
         if (id == R.id.comment_detail_push_btn) {
             //发送到RecycylerView 中进行假显
             Toast.makeText(this, commentPush.getText().toString(), Toast.LENGTH_SHORT).show();
-            mPresenter.uploadCommentData(commentPush.getText().toString());
+            mPresenter.uploadCommentData(commentPush.getText().toString(), psb.getPalcircle().getPalid());
         }
     }
 
     @Override
     public void showToast(String msg, int state) {
         showToasts(msg, state);
+    }
+
+    @Override
+    public void commentPublishSuccess() {
+        commentPushChangeFocus();
+    }
+
+    private void commentPushChangeFocus() {
+        commentPush.setText("");
+        commentPush.clearFocus();
+    }
+
+    @Override
+    public void commentPublishFail() {
+
     }
 
 }

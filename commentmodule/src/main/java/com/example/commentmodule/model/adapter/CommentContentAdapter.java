@@ -8,19 +8,23 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.basemodule.bean.CommentUIBean;
+import com.example.basemodule.utils.PalSquareUtils;
 import com.example.commentmodule.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CommentContentAdapter extends RecyclerView.Adapter<CommentContentAdapter.CommentContentViewHoder> {
 
-    private List<CommentUIBean> commentUIBeanList;
+    private int curPosition;
+
 
     public CommentContentAdapter() {
     }
 
-    public CommentContentAdapter(List<CommentUIBean> commentUIBeanList) {
-        this.commentUIBeanList = commentUIBeanList;
+
+    public CommentContentAdapter(int curPosition) {
+        this.curPosition = curPosition;
     }
 
     @NonNull
@@ -33,6 +37,8 @@ public class CommentContentAdapter extends RecyclerView.Adapter<CommentContentAd
 
     @Override
     public void onBindViewHolder(@NonNull CommentContentViewHoder vh, int i) {
+       List<CommentUIBean> commentUIBeanList
+               = PalSquareUtils.palSquareBeans.get(curPosition).getCommentUIBeans();
         if (commentUIBeanList != null && commentUIBeanList.size() > 0) {
             vh.comName.setText(commentUIBeanList.get(i).getmAccount().getAname());
             vh.comContent.setText(commentUIBeanList.get(i).getmComment().getComcontent());
@@ -41,17 +47,23 @@ public class CommentContentAdapter extends RecyclerView.Adapter<CommentContentAd
 
     @Override
     public int getItemCount() {
-        return commentUIBeanList == null ? 0 : commentUIBeanList.size();
+        return PalSquareUtils.palSquareBeans.get(curPosition).getCommentUIBeans() == null ?
+                0 : PalSquareUtils.palSquareBeans.get(curPosition).getCommentUIBeans().size();
     }
 
     public void addItem(int position, CommentUIBean commentUIBean) {
-        commentUIBeanList.add(position,commentUIBean );
+        if (PalSquareUtils.palSquareBeans.get(curPosition).getCommentUIBeans() == null) {
+            PalSquareUtils.palSquareBeans.get(curPosition).setCommentUIBeans(new ArrayList<CommentUIBean>());
+        }
+        PalSquareUtils.palSquareBeans.get(curPosition).getCommentUIBeans().add(position,commentUIBean );
         notifyItemInserted(position);
     }
 
     public void removeItem(int position){
-        commentUIBeanList.remove(position);
-        notifyItemRemoved(position);
+        if (PalSquareUtils.palSquareBeans.get(curPosition).getCommentUIBeans() != null) {
+            PalSquareUtils.palSquareBeans.get(curPosition).getCommentUIBeans().remove(position);
+            notifyItemRemoved(position);
+        }
     }
 
     static class CommentContentViewHoder extends RecyclerView.ViewHolder {

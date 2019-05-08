@@ -18,6 +18,7 @@ import com.example.basemodule.bus.generated.im.EventsDefineAsPalSquareEvents;
 import com.example.basemodule.model.BaseModel;
 import com.example.basemodule.net.PalSquareNetServer;
 import com.example.basemodule.utils.LoginStatusUtils;
+import com.example.basemodule.utils.PalSquareUtils;
 import com.example.lemonbily.R;
 import com.example.lemonbily.model.IPalSquareModel;
 import com.example.lemonbily.model.adapter.PalSquareAdapter;
@@ -31,7 +32,6 @@ public class IPalSquareModelImpl extends BaseModel<PalSquarePresenter>
         implements IPalSquareModel, onRecyclerViewItemClickListener {
 
     private PalSquareAdapter palSquareAdapter;
-    private List<PalSquareBean> palSquareBeanList;
 
     public IPalSquareModelImpl() {
     }
@@ -41,8 +41,8 @@ public class IPalSquareModelImpl extends BaseModel<PalSquarePresenter>
     }
 
     public PalSquareAdapter produceAdapter(Context context) {
-        if (palSquareBeanList != null) {
-            palSquareAdapter = new PalSquareAdapter(context, palSquareBeanList);
+        if (PalSquareUtils.palSquareBeans != null) {
+            palSquareAdapter = new PalSquareAdapter(context);
             PalSquareAdapter.setItemClickListener(this);
             return palSquareAdapter;
         } else {
@@ -135,7 +135,7 @@ public class IPalSquareModelImpl extends BaseModel<PalSquarePresenter>
         getPresenter().showToast("点击了 评论", Toast.LENGTH_SHORT);
         ARouter.getInstance()
                 .build("/CommentModule/CommentActivity")
-                .withSerializable("psb", palSquareAdapter.getPalSquareBean(position))
+                .withInt("position", position)
                 .navigation();
     }
 
@@ -149,8 +149,8 @@ public class IPalSquareModelImpl extends BaseModel<PalSquarePresenter>
     }
 
     public void notifyRecyclerViewBindData() {
-        if (palSquareBeanList != null) {
-            palSquareAdapter.updateDataList(palSquareBeanList);
+        if (PalSquareUtils.palSquareBeans != null) {
+            palSquareAdapter.updateDataList();
         }
     }
 
@@ -167,7 +167,7 @@ public class IPalSquareModelImpl extends BaseModel<PalSquarePresenter>
                         } else {
                             if (jsonResponse.getCode() == 0) {
                                 if (jsonResponse.getData() != null) {
-                                    palSquareBeanList = (List<PalSquareBean>) jsonResponse.getData();
+                                    PalSquareUtils.palSquareBeans = (List<PalSquareBean>) jsonResponse.getData();
                                     getPresenter().initPalDataSuccess();
                                 } else {
                                     getPresenter().sendErrorMsg("获取PalData为空，请稍后重试",

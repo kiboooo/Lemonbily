@@ -9,6 +9,7 @@ import com.example.basemodule.bean.PalSquareBean;
 import com.example.basemodule.bean.Palcircle;
 import com.example.basemodule.bus.generated.im.EventsDefineAsLoginEvents;
 import com.example.basemodule.bus.generated.im.EventsDefineAsPalSquareEvents;
+import com.example.basemodule.net.path.PalSquareServer;
 import com.example.basemodule.utils.LoginStatusUtils;
 import com.jeremyliao.im.core.InvokingMessage;
 import com.jeremyliao.liveeventbus.LiveEventBus;

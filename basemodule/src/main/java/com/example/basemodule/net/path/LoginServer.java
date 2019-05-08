@@ -1,4 +1,4 @@
-package com.example.basemodule.net;
+package com.example.basemodule.net.path;
 
 import com.example.basemodule.bean.Account;
 import com.example.basemodule.bean.JsonResponse;
