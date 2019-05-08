@@ -110,6 +110,7 @@ public class IPalSquareModelImpl extends BaseModel<PalSquarePresenter>
                 PalSquareNetServer.getInstance().doUnAttentionOperating(Userid, Buddyid);
             }
         }
+        palSquareAdapter.notifyDataSetChanged();
     }
 
     private void doLike(int position) {

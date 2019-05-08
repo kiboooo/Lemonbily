@@ -56,9 +56,10 @@ public class PalSquareAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                 if (psb != null) {
                     PalSquareViewHolder vh = (PalSquareViewHolder) viewHolder;
                     vh.likeBtn.setSelected(psb.isLike());
-                    if (psb.getAccount().getAid() == LoginStatusUtils.mLogin.getId()) {
+                    if (psb.getAccount().getAid().equals(LoginStatusUtils.mLogin.getId())) {
                         vh.attentionBtn.setVisibility(View.INVISIBLE);
                     } else {
+                        vh.attentionBtn.setVisibility(View.VISIBLE);
                         bindAttention(vh.attentionBtn, psb.isAttention());
                     }
                     vh.name.setText(psb.getAccount().getAname());
@@ -122,6 +123,9 @@ public class PalSquareAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     }
 
     public PalSquareBean getPalSquareBean(int position) {
+        if (position < 0) {
+            return null;
+        }
         return PalSquareUtils.palSquareBeans.get(position);
     }
 
@@ -179,17 +183,29 @@ public class PalSquareAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                         if (!attentionBtn.isSelected()) {
                             attentionBtn.setText("已关注");
                             attentionBtn.setSelected(true);
-                            PalSquareUtils.palSquareBeans.get(getAdapterPosition()).setAttention(true);
+                            attentionOperation(PalSquareUtils.palSquareBeans
+                                    .get(getAdapterPosition()).getAccount().getAid(), true);
                         }else {
                             attentionBtn.setText("+关注");
                             attentionBtn.setSelected(false);
-                            PalSquareUtils.palSquareBeans.get(getAdapterPosition()).setAttention(false);
+                            attentionOperation(PalSquareUtils.palSquareBeans
+                                    .get(getAdapterPosition()).getAccount().getAid(), false);
                         }
                     }
                 }
                 itemClickListener.onItemClick(this, view, getAdapterPosition());
             }
         }
+        private void attentionOperation(int uid, boolean state) {
+            if (PalSquareUtils.palSquareBeans != null) {
+                for (int i = 0; i < PalSquareUtils.palSquareBeans.size(); i++) {
+                    if (PalSquareUtils.palSquareBeans.get(i).getAccount().getAid() == uid) {
+                        PalSquareUtils.palSquareBeans.get(i).setAttention(state);
+                    }
+                }
+            }
+        }
+
 
         @Override
         public boolean onLongClick(View view) {
@@ -199,6 +215,7 @@ public class PalSquareAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             }
             return false;
         }
+
     }
 
     static class FootViewHolder extends RecyclerView.ViewHolder {
