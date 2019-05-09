@@ -74,7 +74,8 @@ dependencies {
     implementation project(":danmakuflamemastermodule") //  danmakuflamemastermodule Module
     implementation project(":publishmodule") //  publish Module
     implementation project(":commentmodule") //  commentmodule Module
-
+    //引入cardView
+    implementation rootProject.ext.dependencies.cardViewCompiler
     //ijkPlayer 接入
     implementation 'com.shuyu:GSYVideoPlayer:6.0.3'
     //引入recyclerView

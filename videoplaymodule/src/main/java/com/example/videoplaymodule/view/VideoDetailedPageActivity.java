@@ -54,6 +54,7 @@ public class VideoDetailedPageActivity
         commentRecycler.setLayoutManager(manager);
         pushEdit = findViewById(R.id.detail_video_edit_push);
         pushBtn = findViewById(R.id.detail_video_push_btn);
+        pushBtn.setEnabled(false);
         player.getTitleTextView().setVisibility(View.GONE);
         player.getBackButton().setVisibility(View.VISIBLE);
     }
@@ -67,6 +68,10 @@ public class VideoDetailedPageActivity
         if (videoData != null) {
             videoName.setText(videoData.getVname());
             videoDescribe.setText(videoData.getVdescribe());
+            RecyclerView.Adapter adapter = mPresenter.produceAdapter(this);
+            if (adapter != null) {
+                commentRecycler.setAdapter(adapter);
+            }
             initVideoBuilderMode();
         }
     }
@@ -91,7 +96,7 @@ public class VideoDetailedPageActivity
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 if (TextUtils.isEmpty(pushEdit.getText())) {
                     pushBtn.setEnabled(false);
-                    pushBtn.setBackground(getDrawable(com.example.commentmodule.R.color.base_colorBackground));
+                    pushBtn.setBackground(getDrawable(com.example.commentmodule.R.drawable.base_loading_backgrand));
                     pushBtn.setTextColor(getColor(com.example.commentmodule.R.color.base_colorWeakPoint));
                 }else {
                     pushBtn.setEnabled(true);
@@ -168,6 +173,16 @@ public class VideoDetailedPageActivity
     @Override
     public void showToat(String msg, int state) {
         showToasts(msg, state);
+    }
+
+    @Override
+    public void initCurrentCommentDataSuccess() {
+
+    }
+
+    @Override
+    public void initCurrentCommentDataFail() {
+
     }
 
 }

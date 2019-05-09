@@ -1,9 +1,91 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:layout_marginStart="8dp"
+    android:layout_marginEnd="8dp"
+    android:layout_marginBottom="8dp"
+    app:cardCornerRadius="5dp"
+    app:cardElevation="5dp">
 
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/base_loading_back">
 
+        <TextView
+            android:id="@+id/detail_comment_floor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="5dp"
+            android:text="#"
+            android:textColor="@color/base_colorPrimary"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-</android.support.constraint.ConstraintLayout>
+        <TextView
+            android:id="@+id/detail_comment_floor_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:text="29 楼"
+            android:textColor="@color/base_loading_image_background"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="@id/detail_comment_floor"
+            app:layout_constraintLeft_toRightOf="@id/detail_comment_floor"
+            app:layout_constraintTop_toTopOf="@id/detail_comment_floor" />
+
+        <TextView
+            android:id="@+id/detail_comment_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="10dp"
+            android:text="2019.5.2"
+            android:textColor="@color/base_loading_image_background"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/detail_comment_avatar"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="10dp"
+            android:background="#FFEB3B"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/detail_comment_floor" />
+
+        <TextView
+            android:id="@+id/detail_comment_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:text="弗兰克经过了"
+            android:textColor="@color/base_colorPrimary"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toRightOf="@id/detail_comment_avatar"
+            app:layout_constraintTop_toTopOf="@id/detail_comment_avatar" />
+
+        <TextView
+            android:id="@+id/detail_comment_content"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginBottom="15dp"
+            android:text="放器、添加旋转外部旋转支持、增加监听。
+            （也可以会直接通过player设置，不用builder）"
+            android:textColor="@color/base_loading_image_background"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="@id/detail_comment_name"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/detail_comment_name" />
+
+    </android.support.constraint.ConstraintLayout>
+</android.support.v7.widget.CardView>

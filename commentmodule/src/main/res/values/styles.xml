@@ -1,0 +1,11 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="comment_AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/videoplay_colorPrimary</item>
+        <item name="colorPrimaryDark">@color/videoplay_colorPrimaryDark</item>
+        <item name="colorAccent">@color/videoplay_colorAccent</item>
+    </style>
+
+</resources>

@@ -1,5 +1,7 @@
 package com.example.basemodule.utils;
 
+import android.icu.text.SimpleDateFormat;
+
 import com.bumptech.glide.request.RequestOptions;
 import com.example.basemodule.R;
 
@@ -11,6 +13,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class CommonUtils {
+
+    public static SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+
     /**
      * 判断是否是手机号
      * 目前已支持的匹配号段
