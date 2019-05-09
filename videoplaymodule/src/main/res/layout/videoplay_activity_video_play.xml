@@ -47,8 +47,8 @@
 
     <ImageView
         android:id="@+id/detail_video_collect_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:layout_marginEnd="10dp"
         android:background="@drawable/base_collect_icon_select"
         app:layout_constraintTop_toTopOf="@id/detail_video_name"
@@ -101,7 +101,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@id/detail_video_push_btn"
-        />
+        android:importantForAutofill="no"
+        android:inputType="text" />
 
     <Button
         android:id="@+id/detail_video_push_btn"
