@@ -8,9 +8,11 @@
         android:supportsRtl="true"
         >
 
+        <!--configChanges ：解决手机屏幕由于横竖切换的时候，导致生命周期回调的问题-->
         <activity
             android:name=".view.VideoDetailedPageActivity"
             android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden|screenSize"
             android:exported="true"
             >
 

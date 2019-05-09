@@ -1,15 +1,116 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
 
-    <TextView
-        android:id="@+id/text_video_detail"
+    <com.shuyu.gsyvideoplayer.video.StandardGSYVideoPlayer
+        android:id="@+id/detail_video_danmaku_player"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:text="视频界面"
-        android:textSize="24sp"
+        android:layout_height="210dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
         />
 
-</LinearLayout>
+    <TextView
+        android:id="@+id/detail_video_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="多开几个分厘卡即使卢卡斯了"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:textColor="@color/base_colorPrimary"
+        android:maxLines="1"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="5dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/detail_video_collect_btn"
+        app:layout_constraintTop_toBottomOf="@id/detail_video_danmaku_player"
+        />
+
+    <TextView
+        android:id="@+id/detail_video_describe"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="《山丘》是由李宗盛作词作曲并演唱的一首歌，收录在李宗盛2013年发行的同名专辑《山丘》中，该曲获得第25届流行音乐“最佳年度歌曲奖”和“最佳单曲等奖项。"
+        android:textColor="@color/base_loading_image_background"
+        android:layout_marginTop="15dp"
+        app:layout_constraintLeft_toLeftOf="@id/detail_video_name"
+        app:layout_constraintRight_toRightOf="@id/detail_video_name"
+        app:layout_constraintTop_toBottomOf="@id/detail_video_name"
+        />
+
+    <ImageView
+        android:id="@+id/detail_video_collect_btn"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginEnd="10dp"
+        android:background="@drawable/base_collect_icon_select"
+        app:layout_constraintTop_toTopOf="@id/detail_video_name"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/detail_video_name"
+        />
+
+    <View
+        android:id="@+id/detail_video_guide_line"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/base_colorWeakPoint"
+        app:layout_constraintTop_toBottomOf="@id/detail_video_describe"
+        />
+
+    <TextView
+        android:id="@+id/detail_video_collect_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="精彩评论"
+        android:textColor="@color/base_colorPrimary"
+        android:layout_marginTop="10dp"
+        app:layout_constraintTop_toBottomOf="@id/detail_video_guide_line"
+        app:layout_constraintLeft_toLeftOf="@id/detail_video_describe"
+        />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/detail_video_comment_recycler"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintTop_toBottomOf="@id/detail_video_collect_title"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/detail_video_edit_push"
+        >
+
+    </android.support.v7.widget.RecyclerView>
+
+    <EditText
+        android:id="@+id/detail_video_edit_push"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:maxLength="100"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/detail_video_push_btn"
+        />
+
+    <Button
+        android:id="@+id/detail_video_push_btn"
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
+        android:text="发送"
+        android:background="@color/base_colorBackground"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        />
+
+
+</android.support.constraint.ConstraintLayout>
