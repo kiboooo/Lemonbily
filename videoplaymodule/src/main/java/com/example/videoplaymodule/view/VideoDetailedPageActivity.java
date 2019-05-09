@@ -16,7 +16,9 @@ import android.widget.Toast;
 import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.bumptech.glide.Glide;
 import com.example.basemodule.bean.Video;
+import com.example.basemodule.net.NetWorkServer;
 import com.example.videoplaymodule.R;
 import com.example.videoplaymodule.presenter.impl.VideoDetailPagePresenter;
 import com.example.videoplaymodule.view.ui.IVedioDetailedPageView;
@@ -65,6 +67,7 @@ public class VideoDetailedPageActivity
         if (videoData != null) {
             videoName.setText(videoData.getVname());
             videoDescribe.setText(videoData.getVdescribe());
+            initVideoBuilderMode();
         }
     }
 
@@ -133,6 +136,22 @@ public class VideoDetailedPageActivity
 
     @Override
     public GSYVideoOptionBuilder getGSYVideoOptionBuilder() {
+        if (videoData != null) {
+            ImageView imageView = new ImageView(this);
+            Glide.with(getApplicationContext())
+                    .load(NetWorkServer.SERVER_URL +videoData.getVpicture())
+                    .into(imageView);
+            return new GSYVideoOptionBuilder()
+                    .setThumbImageView(imageView)
+                    .setUrl(NetWorkServer.SERVER_URL + videoData.getVpath())
+                    .setCacheWithPlay(true)
+                    .setVideoTitle(videoData.getVname())
+                    .setIsTouchWiget(true)
+                    .setRotateViewAuto(false)
+                    .setShowFullAnimation(true)
+                    .setNeedLockFull(true)
+                    .setSeekRatio(5);
+        }
         return null;
     }
 
@@ -143,7 +162,7 @@ public class VideoDetailedPageActivity
 
     @Override
     public boolean getDetailOrientationRotateAuto() {
-        return false;
+        return true;
     }
 
     @Override
