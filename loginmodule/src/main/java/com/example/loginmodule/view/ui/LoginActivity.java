@@ -69,7 +69,7 @@ public class LoginActivity extends BaseActivity<ILoginView, LoginPresenter>
                 String mPhone = phone.getText().toString();
                 String mPass = password.getText().toString();
                 if (mPhone.equals(getResources().getString(R.string.login_phone_hint)) ||
-                        CommonUtils.isTextEmpty(mPhone) || !CommonUtils.isMobile(mPhone)) {
+                        CommonUtils.isTextEmpty(mPhone) || !CommonUtils.isMobilePhone(mPhone)) {
                     phone.setError(getResources().getString(R.string.login_phone_error));
                     return;
                 }

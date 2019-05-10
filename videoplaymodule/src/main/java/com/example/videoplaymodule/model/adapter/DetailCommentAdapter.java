@@ -42,17 +42,21 @@ public class DetailCommentAdapter
     public void onBindViewHolder(@NonNull CommentViewHolder vh, int i) {
         if (uiBeanList != null) {
             CommentUIBean cuib = uiBeanList.get(i);
-            if (cuib != null && cuib.getmAccount() != null && cuib.getmComment() != null) {
-                String fool = String.valueOf((getItemCount() - i + 1)) + " 楼";
+            if (cuib != null  && cuib.getmComment() != null) {
+                String fool = String.valueOf((getItemCount() - i)) + " 楼";
                 vh.floorNum.setText(fool);
-                vh.name.setText(cuib.getmAccount().getAname());
-                vh.time.setText(CommonUtils.simpleDateFormat.format(cuib.getmComment().getComtime()));
+                vh.time.setText(CommonUtils.simpleDateFormat.format(
+                        cuib.getmComment().getComtime() == null ?
+                                System.currentTimeMillis() : cuib.getmComment().getComtime()));
                 vh.content.setText(cuib.getmComment().getComcontent());
-                Glide.with(mContext)
-                        .load(NetWorkServer.SERVER_URL
-                                + cuib.getmAccount().getAavatar())
-                        .apply(CommonUtils.avatarRequestOption())
-                        .into(vh.avatar);
+                if (cuib.getmAccount() != null) {
+                    vh.name.setText(cuib.getmAccount().getAname());
+                    Glide.with(mContext)
+                            .load(NetWorkServer.SERVER_URL
+                                    + cuib.getmAccount().getAavatar())
+                            .apply(CommonUtils.avatarRequestOption())
+                            .into(vh.avatar);
+                }
             }
         }
     }
@@ -65,6 +69,7 @@ public class DetailCommentAdapter
             uiBeanList.add(position, commentUIBean);
         }
         notifyItemInserted(position);
+
     }
 
     public void removeItem(int position) {

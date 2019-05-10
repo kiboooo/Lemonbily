@@ -5,6 +5,7 @@ import android.arch.lifecycle.Observer;
 import android.support.annotation.Nullable;
 import android.widget.Toast;
 
+import com.example.basemodule.bean.Account;
 import com.example.basemodule.bean.JsonResponse;
 import com.example.basemodule.bean.Login;
 import com.example.basemodule.bus.generated.im.EventsDefineAsLoginEvents;
@@ -26,6 +27,7 @@ public class ILoginModelimpl extends LoginBaseModel<ILoginPresenter> implements 
     @Override
     public void initObservers(LifecycleOwner owner) {
         registerLoginEvenObserver(owner);
+        registerInitAccountObserver(owner);
     }
 
     @Override
@@ -34,9 +36,9 @@ public class ILoginModelimpl extends LoginBaseModel<ILoginPresenter> implements 
     }
 
     private void updateUI() {
-        InvokingMessage.get()
-                .as(EventsDefineAsLoginEvents.class).MINE_UI_DATA_UPDATE()
-                .post("update");
+//        InvokingMessage.get()
+//                .as(EventsDefineAsLoginEvents.class).MINE_UI_DATA_UPDATE()
+//                .post("update");
         InvokingMessage.get()
                 .as(EventsDefineAsLoginEvents.class)
                 .LOGIN_SUCCESS_EVENT().post(null);
@@ -59,13 +61,33 @@ public class ILoginModelimpl extends LoginBaseModel<ILoginPresenter> implements 
                                 LoginStatusUtils.token = jsonResponse.getToken();
                                 LoginStatusUtils.mLogin = (Login) jsonResponse.getData();
                                 updateUI();
-                                getPresenter().loginSuccess();
+                                LoginNetServer.getInstance().getAccount(LoginStatusUtils.mLogin.getId());
                             } else {
                                 getPresenter().sendErrorMsg(jsonResponse.getCode()+" : "
                                         +jsonResponse.getMsg(),Toast.LENGTH_SHORT);
                                 getPresenter().loginFail();
                             }
                         }
+
+                    }
+                });
+    }
+
+    private void registerInitAccountObserver(LifecycleOwner owner) {
+        InvokingMessage.get().as(EventsDefineAsLoginEvents.class)
+                .INIT_ACCOUNT_EVENT()
+                .observe(owner, new Observer<JsonResponse>() {
+                    @Override
+                    public void onChanged(@Nullable JsonResponse jsonResponse) {
+                        if (null != jsonResponse) {
+                            if (jsonResponse.getCode() == 0) {
+                                LoginStatusUtils.mAccount = (Account) jsonResponse.getData();
+                                getPresenter().loginSuccess();
+                            } else {
+                                getPresenter().loginFail();
+                            }
+                        }else
+                            getPresenter().loginFail();
 
                     }
                 });

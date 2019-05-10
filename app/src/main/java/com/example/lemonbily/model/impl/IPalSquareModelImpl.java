@@ -14,6 +14,7 @@ import com.example.basemodule.bean.Buddy;
 import com.example.basemodule.bean.JsonResponse;
 import com.example.basemodule.bean.Like;
 import com.example.basemodule.bean.PalSquareBean;
+import com.example.basemodule.bus.generated.im.EventsDefineAsLoginEvents;
 import com.example.basemodule.bus.generated.im.EventsDefineAsPalSquareEvents;
 import com.example.basemodule.model.BaseModel;
 import com.example.basemodule.net.PalSquareNetServer;
@@ -175,6 +176,9 @@ public class IPalSquareModelImpl extends BaseModel<PalSquarePresenter>
                                             Toast.LENGTH_SHORT);
                                     getPresenter().initPalDataFail();
                                 }
+                            }else if(jsonResponse.getCode() == 1004){
+                                InvokingMessage.get().as(EventsDefineAsLoginEvents.class)
+                                        .USER_INACTIVATION().post(null);
                             } else {
                                 getPresenter().sendErrorMsg(jsonResponse.getCode() + " : "
                                         + jsonResponse.getMsg(), Toast.LENGTH_SHORT);

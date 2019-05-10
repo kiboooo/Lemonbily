@@ -1,14 +1,17 @@
 package com.example.basemodule.utils;
 
+import android.content.Context;
 import android.icu.text.SimpleDateFormat;
+import android.support.v7.widget.LinearSmoothScroller;
+import android.support.v7.widget.RecyclerView;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
 
 import com.bumptech.glide.request.RequestOptions;
 import com.example.basemodule.R;
 
 import org.apaches.commons.codec.digest.DigestUtils;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -41,7 +44,7 @@ public class CommonUtils {
 
      */
 
-    public static boolean isMobile(String mobile) {
+    public static boolean isMobilePhone(String mobile) {
         String regex = "^((13[0-9])|(14[5,7])|(15[0-3,5-9])|(17[0,3,5-8])|(18[0-9])|166|198|199|(147))\\d{8}$";
         Pattern p = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
         Matcher m = p.matcher(mobile);
@@ -72,15 +75,16 @@ public class CommonUtils {
                 .fallback(R.drawable.base_image_loading_error_state);
     }
 
-    public static List<String> initBannerList(){
-        List<String> list = new ArrayList<>();
-        list.add("/lemonbily/picture/music_05.jpg");
-        list.add("/lemonbily/picture/movie_01.jpg");
-        list.add("/lemonbily/picture/music_03.jpg");
-        list.add("/lemonbily/picture/music_04.jpg");
-        list.add("/lemonbily/picture/music_02.jpg");
-        return list;
+    //手动隐藏键盘
+    public static void closeSoftKeybord(EditText mEditText, Context mContext) {
+        InputMethodManager imm = (InputMethodManager) mContext.getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(mEditText.getWindowToken(), 0);
     }
 
+    public static void recyclerViewScrollToPostion(Context context, RecyclerView.LayoutManager manager, int position) {
+        LinearSmoothScroller scroller = new TopSmoothScroller(context);
+        scroller.setTargetPosition(position);
+        manager.startSmoothScroll(scroller);
+    }
 
 }

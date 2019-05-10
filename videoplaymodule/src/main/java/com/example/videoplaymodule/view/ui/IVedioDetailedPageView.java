@@ -7,4 +7,10 @@ public interface IVedioDetailedPageView {
     void initCurrentCommentDataSuccess();
 
     void initCurrentCommentDataFail();
+
+    void commentPublishSuccess();
+
+    void commentPublishFail();
+
+    void scrollToPosition(int position);
 }

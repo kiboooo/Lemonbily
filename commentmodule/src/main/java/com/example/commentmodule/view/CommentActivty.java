@@ -161,6 +161,7 @@ public class CommentActivty extends BaseActivity<ICommentView, CommentPressenter
             //发送到RecycylerView 中进行假显
             Toast.makeText(this, commentPush.getText().toString(), Toast.LENGTH_SHORT).show();
             mPresenter.uploadCommentData(commentPush.getText().toString(), psb.getPalcircle().getPalid());
+            CommonUtils.closeSoftKeybord(commentPush, getApplicationContext());
         }
     }
 

@@ -30,13 +30,13 @@
             android:id="@+id/detail_comment_floor_number"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="x 楼"
             android:layout_marginStart="5dp"
-            android:text="29 楼"
             android:textColor="@color/base_loading_image_background"
-            android:textSize="14sp"
-            app:layout_constraintBottom_toBottomOf="@id/detail_comment_floor"
+            android:textSize="12sp"
             app:layout_constraintLeft_toRightOf="@id/detail_comment_floor"
-            app:layout_constraintTop_toTopOf="@id/detail_comment_floor" />
+            app:layout_constraintTop_toTopOf="@id/detail_comment_floor"
+            app:layout_constraintBottom_toBottomOf="@id/detail_comment_floor"/>
 
         <TextView
             android:id="@+id/detail_comment_time"
@@ -45,6 +45,7 @@
             android:layout_marginTop="5dp"
             android:layout_marginEnd="10dp"
             android:text="2019.5.2"
+            android:textSize="12sp"
             android:textColor="@color/base_loading_image_background"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -54,8 +55,7 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_marginStart="15dp"
-            android:layout_marginTop="10dp"
-            android:background="#FFEB3B"
+            android:layout_marginTop="5dp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@id/detail_comment_floor" />
 
@@ -64,11 +64,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
-            android:text="弗兰克经过了"
+            android:text="test"
             android:textColor="@color/base_colorPrimary"
             android:textStyle="bold"
             app:layout_constraintLeft_toRightOf="@id/detail_comment_avatar"
-            app:layout_constraintTop_toTopOf="@id/detail_comment_avatar" />
+            app:layout_constraintTop_toBottomOf="@id/detail_comment_floor_number" />
 
         <TextView
             android:id="@+id/detail_comment_content"

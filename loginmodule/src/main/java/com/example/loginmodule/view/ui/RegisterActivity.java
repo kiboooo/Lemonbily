@@ -118,7 +118,7 @@ public class RegisterActivity extends BaseActivity<IRegisterView, RegisterPresen
     }
 
     private boolean isPhoneError(String inPhone) {
-        return !CommonUtils.isMobile(inPhone);
+        return !CommonUtils.isMobilePhone(inPhone);
     }
 
     private void toRegister(Login login ,String accountName) {

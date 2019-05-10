@@ -35,4 +35,44 @@ public class VideoDetailPagePresenter extends BasePresenter<IVedioDetailedPageVi
     public RecyclerView.Adapter produceAdapter(Context context) {
         return ((VideoDetailedModel) getBaseModel()).produceAdapter(context);
     }
+
+    @Override
+    public void initCurrentCommentDataSuccess() {
+        getView().initCurrentCommentDataSuccess();
+    }
+
+    @Override
+    public void initCurrentCommentDataFail() {
+        getView().initCurrentCommentDataFail();
+    }
+
+    @Override
+    public void commentPublishSuccess() {
+        getView().commentPublishSuccess();
+    }
+
+    @Override
+    public void commentPublishFail() {
+        getView().commentPublishFail();
+    }
+
+    @Override
+    public boolean isCollect() {
+        return ((VideoDetailedModel) getBaseModel()).isCurVideoCollect();
+    }
+
+    @Override
+    public void updateCollectState(Integer vid, int i) {
+        ((VideoDetailedModel) getBaseModel()).updateCollectState(vid, i);
+    }
+
+    @Override
+    public void uploadCommentData(String toString, Integer vid) {
+        ((VideoDetailedModel) getBaseModel()).uploadCommentData(toString, vid);
+    }
+
+    @Override
+    public void scrollToPosition(int position) {
+        getView().scrollToPosition(position);
+    }
 }

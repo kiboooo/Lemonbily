@@ -62,7 +62,6 @@ public class MineFragment extends BaseFragment<IMineView, MinePresenter>
                             .navigation();
                 }
             });
-
         }
         mineSetting.setOnClickListener(this);
         mineAttention.setOnClickListener(this);

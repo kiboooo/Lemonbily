@@ -13,17 +13,17 @@ import android.widget.ImageView;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.example.basemodule.bus.generated.im.EventsDefineAsLoginEvents;
+import com.example.basemodule.net.VideoNetServer;
 import com.example.basemodule.utils.LoginStatusUtils;
 import com.example.basemodule.view.BaseActivity;
 import com.example.lemonbily.R;
 import com.example.lemonbily.presenter.impl.MainPresenter;
 import com.example.lemonbily.view.ui.IMainView;
-import com.example.basemodule.net.VideoNetServer;
 import com.jeremyliao.im.core.InvokingMessage;
 
 @Route(path = "/Lemonbily/MainActivity")
-public class MainActivity extends BaseActivity<IMainView,MainPresenter>
-        implements IMainView,View.OnClickListener {
+public class MainActivity extends BaseActivity<IMainView, MainPresenter>
+        implements IMainView, View.OnClickListener {
 
     private Fragment[] fragments = new Fragment[3];
     private HomeFragment homeFragment;
@@ -41,7 +41,7 @@ public class MainActivity extends BaseActivity<IMainView,MainPresenter>
     protected void initBinding() {
         registerUserLifeEvenObserver(this);
         VideoNetServer.getInstance().loadAllVideoData();
-        palCircleFragment =(PalCircleFragment) ARouter.getInstance()
+        palCircleFragment = (PalCircleFragment) ARouter.getInstance()
                 .build("/Lemonbily/PalCircleFragment")
                 .navigation();
         homeFragment = (HomeFragment) ARouter.getInstance()
@@ -70,7 +70,7 @@ public class MainActivity extends BaseActivity<IMainView,MainPresenter>
 
     @Override
     public MainPresenter initPresenter() {
-        return new MainPresenter(this,this);
+        return new MainPresenter(this, this);
     }
 
     @Override
@@ -153,6 +153,8 @@ public class MainActivity extends BaseActivity<IMainView,MainPresenter>
                     }
                 });
     }
+
+
 
 
 }

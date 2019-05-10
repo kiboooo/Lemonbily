@@ -7,4 +7,10 @@ import com.example.basemodule.model.IBaseModel;
 
 public interface IViewDetailModel extends IBaseModel {
     RecyclerView.Adapter produceAdapter(Context context);
+
+    boolean isCurVideoCollect();
+
+    void updateCollectState(Integer vid, int i);
+
+    void uploadCommentData(String toString, Integer vid);
 }

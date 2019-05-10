@@ -31,7 +31,7 @@ public class IMineModelImpl extends BaseModel<MinePresenter> implements IMineMod
     @Override
     public void initObservers(LifecycleOwner owner) {
         registerInitAccountObserver(owner);
-        registerLoginEvenObserver(owner);
+//        registerLoginEvenObserver(owner);
         modifyAccountObserver(owner);
         modifyAvatarObserver(owner);
     }
@@ -79,25 +79,25 @@ public class IMineModelImpl extends BaseModel<MinePresenter> implements IMineMod
                 });
     }
 
-    //登录事件的观察者
-    private void registerLoginEvenObserver(LifecycleOwner owner) {
-        InvokingMessage.get().as(EventsDefineAsLoginEvents.class)
-                .MINE_UI_DATA_UPDATE()
-                .observe(owner, new Observer<String>() {
-                    @Override
-                    public void onChanged(@Nullable String s) {
-                        if (s != null && s.equals("update")) {
-                            initAccountData(LoginStatusUtils.mLogin.getId());
-                        }
-                    }
-                });
-    }
+//    //登录事件的观察者
+//    private void registerLoginEvenObserver(LifecycleOwner owner) {
+//        InvokingMessage.get().as(EventsDefineAsLoginEvents.class)
+//                .MINE_UI_DATA_UPDATE()
+//                .observe(owner, new Observer<String>() {
+//                    @Override
+//                    public void onChanged(@Nullable String s) {
+//                        if (s != null && s.equals("update")) {
+//                            initAccountData(LoginStatusUtils.mLogin.getId());
+//                        }
+//                    }
+//                });
+//    }
 
     //更新Account事件的观察者
     private void modifyAccountObserver(LifecycleOwner owner) {
         InvokingMessage.get().as(EventsDefineAsLoginEvents.class)
                 .MODIFY_ACCOUNT_EVENT()
-                .observeSticky(owner, new Observer<JsonResponse>() {
+                .observe(owner, new Observer<JsonResponse>() {
                     @Override
                     public void onChanged(@Nullable JsonResponse jsonResponse) {
                         if (null != jsonResponse) {
@@ -114,7 +114,7 @@ public class IMineModelImpl extends BaseModel<MinePresenter> implements IMineMod
     private void modifyAvatarObserver(LifecycleOwner owner) {
         InvokingMessage.get().as(EventsDefineAsLoginEvents.class)
                 .MODIFY_ACCOUNT_AVATAR_EVENT()
-                .observeSticky(owner, new Observer<JsonResponse>() {
+                .observe(owner, new Observer<JsonResponse>() {
                     @Override
                     public void onChanged(@Nullable JsonResponse jsonResponse) {
                         if (null != jsonResponse) {
