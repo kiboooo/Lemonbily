@@ -76,8 +76,10 @@ dependencies {
     implementation project(":commentmodule") //  commentmodule Module
     //引入cardView
     implementation rootProject.ext.dependencies.cardViewCompiler
-    //ijkPlayer 接入
+    //引入播放器
     implementation 'com.shuyu:GSYVideoPlayer:6.0.3'
+    implementation 'com.github.ctiao:DanmakuFlameMaster:0.9.25'
+    implementation 'com.github.ctiao:ndkbitmap-armv7a:0.9.21'
     //引入recyclerView
     implementation rootProject.ext.dependencies.recyclerViewCompiler
     // arouter-compiler 的注解依赖需要所有使用 ARouter 的 module 都添加依赖

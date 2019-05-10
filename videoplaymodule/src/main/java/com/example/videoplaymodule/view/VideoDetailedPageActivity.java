@@ -23,6 +23,7 @@ import com.example.basemodule.net.VideoNetServer;
 import com.example.basemodule.utils.CommonUtils;
 import com.example.basemodule.utils.LoginStatusUtils;
 import com.example.videoplaymodule.R;
+import com.example.videoplaymodule.player.DanmakuVideoPlayer;
 import com.example.videoplaymodule.presenter.impl.VideoDetailPagePresenter;
 import com.example.videoplaymodule.view.ui.IVedioDetailedPageView;
 import com.jeremyliao.im.core.InvokingMessage;
@@ -39,7 +40,8 @@ public class VideoDetailedPageActivity
     private TextView videoName;
     private TextView videoDescribe;
     private ImageView collectIcon;
-    private StandardGSYVideoPlayer player;
+//    private StandardGSYVideoPlayer player;
+    private DanmakuVideoPlayer player;
     private RecyclerView commentRecycler;
     private EditText pushEdit;
     private Button pushBtn;

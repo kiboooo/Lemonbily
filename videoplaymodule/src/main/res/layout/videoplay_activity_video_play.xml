@@ -7,7 +7,7 @@
     android:background="@color/base_detail_video_back"
     >
 
-    <com.shuyu.gsyvideoplayer.video.StandardGSYVideoPlayer
+    <com.example.videoplaymodule.player.DanmakuVideoPlayer
         android:id="@+id/detail_video_danmaku_player"
         android:layout_width="match_parent"
         android:layout_height="210dp"
