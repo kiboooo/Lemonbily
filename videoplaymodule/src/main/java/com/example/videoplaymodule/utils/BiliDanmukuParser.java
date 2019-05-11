@@ -41,6 +41,9 @@ import master.flame.danmaku.danmaku.parser.BaseDanmakuParser;
 import master.flame.danmaku.danmaku.parser.android.AndroidFileSource;
 import master.flame.danmaku.danmaku.util.DanmakuUtils;
 
+/**
+ *  b站弹幕.xml 文件的解析器
+ */
 public class BiliDanmukuParser extends BaseDanmakuParser {
 
     static {
@@ -90,17 +93,19 @@ public class BiliDanmukuParser extends BaseDanmakuParser {
 
         @Override
         public void startDocument() throws SAXException {
-
+            //每处理一个XML文档都会响应一次。所以这个方法里可以写需要初始化的代码
         }
 
         @Override
         public void endDocument() throws SAXException {
+            // 如果当前的XML文档处理完毕后，将会触发该方法，在此方法内你可以将最终的结果保存并且销毁不需要使用的变量
             completed = true;
         }
 
         @Override
         public void startElement(String uri, String localName, String qName, Attributes attributes)
                 throws SAXException {
+            //这是处理每个节点所触发的方法，通过这个方法你可以直接当前处理的节点的名称以及属性
             String tagName = localName.length() != 0 ? localName : qName;
             tagName = tagName.toLowerCase(Locale.getDefault()).trim();
             if (tagName.equals("d")) {
@@ -135,6 +140,7 @@ public class BiliDanmukuParser extends BaseDanmakuParser {
 
         @Override
         public void endElement(String uri, String localName, String qName) throws SAXException {
+            //遇到一个节点的结束标签时，将会触发这个方法，并且会传递结束标签的名称。
             if (item != null && item.text != null) {
                 if (item.duration != null) {
                     String tagName = localName.length() != 0 ? localName : qName;
@@ -153,6 +159,7 @@ public class BiliDanmukuParser extends BaseDanmakuParser {
 
         @Override
         public void characters(char[] ch, int start, int length) {
+            //当处理一个节点之间的文本时候触发该方法，但是该方法并不会告诉你当前文本的所属标签，而仅仅是告诉你文本内容
             if (item != null) {
                 DanmakuUtils.fillText(item, decodeXmlString(new String(ch, start, length)));
                 item.index = index++;

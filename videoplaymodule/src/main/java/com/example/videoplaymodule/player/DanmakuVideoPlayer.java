@@ -2,14 +2,18 @@ package com.example.videoplaymodule.player;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.text.Editable;
+import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
 
 import com.example.videoplaymodule.R;
-import com.example.videoplaymodule.model.adapter.DanamakuAdapter;
 import com.example.videoplaymodule.utils.BiliDanmukuParser;
 import com.shuyu.gsyvideoplayer.utils.Debuger;
 import com.shuyu.gsyvideoplayer.video.StandardGSYVideoPlayer;
@@ -34,7 +38,6 @@ import master.flame.danmaku.danmaku.model.DanmakuTimer;
 import master.flame.danmaku.danmaku.model.IDisplayer;
 import master.flame.danmaku.danmaku.model.android.DanmakuContext;
 import master.flame.danmaku.danmaku.model.android.Danmakus;
-import master.flame.danmaku.danmaku.model.android.SpannedCacheStuffer;
 import master.flame.danmaku.danmaku.parser.BaseDanmakuParser;
 import master.flame.danmaku.danmaku.parser.IDataSource;
 import master.flame.danmaku.ui.widget.DanmakuView;
@@ -56,7 +59,9 @@ public class DanmakuVideoPlayer extends StandardGSYVideoPlayer {
     private IDanmakuView mDanmakuView;//弹幕view
     private DanmakuContext mDanmakuContext;
 
-    private TextView mSendDanmaku, mToogleDanmaku;
+    private ImageView danmmakuSwitch;
+    private EditText danmmakuPush;
+    private Button pushBtn;
 
     private long mDanmakuStartSeekPosition = -1;
 
@@ -86,13 +91,43 @@ public class DanmakuVideoPlayer extends StandardGSYVideoPlayer {
     protected void init(Context context) {
         super.init(context);
         mDanmakuView = (DanmakuView) findViewById(R.id.danmaku_view);
-        mSendDanmaku = (TextView) findViewById(R.id.send_danmaku);
-        mToogleDanmaku = (TextView) findViewById(R.id.toogle_danmaku);
-
+        danmmakuSwitch = findViewById(R.id.danmaku_switch);
+        danmmakuPush = findViewById(R.id.send_danmaku_edit);
+        pushBtn = findViewById(R.id.send_danmaku_btn);
+        pushBtn.setEnabled(false);
         //初始化弹幕显示
         initDanmaku();
-        mSendDanmaku.setOnClickListener(this);
-        mToogleDanmaku.setOnClickListener(this);
+        danmmakuSwitch.setOnClickListener(this);
+        danmmakuPush.setOnClickListener(this);
+        pushBtn.setOnClickListener(this);
+        danmmakuPush.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if (TextUtils.isEmpty(danmmakuPush.getText())) {
+                    pushBtn.setEnabled(false);
+                    pushBtn.setBackground(getContext().getDrawable(
+                            com.example.commentmodule.R.drawable.base_loading_backgrand));
+                    pushBtn.setTextColor(getContext().getColor(
+                            com.example.commentmodule.R.color.base_colorWeakPoint));
+                } else {
+                    pushBtn.setEnabled(true);
+                    pushBtn.setBackground(getContext().getDrawable(
+                            com.example.commentmodule.R.drawable.base_radius2_button));
+                    pushBtn.setTextColor(getContext().getColor(
+                            com.example.commentmodule.R.color.base_colorPrimary));
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
     }
 
     @Override
@@ -101,6 +136,7 @@ public class DanmakuVideoPlayer extends StandardGSYVideoPlayer {
         onPrepareDanmaku(this);
     }
 
+    /*播放器的生命周期处理--开始*/
     @Override
     public void onVideoPause() {
         super.onVideoPause();
@@ -112,6 +148,7 @@ public class DanmakuVideoPlayer extends StandardGSYVideoPlayer {
         super.onVideoResume(isResume);
         danmakuOnResume();
     }
+    /*播放器的生命周期处理--结束*/
 
     @Override
     protected void clickStartIcon() {
@@ -146,13 +183,11 @@ public class DanmakuVideoPlayer extends StandardGSYVideoPlayer {
     public void onClick(View v) {
         super.onClick(v);
         int i = v.getId();
-        if (i == R.id.send_danmaku) {
-            addDanmaku(true);
-
-        } else if (i == R.id.toogle_danmaku) {
+        if (i == R.id.send_danmaku_btn) {
+            addDanmaku(danmmakuPush.getText().toString(), true);
+        } else if (i == R.id.danmaku_switch) {
             mDanmaKuShow = !mDanmaKuShow;
             resolveDanmakuShow();
-
         }
     }
 
@@ -228,13 +263,13 @@ public class DanmakuVideoPlayer extends StandardGSYVideoPlayer {
         overlappingEnablePair.put(BaseDanmaku.TYPE_FIX_TOP, true);
 
         //为了增加图文样式 BaseCacheStuffer.Proxy
-        DanamakuAdapter danamakuAdapter = new DanamakuAdapter(mDanmakuView);
+//        DanamakuAdapter danamakuAdapter = new DanamakuAdapter(mDanmakuView);
         mDanmakuContext = DanmakuContext.create();
         mDanmakuContext.setDanmakuStyle(IDisplayer.DANMAKU_STYLE_STROKEN, 2)
                 .setDuplicateMergingEnabled(false)
                 .setScrollSpeedFactor(1.2f)
                 .setScaleTextSize(1.2f)
-                .setCacheStuffer(new SpannedCacheStuffer(), danamakuAdapter) // 图文混排使用SpannedCacheStuffer
+//                .setCacheStuffer(new SpannedCacheStuffer(), danamakuAdapter) // 图文混排使用SpannedCacheStuffer
                 .setMaximumLines(maxLinesPair)
                 .preventOverlapping(overlappingEnablePair);
         if (mDanmakuView != null) {
@@ -275,6 +310,8 @@ public class DanmakuVideoPlayer extends StandardGSYVideoPlayer {
         }
     }
 
+
+    //解析xml文件
     private InputStream getIsStream(File file) {
         try {
             InputStream instream = new FileInputStream(file);
@@ -309,12 +346,17 @@ public class DanmakuVideoPlayer extends StandardGSYVideoPlayer {
                 if (mDanmaKuShow) {
                     if (!getDanmakuView().isShown())
                         getDanmakuView().show();
-                    mToogleDanmaku.setText("弹幕关");
+                    danmmakuSwitch.setSelected(true);
+                    pushBtn.setVisibility(VISIBLE);
+                    danmmakuPush.setVisibility(VISIBLE);
                 } else {
                     if (getDanmakuView().isShown()) {
                         getDanmakuView().hide();
                     }
-                    mToogleDanmaku.setText("弹幕开");
+                    danmmakuSwitch.setSelected(false);
+                    pushBtn.setVisibility(INVISIBLE);
+                    danmmakuPush.setVisibility(INVISIBLE);
+
                 }
             }
         });
@@ -324,7 +366,9 @@ public class DanmakuVideoPlayer extends StandardGSYVideoPlayer {
      开始播放弹幕
      */
     private void onPrepareDanmaku(DanmakuVideoPlayer gsyVideoPlayer) {
-        if (gsyVideoPlayer.getDanmakuView() != null && !gsyVideoPlayer.getDanmakuView().isPrepared() && gsyVideoPlayer.getParser() != null) {
+        if (gsyVideoPlayer.getDanmakuView() != null
+                && !gsyVideoPlayer.getDanmakuView().isPrepared()
+                && gsyVideoPlayer.getParser() != null) {
             gsyVideoPlayer.getDanmakuView().prepare(gsyVideoPlayer.getParser(),
                     gsyVideoPlayer.getDanmakuContext());
         }
@@ -334,7 +378,8 @@ public class DanmakuVideoPlayer extends StandardGSYVideoPlayer {
      弹幕偏移
      */
     private void resolveDanmakuSeek(DanmakuVideoPlayer gsyVideoPlayer, long time) {
-        if (mHadPlay && gsyVideoPlayer.getDanmakuView() != null && gsyVideoPlayer.getDanmakuView().isPrepared()) {
+        if (mHadPlay && gsyVideoPlayer.getDanmakuView() != null
+                && gsyVideoPlayer.getDanmakuView().isPrepared()) {
             gsyVideoPlayer.getDanmakuView().seekTo(time);
         }
     }
@@ -415,24 +460,23 @@ public class DanmakuVideoPlayer extends StandardGSYVideoPlayer {
     }
 
     /**
-     模拟添加弹幕数据
+     * 模拟添加弹幕数据
      */
-    private void addDanmaku(boolean islive) {
+    private void addDanmaku(String content, boolean islive) {
         BaseDanmaku danmaku = mDanmakuContext.mDanmakuFactory.createDanmaku(BaseDanmaku.TYPE_SCROLL_RL);
         if (danmaku == null || mDanmakuView == null) {
             return;
         }
-        danmaku.text = "这是一条弹幕 " + getCurrentPositionWhenPlaying();
+        danmaku.text = content;
         danmaku.padding = 5;
         danmaku.priority = 8;  // 可能会被各种过滤器过滤并隐藏显示，所以提高等级
         danmaku.isLive = islive;
         danmaku.setTime(mDanmakuView.getCurrentTime() + 500);
         danmaku.textSize = 25f * (mParser.getDisplayer().getDensity() - 0.6f);
-        danmaku.textColor = Color.RED;
-        danmaku.textShadowColor = Color.WHITE;
-        danmaku.borderColor = Color.GREEN;
+        danmaku.textColor = Color.WHITE;
+        danmaku.textShadowColor = getContext().getColor(R.color.base_colorAccent);
+        danmaku.borderColor = Color.WHITE;
         mDanmakuView.addDanmaku(danmaku);
-
     }
 
 }

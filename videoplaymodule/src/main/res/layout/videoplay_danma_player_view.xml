@@ -90,28 +90,54 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="20dp"
+            android:layout_height="38dp"
             android:layout_gravity="center"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layout_marginBottom="3dp"
+            >
+            
+            <ImageView
+                android:id="@+id/danmaku_switch"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:background="@drawable/videoplay_danma_switch_selector"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="10dp"
+                />
 
-            <TextView
-                android:id="@+id/send_danmaku"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+            <EditText
+                android:id="@+id/send_danmaku_edit"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
                 android:layout_weight="1"
-                android:background="#808080"
-                android:gravity="center"
-                android:text="发送弹幕"
-                android:textColor="#ffffff" />
+                android:visibility="invisible"
+                android:background="@drawable/base_loading_backgrand"
+                android:layout_gravity="center"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:hint="来说点什么吧..."
+                android:maxLines="1"
+                android:maxLength="30"
+                android:textColor="@color/base_colorBackground"
+                android:importantForAutofill="yes"
+                android:inputType="text"
+                />
 
-            <TextView
-                android:id="@+id/toogle_danmaku"
+            <Button
+                android:id="@+id/send_danmaku_btn"
                 android:layout_width="50dp"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="20dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
                 android:gravity="center"
-                android:text="弹幕关"
-                android:textColor="#ffffff" />
+                android:layout_gravity="center"
+                android:text="发送"
+                android:textSize="12sp"
+                android:textColor="@color/base_colorWeakPoint"
+                android:background="@drawable/base_loading_backgrand"
+                android:visibility="invisible"
+                />
 
         </LinearLayout>
     </LinearLayout>

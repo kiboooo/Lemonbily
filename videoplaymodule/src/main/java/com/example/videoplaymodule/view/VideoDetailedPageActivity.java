@@ -40,7 +40,6 @@ public class VideoDetailedPageActivity
     private TextView videoName;
     private TextView videoDescribe;
     private ImageView collectIcon;
-//    private StandardGSYVideoPlayer player;
     private DanmakuVideoPlayer player;
     private RecyclerView commentRecycler;
     private EditText pushEdit;
