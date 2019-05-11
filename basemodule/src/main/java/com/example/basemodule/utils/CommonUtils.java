@@ -17,7 +17,8 @@ import java.util.regex.Pattern;
 
 public class CommonUtils {
 
-    public static SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+    public static SimpleDateFormat simpleDateFormatDay = new SimpleDateFormat("yyyy-MM-dd");
+    public static SimpleDateFormat simpleDateFormatMin = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 
     /**
      * 判断是否是手机号

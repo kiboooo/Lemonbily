@@ -45,7 +45,7 @@ public class DetailCommentAdapter
             if (cuib != null  && cuib.getmComment() != null) {
                 String fool = String.valueOf((getItemCount() - i)) + " 楼";
                 vh.floorNum.setText(fool);
-                vh.time.setText(CommonUtils.simpleDateFormat.format(
+                vh.time.setText(CommonUtils.simpleDateFormatDay.format(
                         cuib.getmComment().getComtime() == null ?
                                 System.currentTimeMillis() : cuib.getmComment().getComtime()));
                 vh.content.setText(cuib.getmComment().getComcontent());

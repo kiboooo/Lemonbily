@@ -65,6 +65,9 @@ public class PalSquareAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                     vh.name.setText(psb.getAccount().getAname());
                     vh.genderIcon.setSelected(psb.getAccount().getAsex() != null
                             && psb.getAccount().getAsex().equals("w"));
+                    vh.time.setText(CommonUtils.simpleDateFormatMin.format(
+                            psb.getPalcircle().getPaltime() == null ?
+                                    System.currentTimeMillis() : psb.getPalcircle().getPaltime() ));
                     vh.content.setText(psb.getPalcircle().getPalcontent());
                     Glide.with(mContext)
                             .load(NetWorkServer.SERVER_URL
@@ -138,6 +141,7 @@ public class PalSquareAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         ImageView genderIcon;
         TextView attentionBtn;
         TextView content;
+        TextView time;
         ImageView likeBtn;
         ImageView commentBtn;
 
@@ -145,6 +149,7 @@ public class PalSquareAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             super(itemView);
             avatar = itemView.findViewById(R.id.square_avatar);
             name = itemView.findViewById(R.id.square_name);
+            time = itemView.findViewById(R.id.square_time);
             genderIcon = itemView.findViewById(R.id.square_gender);
             attentionBtn = itemView.findViewById(R.id.square_attention);
             content = itemView.findViewById(R.id.square_content);
