@@ -79,7 +79,7 @@
 
     <TextView
         android:id="@+id/mine_attention"
-        android:layout_width="100dp"
+        android:layout_width="match_parent"
         android:layout_height="30dp"
         android:gravity="center"
         android:text="@string/mine_attention_content"
@@ -92,7 +92,7 @@
 
     <TextView
         android:id="@+id/mine_collection"
-        android:layout_width="100dp"
+        android:layout_width="match_parent"
         android:layout_height="30dp"
         android:gravity="center"
         android:text="@string/mine_collection_content"

@@ -129,11 +129,15 @@ public class MineFragment extends BaseFragment<IMineView, MinePresenter>
         }
 
         if (i == R.id.mine_attention) {
-
+            ARouter.getInstance()
+                    .build("/LoginModule/MineAttentionActivity")
+                    .navigation();
         }
 
         if (i == R.id.mine_collection) {
-
+            ARouter.getInstance()
+                    .build("/LoginModule/MineCollectActivity")
+                    .navigation();
         }
     }
 

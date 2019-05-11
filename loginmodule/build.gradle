@@ -64,6 +64,8 @@ dependencies {
     implementation  rootProject.ext.dependencies.supportV7
     implementation  rootProject.ext.dependencies.constraintLayout
     implementation project(":basemodule") // 导入 baseModule
+    //引入recyclerView
+    implementation rootProject.ext.dependencies.recyclerViewCompiler
     // arouter-compiler 的注解依赖需要所有使用 ARouter 的 module 都添加依赖
     annotationProcessor rootProject.ext.dependencies.arouterCompiler
     annotationProcessor rootProject.ext.dependencies.evenMsgCompiler

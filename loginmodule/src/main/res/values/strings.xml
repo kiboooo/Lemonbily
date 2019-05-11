@@ -12,4 +12,6 @@
     <string name="login_old_password">请输入原密码</string>
     <string name="login_new_password">请输入新密码,至少6位</string>
     <string name="login_new_password_again">请再次输入新密码，至少6位</string>
+    <string name="login_mine_attention_not_data">暂时没有关注任何人噢！</string>
+    <string name="login_mine_collect_not_data">暂时没有收藏任何视频噢！</string>
 </resources>
