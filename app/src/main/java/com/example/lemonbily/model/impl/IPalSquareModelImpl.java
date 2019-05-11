@@ -54,6 +54,7 @@ public class IPalSquareModelImpl extends BaseModel<PalSquarePresenter>
     @Override
     public void initObservers(LifecycleOwner owner) {
         registerInitPalDataObserver(owner);
+        registerPublishFinishBusObserver(owner);
     }
 
     @Override
@@ -198,6 +199,19 @@ public class IPalSquareModelImpl extends BaseModel<PalSquarePresenter>
                     public void onChanged(@Nullable String s) {
                         if (getPresenter() != null) {
                             getPresenter().sendErrorMsg(s, Toast.LENGTH_SHORT);
+                        }
+                    }
+                });
+    }
+
+    private void registerPublishFinishBusObserver(LifecycleOwner owner) {
+        InvokingMessage.get().as(EventsDefineAsPalSquareEvents.class)
+                .PUBLISH_PAL_FINISH()
+                .observe(owner, new Observer<String>() {
+                    @Override
+                    public void onChanged(@Nullable String s) {
+                        if (LoginStatusUtils.isLogin) {
+                            PalSquareNetServer.getInstance().loadPalSquareAllData(LoginStatusUtils.mLogin.getId());
                         }
                     }
                 });

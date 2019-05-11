@@ -13,6 +13,9 @@ public class PalSquareEvents {
     @EventType(JsonResponse.class)
     public static final String LOAD_PAL_SQUARE_DATA = "load_pal_square_data";
 
+    @EventType(JsonResponse.class)
+    public static final String INSERT_PAL_DATA = "insert_pal_data";
+
     @EventType(String.class)
     public static final String PAL_ERROR = "pal_error";
 
@@ -27,5 +30,8 @@ public class PalSquareEvents {
 
     @EventType(JsonResponse.class)
     public static final String DO_UNATTENTION_OPERATION = "do_unattention_operation";
+
+    @EventType(String.class)
+    public static final String PUBLISH_PAL_FINISH = "publish_pal_finish";
 
 }

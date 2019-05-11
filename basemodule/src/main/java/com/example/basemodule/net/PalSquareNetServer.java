@@ -38,6 +38,10 @@ public class PalSquareNetServer {
         return PalSquareNetServer.InstancePalSquareNetServer.instance;
     }
 
+    public EventsDefineAsPalSquareEvents getPalSquareEvents() {
+        return palSquareEvents;
+    }
+
     public void loadPalSquareAllData(int uid){
         if (LoginStatusUtils.isLogin) {
             callPalSquareBack(mPalSquareServer.getPalSquareData(LoginStatusUtils.mLogin.getLphone(),
@@ -77,6 +81,11 @@ public class PalSquareNetServer {
             //未登录，拉起登录界面
             InvokingMessage.get().as(EventsDefineAsLoginEvents.class).USER_INACTIVATION().post(null);
         }
+    }
+
+    public void pushPalCircleToServer(Palcircle palcircle) {
+        callPalcircleBack(mPalSquareServer.insertPalData(LoginStatusUtils.mLogin.getLphone(),
+                LoginStatusUtils.token, palcircle), palSquareEvents.INSERT_PAL_DATA());
     }
 
 
@@ -128,6 +137,25 @@ public class PalSquareNetServer {
 
             @Override
             public void onFailure(Call<JsonResponse<List<PalSquareBean>>> call, Throwable t) {
+                palSquareEvents.PAL_ERROR().post(t.getMessage());
+                Log.e(TAG, t.getMessage());
+            }
+        });
+    }
+
+    private void callPalcircleBack(Call<JsonResponse<Palcircle>> mCall,
+                              final LiveEventBus.Observable<JsonResponse> observable) {
+        mCall.enqueue(new Callback<JsonResponse<Palcircle>>() {
+            @Override
+            public void onResponse(Call<JsonResponse<Palcircle>> call,
+                                   Response<JsonResponse<Palcircle>> response) {
+                if (isFailOnResponse(response)) {
+                    observable.post(response.body());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<JsonResponse<Palcircle>> call, Throwable t) {
                 palSquareEvents.PAL_ERROR().post(t.getMessage());
                 Log.e(TAG, t.getMessage());
             }

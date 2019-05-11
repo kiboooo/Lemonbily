@@ -18,7 +18,8 @@
 
     <ImageView
         android:id="@+id/base_normal_title_back_btn"
-        android:background="@drawable/base_back_btn"
+        android:src="@drawable/base_back_btn"
+        android:padding="3dp"
         android:layout_width="25dp"
         android:layout_height="25dp"
         android:layout_marginStart="10dp"

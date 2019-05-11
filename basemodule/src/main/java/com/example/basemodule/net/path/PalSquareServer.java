@@ -27,6 +27,10 @@ public interface PalSquareServer {
     Call<JsonResponse<List<PalSquareBean>>> getPalSquareData(@Header("phone") String loginPhone,
                                                              @Header("token") String token, @Field("uid") int uid);
 
+    @POST("PalcircleController/insert")
+    Call<JsonResponse<Palcircle>> insertPalData (@Header("phone") String loginPhone,
+                                            @Header("token") String token,  @Body Palcircle palcircle);
+
     @POST("LikeController/insert")
     Call<JsonResponse<Like>> likeOperating (@Header("phone") String loginPhone,
                                               @Header("token") String token,  @Body Like like);

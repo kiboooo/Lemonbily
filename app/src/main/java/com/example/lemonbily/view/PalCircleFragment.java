@@ -7,7 +7,6 @@ import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
@@ -42,10 +41,14 @@ public class PalCircleFragment extends BaseFragment<IPalCircleView, PalCirclePre
             publishBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    showToasts("进入动态发表页面", Toast.LENGTH_SHORT);
+                    toPublishPage();
                 }
             });
         }
+    }
+
+    private void toPublishPage() {
+        ARouter.getInstance().build("/publishModule/PushCommentActivity").navigation();
     }
 
     @Override
