@@ -13,8 +13,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 
+import com.example.basemodule.bus.generated.im.EventsDefineAsLoginEvents;
+import com.example.basemodule.utils.CommonUtils;
+import com.example.basemodule.utils.LoginStatusUtils;
 import com.example.videoplaymodule.R;
 import com.example.videoplaymodule.utils.BiliDanmukuParser;
+import com.jeremyliao.im.core.InvokingMessage;
 import com.shuyu.gsyvideoplayer.utils.Debuger;
 import com.shuyu.gsyvideoplayer.video.StandardGSYVideoPlayer;
 import com.shuyu.gsyvideoplayer.video.base.GSYBaseVideoPlayer;
@@ -131,6 +135,27 @@ public class DanmakuVideoPlayer extends StandardGSYVideoPlayer {
     }
 
     @Override
+    public void onClick(View v) {
+        super.onClick(v);
+        int i = v.getId();
+        if (i == R.id.send_danmaku_btn) {
+            if (!LoginStatusUtils.isLogin) {
+                //非登录状态，拉起登录界面
+                InvokingMessage.get().as(EventsDefineAsLoginEvents.class)
+                        .USER_INACTIVATION().post(null);
+            } else {
+                addDanmaku(danmmakuPush.getText().toString(), true);
+                danmmakuPush.setText("");
+                danmmakuPush.clearFocus();
+                CommonUtils.closeSoftKeybord(danmmakuPush, getContext());
+            }
+        } else if (i == R.id.danmaku_switch) {
+            mDanmaKuShow = !mDanmaKuShow;
+            resolveDanmakuShow();
+        }
+    }
+
+    @Override
     public void onPrepared() {
         super.onPrepared();
         onPrepareDanmaku(this);
@@ -180,21 +205,30 @@ public class DanmakuVideoPlayer extends StandardGSYVideoPlayer {
     }
 
     @Override
-    public void onClick(View v) {
-        super.onClick(v);
-        int i = v.getId();
-        if (i == R.id.send_danmaku_btn) {
-            addDanmaku(danmmakuPush.getText().toString(), true);
-        } else if (i == R.id.danmaku_switch) {
-            mDanmaKuShow = !mDanmaKuShow;
-            resolveDanmakuShow();
-        }
-    }
-
-    @Override
     protected void cloneParams(GSYBaseVideoPlayer from, GSYBaseVideoPlayer to) {
         ((DanmakuVideoPlayer) to).mDumakuFile = ((DanmakuVideoPlayer) from).mDumakuFile;
         super.cloneParams(from, to);
+    }
+
+    //点击触摸显示和隐藏逻辑
+    @Override
+    protected void onClickUiToggle() {
+        super.onClickUiToggle();
+    }
+
+    @Override
+    protected void hideAllWidget() {
+        super.hideAllWidget();
+        if (mBottomContainer != null) {
+            if (danmmakuPush != null
+                    && danmmakuPush.getVisibility() == VISIBLE
+                    && pushBtn.isEnabled()) {
+                changeUiToPlayingShow();
+            }else {
+                changeUiToPlayingClear();
+                CommonUtils.closeSoftKeybord(danmmakuPush, getContext());
+            }
+        }
     }
 
     /**
@@ -474,8 +508,8 @@ public class DanmakuVideoPlayer extends StandardGSYVideoPlayer {
         danmaku.setTime(mDanmakuView.getCurrentTime() + 500);
         danmaku.textSize = 25f * (mParser.getDisplayer().getDensity() - 0.6f);
         danmaku.textColor = Color.WHITE;
-        danmaku.textShadowColor = getContext().getColor(R.color.base_colorAccent);
-        danmaku.borderColor = Color.WHITE;
+        danmaku.textShadowColor = Color.BLACK;
+        danmaku.borderColor = getContext().getColor(R.color.base_colorAccent);
         mDanmakuView.addDanmaku(danmaku);
     }
 

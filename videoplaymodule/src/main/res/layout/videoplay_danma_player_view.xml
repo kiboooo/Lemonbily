@@ -2,7 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/black">
+    android:background="@android:color/black"
+    >
 
     <RelativeLayout
         android:id="@+id/surface_container"
@@ -122,7 +123,9 @@
                 android:textColor="@color/base_colorBackground"
                 android:importantForAutofill="yes"
                 android:inputType="text"
-                />
+                android:singleLine="true"
+                android:imeOptions="actionDone|flagNoExtractUi"
+            />
 
             <Button
                 android:id="@+id/send_danmaku_btn"
