@@ -1,0 +1,6 @@
+package com.example.loginmodule.model;
+
+import com.example.basemodule.model.IBaseModel;
+
+public interface IMineAttentionModel extends IBaseModel {
+}
