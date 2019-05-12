@@ -2,7 +2,10 @@ package com.example.basemodule.net.path;
 
 import com.example.basemodule.bean.Collect;
 import com.example.basemodule.bean.JsonResponse;
+import com.example.basemodule.bean.Video;
 import com.example.basemodule.bean.VideoDetailUIBean;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -29,4 +32,10 @@ public interface VideoDetailServer {
                                                                @Header("token") String token,
                                                                @Field("colID") int colID,
                                                                @Field("vid") int vid);
+
+    @POST("VideoDetailController/getCollectVideoData")
+    @FormUrlEncoded
+    Call<JsonResponse<List<Video>>> loadCollectVideoData(@Header("phone") String loginPhone,
+                                                        @Header("token") String token,
+                                                        @Field("uid") int uid);
 }

@@ -44,6 +44,12 @@ public class VideoNetServer {
         callVideoBack(mVideoServer.getAllVideoData(), videoEvents.LOAD_ALL_VIDEO_DATA());
     }
 
+    //获取所有视频数据
+    public void loadCollectVideoData(int uid) {
+        callVideoBack(mVideoDetailServer.loadCollectVideoData(LoginStatusUtils.mLogin.getLphone(), LoginStatusUtils.token, uid),
+                videoEvents.LOAD_VIDEO_COLLECT_DATA());
+    }
+
     //获取视频详情页数据：对于视频的评论信息等
     public void loadVideoDetailData(int uid, int vid) {
         callVideoDetailBack(mVideoDetailServer.initVideoDetailData(

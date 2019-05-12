@@ -66,6 +66,8 @@ dependencies {
     implementation project(":basemodule") // 导入 baseModule
     //引入recyclerView
     implementation rootProject.ext.dependencies.recyclerViewCompiler
+    //引入cardView
+    implementation rootProject.ext.dependencies.cardViewCompiler
     // arouter-compiler 的注解依赖需要所有使用 ARouter 的 module 都添加依赖
     annotationProcessor rootProject.ext.dependencies.arouterCompiler
     annotationProcessor rootProject.ext.dependencies.evenMsgCompiler

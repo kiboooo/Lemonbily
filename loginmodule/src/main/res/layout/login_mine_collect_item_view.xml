@@ -1,7 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="120dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="5dp">
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="0.3dp"
+        android:background="@color/base_graybackground"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        />
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/collect_image_group"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        app:cardCornerRadius="5dp"
+        android:layout_margin="10dp"
+        app:layout_constraintDimensionRatio="16:9"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/collect_image"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                />
+
+
+            <TextView
+                android:id="@+id/collect_video_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="12:44"
+                android:textSize="12sp"
+                android:textColor="@color/base_colorBackground"
+                android:textStyle="bold"
+                android:background="@color/base_colorPrimary"
+                android:layout_margin="5dp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentEnd="true"
+                />
+
+        </RelativeLayout>
+
+
+
+    </android.support.v7.widget.CardView>
+
+    <TextView
+        android:id="@+id/collect_video_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="发动机回来开会时间和进口"
+        android:textStyle="bold"
+        android:textColor="@color/base_colorPrimary"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        app:layout_constraintTop_toTopOf="@id/collect_image_group"
+        app:layout_constraintLeft_toRightOf="@id/collect_image_group"
+        app:layout_constraintRight_toRightOf="parent"
+        />
+
+
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="0.3dp"
+        android:background="@color/base_graybackground"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        />
 
 </android.support.constraint.ConstraintLayout>

@@ -1,6 +1,7 @@
 package com.example.loginmodule.presenter.impl;
 
 import android.arch.lifecycle.LifecycleOwner;
+import android.support.v7.widget.RecyclerView;
 
 import com.example.basemodule.model.IBaseModel;
 import com.example.basemodule.presenter.BasePresenter;
@@ -22,6 +23,26 @@ public class MineCollectPresenter extends BasePresenter<IMineCollectView> implem
     }
     @Override
     public void sendErrorMsg(String msg, int state) {
+        getView().showToast(msg, state);
+    }
 
+    @Override
+    public void doLoadCollectVideoData(int uid) {
+        ((MineCollectModel) getBaseModel()).doLoadCollectVideoData(uid);
+    }
+
+    @Override
+    public void loadCollectVideoDataSuccess() {
+        getView().loadCollectVideoDataSuccess();
+    }
+
+    @Override
+    public void loadCollectVideoDataFail() {
+        getView().loadCollectVideoDataFail();
+    }
+
+    @Override
+    public RecyclerView.Adapter produceCollectAdapter() {
+        return ((MineCollectModel) getBaseModel()).produceAdapter();
     }
 }

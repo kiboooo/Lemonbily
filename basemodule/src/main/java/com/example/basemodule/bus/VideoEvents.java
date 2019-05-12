@@ -15,6 +15,9 @@ public class VideoEvents {
     public static final String LOAD_VIDEO_DETAIL_DATA = "load_video_detail_data";
 
     @EventType(JsonResponse.class)
+    public static final String LOAD_VIDEO_COLLECT_DATA = "load_video_collect_data";
+
+    @EventType(JsonResponse.class)
     public static final String DO_COLLECT_OPERATION = "do_collect_operation";
 
     @EventType(JsonResponse.class)
