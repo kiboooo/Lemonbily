@@ -155,7 +155,6 @@ public class PalSquareAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             content = itemView.findViewById(R.id.square_content);
             likeBtn = itemView.findViewById(R.id.square_detail_like_icon);
             commentBtn = itemView.findViewById(R.id.square_detail_conment_icon);
-
             avatar.setOnClickListener(this);
             attentionBtn.setOnClickListener(this);
             likeBtn.setOnClickListener(this);

@@ -1,6 +1,7 @@
 package com.example.loginmodule.presenter.impl;
 
 import android.arch.lifecycle.LifecycleOwner;
+import android.support.v7.widget.RecyclerView;
 
 import com.example.basemodule.model.IBaseModel;
 import com.example.basemodule.presenter.BasePresenter;
@@ -24,5 +25,25 @@ public class MineAttentionPresenter extends BasePresenter<IMineAttentionView> im
     @Override
     public void sendErrorMsg(String msg, int state) {
 
+    }
+
+    @Override
+    public void loadBuddyRelationship(int uid) {
+        ((MineAttentionModel) getBaseModel()).loadBuddyRelationship(uid);
+    }
+
+    @Override
+    public void loadBuddyRelationshipSuccess() {
+        getView().loadBuddyRelationshipSuccess();
+    }
+
+    @Override
+    public void loadBuddyRelationshipFail() {
+        getView().loadBuddyRelationshipFail();
+    }
+
+    @Override
+    public RecyclerView.Adapter produceAttentionAdapter() {
+        return ((MineAttentionModel) getBaseModel()).produceAttentionAdapter();
     }
 }

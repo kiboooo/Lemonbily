@@ -1,5 +1,6 @@
 package com.example.basemodule.net.path;
 
+import com.example.basemodule.bean.Account;
 import com.example.basemodule.bean.Buddy;
 import com.example.basemodule.bean.JsonResponse;
 import com.example.basemodule.bean.Like;
@@ -41,6 +42,12 @@ public interface PalSquareServer {
                                             @Header("token") String token,
                                               @Field("userID") int userID,
                                               @Field("palID") int palID);
+
+    @POST("BuddyController/selectByUserID")
+    @FormUrlEncoded
+    Call<JsonResponse<List<Account>>> getBuddyRelationship(@Header("phone") String loginPhone,
+                                                          @Header("token") String token,
+                                                           @Field("userID") int userID);
 
     @POST("BuddyController/insert")
     Call<JsonResponse<Buddy>> attentionOperating (@Header("phone") String loginPhone,

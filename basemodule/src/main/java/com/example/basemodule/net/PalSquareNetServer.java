@@ -2,6 +2,7 @@ package com.example.basemodule.net;
 
 import android.util.Log;
 
+import com.example.basemodule.bean.Account;
 import com.example.basemodule.bean.Buddy;
 import com.example.basemodule.bean.JsonResponse;
 import com.example.basemodule.bean.Like;
@@ -46,6 +47,16 @@ public class PalSquareNetServer {
         if (LoginStatusUtils.isLogin) {
             callPalSquareBack(mPalSquareServer.getPalSquareData(LoginStatusUtils.mLogin.getLphone(),
                     LoginStatusUtils.token, uid), palSquareEvents.LOAD_PAL_SQUARE_DATA());
+        }else {
+            //未登录，拉起登录界面
+            InvokingMessage.get().as(EventsDefineAsLoginEvents.class).USER_INACTIVATION().post(null);
+        }
+    }
+
+    public void loadBuddyRelationshipData(int uid){
+        if (LoginStatusUtils.isLogin) {
+            callBuddyBack(mPalSquareServer.getBuddyRelationship(LoginStatusUtils.mLogin.getLphone(),
+                    LoginStatusUtils.token, uid), palSquareEvents.LOAD_BUDDY_RELATIONSHIP_DATA());
         }else {
             //未登录，拉起登录界面
             InvokingMessage.get().as(EventsDefineAsLoginEvents.class).USER_INACTIVATION().post(null);
@@ -137,6 +148,25 @@ public class PalSquareNetServer {
 
             @Override
             public void onFailure(Call<JsonResponse<List<PalSquareBean>>> call, Throwable t) {
+                palSquareEvents.PAL_ERROR().post(t.getMessage());
+                Log.e(TAG, t.getMessage());
+            }
+        });
+    }
+
+    private void callBuddyBack(Call<JsonResponse<List<Account>>> mCall,
+                                   final LiveEventBus.Observable<JsonResponse> observable) {
+        mCall.enqueue(new Callback<JsonResponse<List<Account>>>() {
+            @Override
+            public void onResponse(Call<JsonResponse<List<Account>>> call,
+                                   Response<JsonResponse<List<Account>>> response) {
+                if(isFailOnResponse(response)){
+                    observable.post(response.body());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<JsonResponse<List<Account>>> call, Throwable t) {
                 palSquareEvents.PAL_ERROR().post(t.getMessage());
                 Log.e(TAG, t.getMessage());
             }

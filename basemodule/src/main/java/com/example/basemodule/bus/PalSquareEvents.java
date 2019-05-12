@@ -16,6 +16,9 @@ public class PalSquareEvents {
     @EventType(JsonResponse.class)
     public static final String INSERT_PAL_DATA = "insert_pal_data";
 
+    @EventType(JsonResponse.class)
+    public static final String LOAD_BUDDY_RELATIONSHIP_DATA = "load_buddy_relationship_data";
+
     @EventType(String.class)
     public static final String PAL_ERROR = "pal_error";
 
