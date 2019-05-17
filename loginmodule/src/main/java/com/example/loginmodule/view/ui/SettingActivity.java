@@ -25,6 +25,7 @@ public class SettingActivity extends BaseActivity<ISettingView, SettingPresenter
     TextView titleDescription;
     FrameLayout modifyData;
     FrameLayout logout;
+    FrameLayout modifyPassword;
 
 
     @Override
@@ -34,6 +35,7 @@ public class SettingActivity extends BaseActivity<ISettingView, SettingPresenter
         titleDescription = findViewById(R.id.base_normal_back_title);
         modifyData = findViewById(R.id.setting_modify_data);
         logout = findViewById(R.id.setting_logout);
+        modifyPassword = findViewById(R.id.setting_modify_password);
     }
 
     @Override
@@ -55,6 +57,7 @@ public class SettingActivity extends BaseActivity<ISettingView, SettingPresenter
     public void initListener() {
         backBtn.setOnClickListener(this);
         modifyData.setOnClickListener(this);
+        modifyPassword.setOnClickListener(this);
         logout.setOnClickListener(new OnMutiClickListener() {
             @Override
             public void onMutiClick(View view) {
@@ -83,6 +86,13 @@ public class SettingActivity extends BaseActivity<ISettingView, SettingPresenter
         if (i == R.id.setting_modify_data){
             toModifyActivty();
         }
+        if (i == R.id.setting_modify_password){
+            toChangePasswordActivty();
+        }
+    }
+
+    private void toChangePasswordActivty() {
+        ARouter.getInstance().build("/LoginModule/ChangePasswordActivity").navigation();
     }
 
     private void toModifyActivty() {
